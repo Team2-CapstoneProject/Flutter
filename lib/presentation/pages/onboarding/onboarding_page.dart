@@ -1,6 +1,8 @@
+import 'package:capstone_project_villa/presentation/pages/authentication/login_page.dart';
 import 'package:capstone_project_villa/styles/style.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class OnBoardingPage extends StatefulWidget {
   const OnBoardingPage({super.key});
@@ -27,6 +29,10 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+    ));
     return Scaffold(
       body: Stack(
         children: [
@@ -51,7 +57,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   ),
                 ],
                 options: CarouselOptions(
-                  height: 580,
+                  height: MediaQuery.of(context).size.height * 0.5,
                   viewportFraction: 1,
                   enableInfiniteScroll: false,
                   onPageChanged: (index, reason) {
@@ -157,7 +163,14 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                             backgroundColor: primaryColor,
                           ),
                           onPressed: () {
-                            carouselController.nextPage();
+                            currentIndex == 2
+                                ? Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const LoginPage(),
+                                    ),
+                                  )
+                                : carouselController.nextPage();
                           },
                           child: const Text("Next"),
                         ),
@@ -168,7 +181,14 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       currentIndex == 2
                           ? const SizedBox()
                           : TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const LoginPage(),
+                                  ),
+                                );
+                              },
                               child: Text(
                                 "Skip",
                                 style: TextStyle(color: primaryColor),
