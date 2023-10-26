@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Azure Voyage',
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle(
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
             statusBarBrightness: Brightness.light,
           ),
         ),
-        useMaterial3: true,
+        // useMaterial3: true,
       ),
       home: const SplashScreen(),
     );
