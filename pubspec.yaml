@@ -36,6 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   carousel_slider: ^4.2.1
   google_fonts: ^6.1.0
+  iconsax: ^0.0.8
+  flutter_statusbarcolor_ns: ^0.5.0
 
 dev_dependencies:
   flutter_test:
