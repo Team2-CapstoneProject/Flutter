@@ -1,7 +1,11 @@
-import 'package:capstone_project_villa/presentation/pages/authentication/register_page.dart';
+import 'dart:io';
+
+import 'package:capstone_project_villa/presentation/pages/home/home_page.dart';
+import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
 import 'package:capstone_project_villa/styles/style.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:image_picker/image_picker.dart';
 
 class RegisterProfilePage extends StatefulWidget {
   const RegisterProfilePage({super.key});
@@ -25,192 +29,214 @@ class _RegisterProfilePageState extends State<RegisterProfilePage> {
     super.dispose();
   }
 
+  String imageName = "";
+  File? file;
+
+  void _getImage() async {
+    final img = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (img == null) return;
+
+    final imageTemporary = File(img.path);
+
+    setState(() {
+      file = imageTemporary;
+      imageName = img.name;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
+      body: SafeArea(
         child: ListView(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 30.0,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Icon(
-                    Icons.arrow_back,
-                    size: 24,
-                    color: darkGrey,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 30.0,
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 30),
-                  child: Text(
-                    'Fill your Profile',
-                    style: blackTextStyle.copyWith(
-                        fontSize: 32, fontWeight: semiBold),
-                  ),
-                ),
-                Center(
-                  child: Container(
-                    width: 152,
-                    height: 152,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: grey95,
-                    ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
                     child: Icon(
-                      Iconsax.gallery_edit,
-                      color: greyColor,
+                      Icons.arrow_back,
+                      size: 24,
+                      color: darkGrey,
                     ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 50),
-                  child: TextFormField(
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.name,
-                    controller: _fullNameController,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 30),
+                    child: Text(
+                      'Fill your Profile',
+                      style: blackTextStyle.copyWith(
+                          fontSize: 32, fontWeight: semiBold),
+                    ),
+                  ),
+                  Center(
+                    child: GestureDetector(
+                      onTap: () {
+                        _getImage();
+                      },
+                      child: Container(
+                        width: 152,
+                        height: 152,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
                           color: grey95,
+                          image: file != null
+                              ? DecorationImage(
+                                  image: FileImage(file!),
+                                  fit: BoxFit.cover,
+                                )
+                              : null,
                         ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                          color: blackColor.withOpacity(0.1),
-                        ),
-                      ),
-                      labelText: 'Full Name',
-                      labelStyle: TextStyle(color: greyColor),
-                      prefixIcon: Icon(
-                        Iconsax.user,
-                        color: greyColor,
+                        child: file == null
+                            ? Icon(
+                                Iconsax.gallery_edit,
+                                color: greyColor,
+                              )
+                            : null,
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 20),
-                  child: TextFormField(
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.name,
-                    controller: _nickNameController,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                          color: grey95,
+                  Container(
+                    margin: const EdgeInsets.only(top: 50),
+                    child: TextFormField(
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.name,
+                      controller: _fullNameController,
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(
+                            color: grey95,
+                          ),
                         ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                          color: blackColor.withOpacity(0.1),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(
+                            color: blackColor.withOpacity(0.1),
+                          ),
                         ),
-                      ),
-                      labelText: 'Nickname',
-                      labelStyle: TextStyle(color: greyColor),
-                      prefixIcon: Icon(
-                        Iconsax.user,
-                        color: greyColor,
+                        labelText: 'Full Name',
+                        labelStyle: TextStyle(color: greyColor),
+                        prefixIcon: Icon(
+                          Iconsax.user,
+                          color: greyColor,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 20),
-                  child: TextFormField(
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.emailAddress,
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                          color: grey95,
+                  Container(
+                    margin: const EdgeInsets.only(top: 20),
+                    child: TextFormField(
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.name,
+                      controller: _nickNameController,
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(
+                            color: grey95,
+                          ),
                         ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                          color: blackColor.withOpacity(0.1),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(
+                            color: blackColor.withOpacity(0.1),
+                          ),
                         ),
-                      ),
-                      labelText: 'Email',
-                      labelStyle: TextStyle(color: greyColor),
-                      prefixIcon: Icon(
-                        Iconsax.sms,
-                        color: greyColor,
+                        labelText: 'Nickname',
+                        labelStyle: TextStyle(color: greyColor),
+                        prefixIcon: Icon(
+                          Iconsax.user,
+                          color: greyColor,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 20),
-                  child: TextFormField(
-                    textInputAction: TextInputAction.done,
-                    keyboardType: TextInputType.phone,
-                    controller: _phoneController,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                          color: grey95,
+                  // Container(
+                  //   margin: const EdgeInsets.only(top: 20),
+                  //   child: TextFormField(
+                  //     textInputAction: TextInputAction.next,
+                  //     keyboardType: TextInputType.emailAddress,
+                  //     controller: _emailController,
+                  //     decoration: InputDecoration(
+                  //       border: const OutlineInputBorder(),
+                  //       enabledBorder: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(20),
+                  //         borderSide: BorderSide(
+                  //           color: grey95,
+                  //         ),
+                  //       ),
+                  //       focusedBorder: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(20),
+                  //         borderSide: BorderSide(
+                  //           color: blackColor.withOpacity(0.1),
+                  //         ),
+                  //       ),
+                  //       labelText: 'Email',
+                  //       labelStyle: TextStyle(color: greyColor),
+                  //       prefixIcon: Icon(
+                  //         Iconsax.sms,
+                  //         color: greyColor,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 20),
+                    child: TextFormField(
+                      textInputAction: TextInputAction.done,
+                      keyboardType: TextInputType.phone,
+                      controller: _phoneController,
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(
+                            color: grey95,
+                          ),
                         ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                          color: blackColor.withOpacity(0.1),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(
+                            color: blackColor.withOpacity(0.1),
+                          ),
                         ),
+                        labelText: 'Phone Number',
+                        labelStyle: TextStyle(color: greyColor),
+                        prefixIcon: Icon(
+                          Iconsax.call,
+                          color: darkGrey,
+                        ),
+                        hintText: '08123456789',
                       ),
-                      labelText: 'Phone Number',
-                      labelStyle: TextStyle(color: greyColor),
-                      prefixIcon: Icon(
-                        Iconsax.call,
-                        color: darkGrey,
-                      ),
-                      hintText: '08123456789',
                     ),
                   ),
-                ),
-                Container(
-                  height: 55,
-                  margin: const EdgeInsets.only(top: 60),
-                  width: MediaQuery.of(context).size.width,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
+                  const SizedBox(
+                    height: 50.0,
+                  ),
+                  CustomButton(
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const RegisterPage(),
+                          builder: (context) => const HomePage(),
                         ),
                       );
                     },
-                    child: const Text('Register'),
+                    text: 'Register',
                   ),
-                )
-              ],
-            )
+                ],
+              ),
+            ),
           ],
         ),
       ),

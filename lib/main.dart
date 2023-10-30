@@ -1,4 +1,5 @@
 import 'package:capstone_project_villa/presentation/pages/splash/splash_screen.dart';
+import 'package:capstone_project_villa/styles/style.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,9 +15,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Azure Voyage',
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: whiteColor,
       ),
-      home: SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }

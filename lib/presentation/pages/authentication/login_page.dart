@@ -1,7 +1,11 @@
+import 'package:capstone_project_villa/presentation/pages/authentication/forgot_page.dart';
 import 'package:capstone_project_villa/presentation/pages/authentication/register_page.dart';
+import 'package:capstone_project_villa/presentation/pages/home/home_page.dart';
+import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
 import 'package:capstone_project_villa/styles/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:iconsax/iconsax.dart';
 
 class LoginPage extends StatefulWidget {
@@ -66,7 +70,9 @@ class _LoginPageState extends State<LoginPage> {
                       keyboardType: TextInputType.emailAddress,
                       controller: _emailController,
                       decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                           borderSide: BorderSide(
@@ -110,7 +116,9 @@ class _LoginPageState extends State<LoginPage> {
                           obscureText: _obscureText.value,
                           textInputAction: TextInputAction.done,
                           decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
                               borderSide: BorderSide(
@@ -124,8 +132,8 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                             prefixIcon: Icon(
-                              Iconsax.shield_security2,
-                              color: darkGrey,
+                              Iconsax.frame_4,
+                              color: greyColor,
                             ),
                             filled: true,
                             fillColor: _isPasswordFocused.value
@@ -158,7 +166,7 @@ class _LoginPageState extends State<LoginPage> {
                             } else if (!RegExp(
                                     r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])')
                                 .hasMatch(value)) {
-                              return 'Password Salah';
+                              return 'Password harus mengandung huruf kapital dan angka';
                             }
                             return null;
                           },
@@ -166,37 +174,44 @@ class _LoginPageState extends State<LoginPage> {
                       },
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: Text(
-                      'Forgot password?',
-                      style: primaryTextStyle.copyWith(
-                        fontSize: 14,
-                        fontWeight: bold,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ForgotPage(),
+                        ),
+                      );
+                    },
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: Text(
+                        'Forgot password?',
+                        style: primaryTextStyle.copyWith(
+                          fontSize: 14,
+                          fontWeight: bold,
+                        ),
                       ),
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 15, bottom: 40),
-                    height: 55,
-                    width: MediaQuery.of(context).size.width,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: primaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                      onPressed: () {},
-                      child: Text(
-                        'Sign In',
-                        style: whiteTextStyle.copyWith(
-                          fontSize: 14,
-                          fontWeight: semiBold,
-                          letterSpacing: 0.5,
-                        ),
-                      ),
-                    ),
+                  const SizedBox(
+                    height: 14.0,
+                  ),
+                  CustomButton(
+                    onPressed: () async {
+                      if (formKey.currentState!.validate()) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomePage(),
+                          ),
+                        );
+                      }
+                    },
+                    text: 'Sign In',
+                  ),
+                  const SizedBox(
+                    height: 40.0,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -242,8 +257,8 @@ class _LoginPageState extends State<LoginPage> {
                           const Image(
                             height: 24,
                             width: 24,
-                            image: NetworkImage(
-                              'http://pngimg.com/uploads/google/google_PNG19635.png',
+                            image: AssetImage(
+                              'assets/auth/google.png',
                             ),
                           ),
                           const SizedBox(
