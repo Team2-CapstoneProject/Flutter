@@ -1,3 +1,4 @@
+import 'package:capstone_project_villa/presentation/pages/authentication/register_page.dart';
 import 'package:capstone_project_villa/styles/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,10 +17,12 @@ class _LoginPageState extends State<LoginPage> {
   final _passwordController = TextEditingController();
 
   late ValueNotifier<bool> _obscureText;
+  late ValueNotifier<bool> _isPasswordFocused;
 
   @override
   void initState() {
     _obscureText = ValueNotifier(true);
+    _isPasswordFocused = ValueNotifier(false);
     super.initState();
   }
 
@@ -37,9 +40,9 @@ class _LoginPageState extends State<LoginPage> {
       statusBarIconBrightness: Brightness.dark,
     ));
     return Scaffold(
-        body: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30),
-      child: Form(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        child: Form(
           key: formKey,
           child: ListView(
             children: [
@@ -63,11 +66,26 @@ class _LoginPageState extends State<LoginPage> {
                       keyboardType: TextInputType.emailAddress,
                       controller: _emailController,
                       decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
+                        border: const OutlineInputBorder(),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(
+                            color: grey95,
                           ),
-                          labelText: 'Email',
-                          prefixIcon: const Icon(Iconsax.sms)),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(
+                            color: blackColor.withOpacity(0.1),
+                          ),
+                        ),
+                        labelText: 'Email',
+                        labelStyle: TextStyle(color: greyColor),
+                        prefixIcon: Icon(
+                          Iconsax.sms,
+                          color: greyColor,
+                        ),
+                      ),
                       validator: (value) {
                         final emailRegex = RegExp(
                             r'^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$');
@@ -92,11 +110,29 @@ class _LoginPageState extends State<LoginPage> {
                           obscureText: _obscureText.value,
                           textInputAction: TextInputAction.done,
                           decoration: InputDecoration(
-                            border: OutlineInputBorder(
+                            border: const OutlineInputBorder(),
+                            enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(
+                                color: grey95,
+                              ),
                             ),
-                            prefixIcon: const Icon(Iconsax.shield_security2),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(
+                                color: primaryColor,
+                              ),
+                            ),
+                            prefixIcon: Icon(
+                              Iconsax.shield_security2,
+                              color: darkGrey,
+                            ),
+                            filled: true,
+                            fillColor: _isPasswordFocused.value
+                                ? cyanBlue
+                                : whiteColor,
                             labelText: 'Password',
+                            labelStyle: TextStyle(color: greyColor),
                             suffixIcon: IconButton(
                               onPressed: () {
                                 _obscureText.value = !_obscureText.value;
@@ -105,9 +141,15 @@ class _LoginPageState extends State<LoginPage> {
                                 _obscureText.value
                                     ? Icons.visibility
                                     : Icons.visibility_off,
+                                color: greyColor,
                               ),
                             ),
                           ),
+                          onChanged: (value) {
+                            setState(() {
+                              _isPasswordFocused.value = value.isNotEmpty;
+                            });
+                          },
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Password tidak boleh kosong';
@@ -229,7 +271,14 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const RegisterPage(),
+                            ),
+                          );
+                        },
                         child: Text(
                           "Sign Up",
                           style: TextStyle(
@@ -244,7 +293,9 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
             ],
-          )),
-    ));
+          ),
+        ),
+      ),
+    );
   }
 }
