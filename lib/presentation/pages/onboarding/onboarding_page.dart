@@ -1,4 +1,5 @@
 import 'package:capstone_project_villa/presentation/pages/authentication/login_page.dart';
+import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
 import 'package:capstone_project_villa/styles/style.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -152,16 +153,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   ),
                   Column(
                     children: [
-                      Container(
+                      Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 52),
-                        height: 55,
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            backgroundColor: primaryColor,
-                          ),
+                        child: CustomButton(
                           onPressed: () {
                             currentIndex == 2
                                 ? Navigator.pushReplacement(
@@ -172,7 +166,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                                   )
                                 : carouselController.nextPage();
                           },
-                          child: const Text("Next"),
+                          text: 'Next',
                         ),
                       ),
                       const SizedBox(
@@ -191,7 +185,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                               },
                               child: Text(
                                 "Skip",
-                                style: TextStyle(color: primaryColor),
+                                style: primaryTextStyle.copyWith(
+                                  fontSize: 14,
+                                  fontWeight: semiBold,
+                                  letterSpacing: 0.5,
+                                ),
                               ),
                             )
                     ],
