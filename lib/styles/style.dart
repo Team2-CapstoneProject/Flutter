@@ -9,11 +9,14 @@ Color greyColor = const Color(0xFF525252);
 Color grey95 = const Color(0xFFF2F2F2);
 Color darkGrey = const Color(0xFF292D32);
 Color cyanBlue = const Color(0xFFDBEAFF);
+Color darkerGrey = const Color(0xFF484C52);
+Color redCandy = const Color(0xFFFF3055);
 
 TextStyle primaryTextStyle = GoogleFonts.poppins(color: primaryColor);
 TextStyle whiteTextStyle = GoogleFonts.poppins(color: whiteColor);
 TextStyle greyTextStyle = GoogleFonts.poppins(color: greyColor);
 TextStyle blackTextStyle = GoogleFonts.poppins(color: blackColor);
+TextStyle redCandyTextStyle = GoogleFonts.poppins(color: redCandy);
 
 FontWeight thin = FontWeight.w100;
 FontWeight extraLight = FontWeight.w200;

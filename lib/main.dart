@@ -1,4 +1,4 @@
-import 'package:capstone_project_villa/presentation/pages/splash/splash_screen.dart';
+import 'package:capstone_project_villa/presentation/pages/navbar/bottom_navbar.dart';
 import 'package:capstone_project_villa/styles/style.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: whiteColor,
       ),
-      home: const SplashScreen(),
+      home: const BottomNavbarPage(),
     );
   }
 }
