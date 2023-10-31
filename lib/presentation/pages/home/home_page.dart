@@ -1,5 +1,6 @@
 import 'package:capstone_project_villa/styles/style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:iconsax/iconsax.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,6 +15,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: whiteColor,
+          statusBarIconBrightness: Brightness.dark,
+        ),
         backgroundColor: whiteColor,
         elevation: 0,
         actions: [
@@ -25,7 +30,7 @@ class _HomePageState extends State<HomePage> {
                   Iconsax.archive_1,
                   color: darkGrey,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20.0,
                 ),
                 Icon(
