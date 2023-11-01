@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:capstone_project_villa/presentation/pages/home/home_page.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
-import 'package:capstone_project_villa/styles/style.dart';
+import 'package:capstone_project_villa/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
@@ -60,7 +60,29 @@ class _RegisterProfilePageState extends State<RegisterProfilePage> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pop(context);
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Konfirmasi'),
+                            content: const Text('Apakah Anda ingin kembali?'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Ya'),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Tidak'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     },
                     child: Icon(
                       Icons.arrow_back,

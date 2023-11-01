@@ -1,10 +1,12 @@
+import 'package:capstone_project_villa/presentation/pages/profile/widgets/edit_profile_page.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_dialog.dart';
-import 'package:capstone_project_villa/presentation/widgets/custom_list_tile.dart';
-import 'package:capstone_project_villa/styles/style.dart';
+import 'package:capstone_project_villa/presentation/pages/profile/widgets/custom_list_tile.dart';
+import 'package:capstone_project_villa/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProfilePage extends StatefulWidget {
+  static const String routeName = '/profile';
   const ProfilePage({super.key});
 
   @override
@@ -58,10 +60,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     icon: Iconsax.user,
                     text: 'Edit Profile',
                     onTap: () {
-                      showDialog(
-                        barrierDismissible: false,
-                        context: context,
-                        builder: (context) => const CustomDialog(),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const EditProfilePage(),
+                        ),
                       );
                     },
                   ),

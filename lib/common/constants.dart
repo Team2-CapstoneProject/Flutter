@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+// Color
 Color primaryColor = const Color(0xFF1D3557);
 Color whiteColor = const Color(0xffFFFFFF);
 Color white70Color = const Color(0xFFD9D9D9);
@@ -12,12 +13,14 @@ Color cyanBlue = const Color(0xFFDBEAFF);
 Color darkerGrey = const Color(0xFF484C52);
 Color redCandy = const Color(0xFFFF3055);
 
+// TextStyle
 TextStyle primaryTextStyle = GoogleFonts.poppins(color: primaryColor);
 TextStyle whiteTextStyle = GoogleFonts.poppins(color: whiteColor);
 TextStyle greyTextStyle = GoogleFonts.poppins(color: greyColor);
 TextStyle blackTextStyle = GoogleFonts.poppins(color: blackColor);
 TextStyle redCandyTextStyle = GoogleFonts.poppins(color: redCandy);
 
+// FontWeight
 FontWeight thin = FontWeight.w100;
 FontWeight extraLight = FontWeight.w200;
 FontWeight light = FontWeight.w300;

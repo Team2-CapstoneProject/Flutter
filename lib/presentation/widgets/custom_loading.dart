@@ -1,4 +1,4 @@
-import 'package:capstone_project_villa/styles/style.dart';
+import 'package:capstone_project_villa/common/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomLoading extends StatelessWidget {

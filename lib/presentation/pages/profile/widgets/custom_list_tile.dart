@@ -1,5 +1,7 @@
-import 'package:capstone_project_villa/styles/style.dart';
+import 'package:capstone_project_villa/common/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:iconsax/iconsax.dart';
 
 class CustomListTile extends StatelessWidget {
   final IconData icon;
@@ -14,12 +16,16 @@ class CustomListTile extends StatelessWidget {
     return ListTile(
       leading: Icon(
         icon,
-        color: greyColor,
+        color: icon == Iconsax.logout ? redCandy : greyColor,
         size: 24,
       ),
       title: Text(
         text,
-        style: blackTextStyle.copyWith(fontSize: 14, fontWeight: regular),
+        style: GoogleFonts.poppins(
+          color: text == 'Logout' ? redCandy : blackColor,
+          fontSize: 14,
+          fontWeight: regular,
+        ),
       ),
       onTap: onTap,
       hoverColor: greyColor,
