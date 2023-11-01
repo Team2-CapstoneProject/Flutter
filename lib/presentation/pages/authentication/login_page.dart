@@ -202,7 +202,9 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () async {
                       if (formKey.currentState!.validate()) {
                         Navigator.pushReplacementNamed(
-                            context, BottomNavbarPage.routeName);
+                          context,
+                          BottomNavbarPage.routeName,
+                        );
                       }
                     },
                     text: 'Sign In',

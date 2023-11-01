@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:capstone_project_villa/presentation/pages/home/home_page.dart';
+import 'package:capstone_project_villa/presentation/pages/navbar/bottom_navbar.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:flutter/material.dart';
@@ -247,11 +247,9 @@ class _RegisterProfilePageState extends State<RegisterProfilePage> {
                   ),
                   CustomButton(
                     onPressed: () {
-                      Navigator.pushReplacement(
+                      Navigator.pushReplacementNamed(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => const HomePage(),
-                        ),
+                        BottomNavbarPage.routeName,
                       );
                     },
                     text: 'Register',
