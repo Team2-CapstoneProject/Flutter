@@ -1,6 +1,6 @@
 import 'package:capstone_project_villa/presentation/pages/authentication/login_page.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
-import 'package:capstone_project_villa/styles/style.dart';
+import 'package:capstone_project_villa/common/constants.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

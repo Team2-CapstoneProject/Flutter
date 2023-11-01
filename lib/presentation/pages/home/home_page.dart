@@ -1,9 +1,10 @@
-import 'package:capstone_project_villa/styles/style.dart';
+import 'package:capstone_project_villa/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:iconsax/iconsax.dart';
 
 class HomePage extends StatefulWidget {
+  static const String routeName = '/home';
   const HomePage({super.key});
 
   @override

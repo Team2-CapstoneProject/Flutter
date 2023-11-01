@@ -1,11 +1,12 @@
 import 'package:capstone_project_villa/presentation/pages/authentication/login_page.dart';
-import 'package:capstone_project_villa/presentation/pages/authentication/register_profile_page.dart';
+import 'package:capstone_project_villa/presentation/pages/authentication/widgets/register_profile_page.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
-import 'package:capstone_project_villa/styles/style.dart';
+import 'package:capstone_project_villa/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
 class RegisterPage extends StatefulWidget {
+  static const String routeName = '/register';
   const RegisterPage({super.key});
 
   @override

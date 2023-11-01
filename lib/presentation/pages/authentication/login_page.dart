@@ -1,14 +1,15 @@
-import 'package:capstone_project_villa/presentation/pages/authentication/forgot_page.dart';
+import 'package:capstone_project_villa/presentation/pages/authentication/widgets/forgot_page.dart';
 import 'package:capstone_project_villa/presentation/pages/authentication/register_page.dart';
-import 'package:capstone_project_villa/presentation/pages/home/home_page.dart';
+import 'package:capstone_project_villa/presentation/pages/navbar/bottom_navbar.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
-import 'package:capstone_project_villa/styles/style.dart';
+import 'package:capstone_project_villa/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:iconsax/iconsax.dart';
 
 class LoginPage extends StatefulWidget {
+  static const String routeName = '/login';
   const LoginPage({super.key});
 
   @override
@@ -200,12 +201,8 @@ class _LoginPageState extends State<LoginPage> {
                   CustomButton(
                     onPressed: () async {
                       if (formKey.currentState!.validate()) {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const HomePage(),
-                          ),
-                        );
+                        Navigator.pushReplacementNamed(
+                            context, BottomNavbarPage.routeName);
                       }
                     },
                     text: 'Sign In',
