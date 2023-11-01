@@ -32,7 +32,7 @@ class _ForgotPageState extends State<ForgotPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 72.0,
+                  height: 52.0,
                 ),
                 GestureDetector(
                   onTap: () {
@@ -74,7 +74,7 @@ class _ForgotPageState extends State<ForgotPage> {
                     labelText: 'New Password',
                     labelStyle: TextStyle(color: greyColor),
                     prefixIcon: Icon(
-                      Iconsax.shield_security2,
+                      Iconsax.frame_4,
                       color: greyColor,
                     ),
                   ),
@@ -104,7 +104,7 @@ class _ForgotPageState extends State<ForgotPage> {
                     labelText: 'Confirm New Password',
                     labelStyle: TextStyle(color: greyColor),
                     prefixIcon: Icon(
-                      Iconsax.shield_security2,
+                      Iconsax.frame_4,
                       color: greyColor,
                     ),
                   ),

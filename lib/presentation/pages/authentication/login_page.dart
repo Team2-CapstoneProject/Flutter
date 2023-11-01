@@ -97,10 +97,10 @@ class _LoginPageState extends State<LoginPage> {
                         final emailRegex = RegExp(
                             r'^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$');
                         if (value!.isEmpty) {
-                          return 'Masukan Email';
+                          return 'Enter Email';
                         }
                         if (!emailRegex.hasMatch(value)) {
-                          return ('Email tidak valid');
+                          return ('Invalid email');
                         } else {
                           return null;
                         }
@@ -161,13 +161,13 @@ class _LoginPageState extends State<LoginPage> {
                           },
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Password tidak boleh kosong';
+                              return 'The password cannot be empty';
                             } else if (value.length < 8) {
-                              return 'Password harus minimal 8 karakter';
+                              return 'Password must be at least 8 characters';
                             } else if (!RegExp(
                                     r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])')
                                 .hasMatch(value)) {
-                              return 'Password harus mengandung huruf kapital dan angka';
+                              return 'The password must contain capital letters and numbers';
                             }
                             return null;
                           },
