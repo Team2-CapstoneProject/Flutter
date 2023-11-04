@@ -232,16 +232,11 @@ class _LoginPageState extends State<LoginPage> {
                           );
                         }
                         if (state is AuthError) {
-                          Flushbar(
-                            margin: EdgeInsets.all(8.0),
-                            borderRadius: BorderRadius.circular(10),
-                            title: 'Failed Login',
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(state.message),
+                            ),
                           );
-                          // ScaffoldMessenger.of(context).showSnackBar(
-                          //   SnackBar(
-                          //     content: Text('Failed Login'),
-                          //   ),
-                          // );
                         }
                       },
                       builder: (context, state) {
@@ -258,15 +253,17 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           onPressed: () {
-                            final loginModel = LoginRequestModel(
-                              email: _emailController.text,
-                              password: _passwordController.text,
-                            );
+                            if (formKey.currentState!.validate()) {
+                              final loginModel = LoginRequestModel(
+                                email: _emailController.text,
+                                password: _passwordController.text,
+                              );
 
-                            print(loginModel.toJson());
+                              print(loginModel.toJson());
 
-                            context.read<AuthBloc>().add(
-                                AuthLoginEvent(loginRequestModel: loginModel));
+                              context.read<AuthBloc>().add(AuthLoginEvent(
+                                  loginRequestModel: loginModel));
+                            }
                           },
                           child: Text(
                             'Sign Up',

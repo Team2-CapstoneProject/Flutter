@@ -35,8 +35,12 @@ class ApiDataSource {
 
     if (response.statusCode == 201) {
       return Right(AuthResponseModel.fromJson(jsonDecode(response.body)));
+    } else if (response.statusCode == 400) {
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      return Left(errorMessage);
     } else {
-      return const Left('Login Gagal');
+      return const Left('Login Failed');
     }
   }
 }
