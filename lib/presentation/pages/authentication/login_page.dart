@@ -61,6 +61,7 @@ class _LoginPageState extends State<LoginPage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Header
                   Text(
                     'Login to your\naccount',
                     style: blackTextStyle.copyWith(
@@ -68,6 +69,8 @@ class _LoginPageState extends State<LoginPage> {
                       fontWeight: semiBold,
                     ),
                   ),
+
+                  // Form Email
                   Container(
                     margin: const EdgeInsets.only(top: 56),
                     child: TextFormField(
@@ -111,6 +114,8 @@ class _LoginPageState extends State<LoginPage> {
                       },
                     ),
                   ),
+
+                  // Form Password
                   Container(
                     margin: const EdgeInsets.only(top: 30, bottom: 24),
                     child: ValueListenableBuilder<bool>(
@@ -179,6 +184,8 @@ class _LoginPageState extends State<LoginPage> {
                       },
                     ),
                   ),
+
+                  // Forget Password
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -199,6 +206,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
+
                   const SizedBox(
                     height: 14.0,
                   ),
@@ -219,24 +227,26 @@ class _LoginPageState extends State<LoginPage> {
                             BottomNavbarPage.routeName,
                             (route) => false,
                           );
-
-                          // Flushbar(
-                          //   margin: EdgeInsets.all(8.0),
-                          //   borderRadius: BorderRadius.circular(10),
-                          //   title: state.authResponseModel.message,
-                          // );
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(state.authResponseModel.message),
-                            ),
-                          );
+                          Flushbar(
+                            message: state.authResponseModel.message,
+                            duration: const Duration(seconds: 3),
+                            margin: EdgeInsets.all(8),
+                            borderRadius: BorderRadius.circular(10),
+                            flushbarStyle: FlushbarStyle.FLOATING,
+                            flushbarPosition: FlushbarPosition.BOTTOM,
+                            padding: EdgeInsets.all(16),
+                          )..show(context);
                         }
                         if (state is AuthError) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(state.message),
-                            ),
-                          );
+                          Flushbar(
+                            message: state.message,
+                            duration: const Duration(seconds: 3),
+                            margin: EdgeInsets.all(8),
+                            borderRadius: BorderRadius.circular(10),
+                            flushbarStyle: FlushbarStyle.FLOATING,
+                            flushbarPosition: FlushbarPosition.BOTTOM,
+                            padding: EdgeInsets.all(16),
+                          )..show(context);
                         }
                       },
                       builder: (context, state) {
@@ -258,11 +268,12 @@ class _LoginPageState extends State<LoginPage> {
                                 email: _emailController.text,
                                 password: _passwordController.text,
                               );
-
-                              print(loginModel.toJson());
-
-                              context.read<AuthBloc>().add(AuthLoginEvent(
-                                  loginRequestModel: loginModel));
+                              // print(loginModel.toJson());
+                              context.read<AuthBloc>().add(
+                                    AuthLoginEvent(
+                                      loginRequestModel: loginModel,
+                                    ),
+                                  );
                             }
                           },
                           child: Text(
@@ -277,20 +288,12 @@ class _LoginPageState extends State<LoginPage> {
                       },
                     ),
                   ),
-                  // CustomButton(
-                  //   onPressed: () async {
-                  //     if (formKey.currentState!.validate()) {
-                  //       Navigator.pushReplacementNamed(
-                  //         context,
-                  //         BottomNavbarPage.routeName,
-                  //       );
-                  //     }
-                  //   },
-                  //   text: 'Sign In',
-                  // ),
+
                   const SizedBox(
                     height: 40.0,
                   ),
+
+                  // Text Or
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -315,6 +318,8 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ],
                   ),
+
+                  // Login With Google
                   Container(
                     margin: const EdgeInsets.only(top: 40, bottom: 52),
                     height: 55,
@@ -353,6 +358,8 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
+
+                  // Footer
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
