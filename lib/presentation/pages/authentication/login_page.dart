@@ -1,10 +1,14 @@
+import 'package:another_flushbar/flushbar.dart';
+import 'package:capstone_project_villa/data/datasources/local/auth_local_datasource.dart';
+import 'package:capstone_project_villa/data/models/request/login_request_model.dart';
+import 'package:capstone_project_villa/presentation/bloc/auth/auth_bloc.dart';
 import 'package:capstone_project_villa/presentation/pages/authentication/widgets/forgot_page.dart';
 import 'package:capstone_project_villa/presentation/pages/authentication/register_page.dart';
 import 'package:capstone_project_villa/presentation/pages/navbar/bottom_navbar.dart';
-import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:iconsax/iconsax.dart';
 
@@ -198,17 +202,95 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(
                     height: 14.0,
                   ),
-                  CustomButton(
-                    onPressed: () async {
-                      if (formKey.currentState!.validate()) {
-                        Navigator.pushReplacementNamed(
-                          context,
-                          BottomNavbarPage.routeName,
+
+                  // Button
+                  SizedBox(
+                    height: 55,
+                    width: MediaQuery.of(context).size.width,
+                    child: BlocConsumer<AuthBloc, AuthState>(
+                      listener: (context, state) async {
+                        if (state is AuthLoaded) {
+                          await AuthLocalDataSource().saveToken(
+                            state.authResponseModel.token,
+                          );
+                          // print('token : ${state.authResponseModel.token}');
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            BottomNavbarPage.routeName,
+                            (route) => false,
+                          );
+
+                          // Flushbar(
+                          //   margin: EdgeInsets.all(8.0),
+                          //   borderRadius: BorderRadius.circular(10),
+                          //   title: state.authResponseModel.message,
+                          // );
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(state.authResponseModel.message),
+                            ),
+                          );
+                        }
+                        if (state is AuthError) {
+                          Flushbar(
+                            margin: EdgeInsets.all(8.0),
+                            borderRadius: BorderRadius.circular(10),
+                            title: 'Failed Login',
+                          );
+                          // ScaffoldMessenger.of(context).showSnackBar(
+                          //   SnackBar(
+                          //     content: Text('Failed Login'),
+                          //   ),
+                          // );
+                        }
+                      },
+                      builder: (context, state) {
+                        if (state is AuthLoading) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        return ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: primaryColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                          onPressed: () {
+                            final loginModel = LoginRequestModel(
+                              email: _emailController.text,
+                              password: _passwordController.text,
+                            );
+
+                            print(loginModel.toJson());
+
+                            context.read<AuthBloc>().add(
+                                AuthLoginEvent(loginRequestModel: loginModel));
+                          },
+                          child: Text(
+                            'Sign Up',
+                            style: whiteTextStyle.copyWith(
+                              fontSize: 14,
+                              fontWeight: semiBold,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
                         );
-                      }
-                    },
-                    text: 'Sign In',
+                      },
+                    ),
                   ),
+                  // CustomButton(
+                  //   onPressed: () async {
+                  //     if (formKey.currentState!.validate()) {
+                  //       Navigator.pushReplacementNamed(
+                  //         context,
+                  //         BottomNavbarPage.routeName,
+                  //       );
+                  //     }
+                  //   },
+                  //   text: 'Sign In',
+                  // ),
                   const SizedBox(
                     height: 40.0,
                   ),
