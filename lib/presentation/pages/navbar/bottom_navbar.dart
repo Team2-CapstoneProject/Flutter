@@ -1,13 +1,14 @@
 import 'package:capstone_project_villa/presentation/pages/home/home_page.dart';
 import 'package:capstone_project_villa/presentation/pages/profile/profile_page.dart';
 import 'package:capstone_project_villa/common/constants.dart';
+import 'package:capstone_project_villa/presentation/pages/search/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:iconsax/iconsax.dart';
 
 class BottomNavbarPage extends StatefulWidget {
   static const String routeName = '/bottomNavbar';
-  
+
   const BottomNavbarPage({super.key});
 
   @override
@@ -19,8 +20,7 @@ class _BottomNavbarPageState extends State<BottomNavbarPage> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    Text('Search Page',
-        style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+    SearchPage(),
     Text('Booking Page',
         style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
     ProfilePage()

@@ -5,6 +5,7 @@ import 'package:capstone_project_villa/presentation/pages/authentication/registe
 import 'package:capstone_project_villa/presentation/pages/home/home_page.dart';
 import 'package:capstone_project_villa/presentation/pages/navbar/bottom_navbar.dart';
 import 'package:capstone_project_villa/presentation/pages/profile/profile_page.dart';
+import 'package:capstone_project_villa/presentation/pages/search/search_page.dart';
 import 'package:capstone_project_villa/presentation/pages/splash/splash_screen.dart';
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,8 @@ class MyApp extends StatelessWidget {
           RegisterPage.routeName: (context) => const RegisterPage(),
           BottomNavbarPage.routeName: (context) => const BottomNavbarPage(),
           HomePage.routeName: (context) => const HomePage(),
-          ProfilePage.routeName: (context) => const ProfilePage()
+          ProfilePage.routeName: (context) => const ProfilePage(),
+          SearchPage.routeName: (context) => const SearchPage(),
         },
       ),
     );

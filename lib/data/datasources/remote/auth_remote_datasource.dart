@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:capstone_project_villa/common/constants.dart';
+import 'package:capstone_project_villa/data/datasources/local/auth_local_datasource.dart';
 import 'package:capstone_project_villa/data/models/request/login_request_model.dart';
+import 'package:capstone_project_villa/data/models/request/register_profile_request_model.dart';
 import 'package:capstone_project_villa/data/models/request/register_request_model.dart';
 import 'package:capstone_project_villa/data/models/response/auth_response_model.dart';
 import 'package:dartz/dartz.dart';
@@ -42,6 +44,25 @@ class ApiDataSource {
       return Right(AuthResponseModel.fromJson(jsonDecode(response.body)));
     } else {
       return Left('Registrasi Failed');
+    }
+  }
+
+  Future<Either<String, AuthResponseModel>> registerProfile(
+      RegisterProfileRequestModel registerProfileRequestModel) async {
+    final token = await AuthLocalDataSource().getToken();
+    final response = await http.post(
+      Uri.parse('$baseUrl/auth/registeruserprof'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token'
+      },
+      body: registerProfileRequestModel.toJson(),
+    );
+
+    if (response == 201) {
+      return Right(AuthResponseModel.fromJson(jsonDecode(response.body)));
+    } else {
+      return Left('Failed update');
     }
   }
 }

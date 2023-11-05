@@ -14,3 +14,9 @@ class AuthRegisterEvent extends AuthEvent {
 
   AuthRegisterEvent({required this.registerRequestModel});
 }
+
+class AuthUpdateProfileEvent extends AuthEvent {
+  final RegisterProfileRequestModel registerProfileRequestModel;
+
+  AuthUpdateProfileEvent({required this.registerProfileRequestModel});
+}
