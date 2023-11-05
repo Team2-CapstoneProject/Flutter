@@ -221,7 +221,7 @@ class _LoginPageState extends State<LoginPage> {
                           await AuthLocalDataSource().saveToken(
                             state.authResponseModel.token,
                           );
-                          // print('token : ${state.authResponseModel.token}');
+                          print('token : ${state.authResponseModel.token}');
                           Navigator.pushNamedAndRemoveUntil(
                             context,
                             BottomNavbarPage.routeName,
@@ -268,7 +268,7 @@ class _LoginPageState extends State<LoginPage> {
                                 email: _emailController.text,
                                 password: _passwordController.text,
                               );
-                              // print(loginModel.toJson());
+                              print(loginModel.toJson());
                               context.read<AuthBloc>().add(
                                     AuthLoginEvent(
                                       loginRequestModel: loginModel,

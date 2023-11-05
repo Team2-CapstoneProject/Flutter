@@ -8,3 +8,11 @@ class AuthLoginEvent extends AuthEvent {
 
   AuthLoginEvent({required this.loginRequestModel});
 }
+
+class AuthRegisterEvent extends AuthEvent {
+  final RegisterRequestModel registerRequestModel;
+
+  AuthRegisterEvent({required this.registerRequestModel});
+}
+
+class AuthGetUserEvent extends AuthEvent {}

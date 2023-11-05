@@ -1,6 +1,8 @@
 import 'package:capstone_project_villa/common/constants.dart';
+import 'package:capstone_project_villa/presentation/bloc/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,6 +14,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    context.read<AuthBloc>().add(AuthGetUserEvent());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,22 +54,32 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 15.0,
-              ),
-              Text(
-                'Howdy, Aezakmy',
-                style: blackTextStyle.copyWith(
-                  fontSize: 24,
-                  fontWeight: semiBold,
-                ),
-              ),
-              const SizedBox(
-                height: 20.0,
-              ),
-            ],
+
+          // Header
+          child: BlocBuilder<AuthBloc, AuthState>(
+            builder: (context, state) {
+              if (state is AuthUserLoaded) {
+                final user = state.user;
+                return Column(
+                  children: [
+                    const SizedBox(
+                      height: 15.0,
+                    ),
+                    Text(
+                      'Hello, ${user.userData.nickname}',
+                      style: blackTextStyle.copyWith(
+                        fontSize: 24,
+                        fontWeight: semiBold,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                  ],
+                );
+              }
+              return Container();
+            },
           ),
         ),
       ),

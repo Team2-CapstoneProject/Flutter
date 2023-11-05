@@ -1,6 +1,12 @@
+import 'package:another_flushbar/flushbar.dart';
+import 'package:capstone_project_villa/data/datasources/local/auth_local_datasource.dart';
+import 'package:capstone_project_villa/data/models/request/register_request_model.dart';
+import 'package:capstone_project_villa/presentation/bloc/auth/auth_bloc.dart';
 import 'package:capstone_project_villa/presentation/pages/authentication/login_page.dart';
 import 'package:capstone_project_villa/common/constants.dart';
+import 'package:capstone_project_villa/presentation/pages/authentication/widgets/register_profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -171,6 +177,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         },
                       ),
                     ),
+
                     const SizedBox(
                       height: 30.0,
                     ),
@@ -179,22 +186,77 @@ class _RegisterPageState extends State<RegisterPage> {
                     SizedBox(
                       height: 55,
                       width: MediaQuery.of(context).size.width,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: primaryColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          'Sign Up',
-                          style: whiteTextStyle.copyWith(
-                            fontSize: 14,
-                            fontWeight: semiBold,
-                            letterSpacing: 0.5,
-                          ),
-                        ),
+                      child: BlocConsumer<AuthBloc, AuthState>(
+                        listener: (context, state) async {
+                          if (state is AuthLoaded) {
+                            await AuthLocalDataSource().saveToken(
+                              state.authResponseModel.token,
+                            );
+                            print('token : ${state.authResponseModel.token}');
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RegisterProfilePage()),
+                            );
+                            Flushbar(
+                              message: state.authResponseModel.message,
+                              duration: const Duration(seconds: 3),
+                              margin: EdgeInsets.all(8),
+                              borderRadius: BorderRadius.circular(10),
+                              flushbarStyle: FlushbarStyle.FLOATING,
+                              flushbarPosition: FlushbarPosition.BOTTOM,
+                              padding: EdgeInsets.all(16),
+                            )..show(context);
+                          }
+                          if (state is AuthError) {
+                            Flushbar(
+                              message: state.message,
+                              duration: const Duration(seconds: 3),
+                              margin: EdgeInsets.all(8),
+                              borderRadius: BorderRadius.circular(10),
+                              flushbarStyle: FlushbarStyle.FLOATING,
+                              flushbarPosition: FlushbarPosition.BOTTOM,
+                              padding: EdgeInsets.all(16),
+                            )..show(context);
+                          }
+                        },
+                        builder: (context, state) {
+                          if (state is AuthLoading) {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          return ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: primaryColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                            onPressed: () {
+                              if (formKey.currentState!.validate()) {
+                                final registerModel = RegisterRequestModel(
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                );
+                                // print(registerModel.toJson());
+                                context.read<AuthBloc>().add(
+                                      AuthRegisterEvent(
+                                        registerRequestModel: registerModel,
+                                      ),
+                                    );
+                              }
+                            },
+                            child: Text(
+                              'Sign In',
+                              style: whiteTextStyle.copyWith(
+                                fontSize: 14,
+                                fontWeight: semiBold,
+                                letterSpacing: 0.5,
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ),
                     // CustomButton(
@@ -225,9 +287,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     //   },
                     //   text: 'Sign Up',
                     // ),
+
                     const SizedBox(
                       height: 40.0,
                     ),
+
+                    // Text Or
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[

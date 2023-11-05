@@ -3,13 +3,19 @@ import 'dart:convert';
 class LoginRequestModel {
   String email;
   String password;
+  String loginType;
 
-  LoginRequestModel({required this.email, required this.password});
+  LoginRequestModel({
+    required this.email,
+    required this.password,
+    this.loginType = 'user',
+  });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'email': email,
       'password': password,
+      'loginType': loginType,
     };
   }
 
@@ -17,6 +23,7 @@ class LoginRequestModel {
     return LoginRequestModel(
       email: map['email'],
       password: map['password'],
+      loginType: map['loginType'] ?? 'user',
     );
   }
 

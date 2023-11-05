@@ -34,38 +34,11 @@ class RegisterRequestModel {
   // }) {
   //   return RegisterRequestModel(
   //     image: image ?? this.image,
-  //     email: email,
-  //     fullname: fullname,
-  //     nickname: nickname,
-  //     password: password,
+  //     email: email ?? this.email,
+  //     fullname: fullname ?? this.fullname,
+  //     nickname: nickname ?? this.nickname,
+  //     password: password ?? this.password,
   //     phoneNumber: phone_number ?? this.phoneNumber,
-  //   );
-  // }
-
-  // String toJson() => json.encode(toMap());
-
-  // factory RegisterRequestModel.fromJson(String source) =>
-  //     RegisterRequestModel.fromMap(json.decode(source));
-
-  // Map<String, dynamic> toJson() {
-  //   return <String, dynamic>{
-  //     'image': image,
-  //     'email': email,
-  //     'fullname': fullname,
-  //     'nickname': nickname,
-  //     'password': password,
-  //     'phone_number': phoneNumber,
-  //   };
-  // }
-
-  // factory RegisterRequestModel.fromMap(Map<String, dynamic> map) {
-  //   return RegisterRequestModel(
-  //     image: map['image'] as String?,
-  //     email: map['email'] as String?,
-  //     fullname: map['fullname'] as String?,
-  //     nickname: map['nickname'] as String?,
-  //     password: map['password'] as String?,
-  //     phoneNumber: map['phone_number'] as int?,
   //   );
   // }
 }
