@@ -1,44 +1,49 @@
-class RegisterRequestModel {
-  // String? image;
-  String? email;
-  // String? fullname;
-  // String? nickname;
-  String? password;
-  // int? phoneNumber;
+import 'dart:convert';
 
+class RegisterRequestModel {
+  String? google_id;
+  String? image;
+  String? email;
+  String? fullname;
+  String? nickname;
+  String? password;
+  int? phoneNumber;
   RegisterRequestModel({
-    // this.image,
+    this.google_id,
+    this.image,
     this.email,
-    // this.fullname,
-    // this.nickname,
+    this.fullname,
+    this.nickname,
     this.password,
-    // this.phoneNumber,
+    this.phoneNumber,
   });
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     return {
-      // 'image': image,
+      'google_id': google_id,
+      'image': image,
       'email': email,
-      // 'fullname': fullname,
-      // 'nickname': nickname,
+      'fullname': fullname,
+      'nickname': nickname,
       'password': password,
-      // 'phone_number': phoneNumber,
+      'phoneNumber': phoneNumber,
     };
   }
 
-  // RegisterRequestModel copyWith({
-  //   String? image,
-  //   String? fullname,
-  //   String? nickname,
-  //   int? phone_number,
-  // }) {
-  //   return RegisterRequestModel(
-  //     image: image ?? this.image,
-  //     email: email ?? this.email,
-  //     fullname: fullname ?? this.fullname,
-  //     nickname: nickname ?? this.nickname,
-  //     password: password ?? this.password,
-  //     phoneNumber: phone_number ?? this.phoneNumber,
-  //   );
-  // }
+  factory RegisterRequestModel.fromMap(Map<String, dynamic> map) {
+    return RegisterRequestModel(
+      google_id: map['google_id'],
+      image: map['image'],
+      email: map['email'],
+      fullname: map['fullname'],
+      nickname: map['nickname'],
+      password: map['password'],
+      phoneNumber: map['phoneNumber']?.toInt(),
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory RegisterRequestModel.fromJson(String source) =>
+      RegisterRequestModel.fromMap(json.decode(source));
 }

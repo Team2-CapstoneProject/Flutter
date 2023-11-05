@@ -1,9 +1,11 @@
 import 'package:capstone_project_villa/common/constants.dart';
-import 'package:capstone_project_villa/presentation/bloc/auth/auth_bloc.dart';
+import 'package:capstone_project_villa/presentation/bloc/home/home_bloc.dart';
+import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomePage extends StatefulWidget {
   static const String routeName = '/home';
@@ -15,14 +17,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+
+
   void initState() {
-    context.read<AuthBloc>().add(AuthGetUserEvent());
+    context.read<HomeBloc>().add(HomeGetUserEvent());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Headers
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: whiteColor,
@@ -54,32 +59,49 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
-
-          // Header
-          child: BlocBuilder<AuthBloc, AuthState>(
-            builder: (context, state) {
-              if (state is AuthUserLoaded) {
-                final user = state.user;
-                return Column(
-                  children: [
-                    const SizedBox(
-                      height: 15.0,
-                    ),
-                    Text(
-                      'Hello, ${user.userData.nickname}',
-                      style: blackTextStyle.copyWith(
-                        fontSize: 24,
-                        fontWeight: semiBold,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Text Welcome
+              BlocBuilder<HomeBloc, HomeState>(
+                builder: (context, state) {
+                  if (state is HomeLoaded) {
+                    final user = state.user;
+                    return Container(
+                      margin: const EdgeInsets.only(top: 15, bottom: 20),
+                      child: Text(
+                        'Hello, ${user.userData!.nickname}',
+                        style: blackTextStyle.copyWith(
+                          fontSize: 24,
+                          fontWeight: semiBold,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                  ],
-                );
-              }
-              return Container();
-            },
+                    );
+                  } else if (state is HomeLoading) {
+                    return Container(
+                      margin: const EdgeInsets.only(top: 15, bottom: 20),
+                      child: Shimmer.fromColors(
+                        baseColor: white70Color,
+                        highlightColor: grey95,
+                        child: Container(
+                          height: 24,
+                          width: 120,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
+                      ),
+                    );
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
+
+              // Search Button
+              CustomButton(onPressed: () {}, text: 'Search')
+            ],
           ),
         ),
       ),

@@ -3,7 +3,6 @@ import 'package:capstone_project_villa/data/datasources/remote/auth_remote_datas
 import 'package:capstone_project_villa/data/models/request/login_request_model.dart';
 import 'package:capstone_project_villa/data/models/request/register_request_model.dart';
 import 'package:capstone_project_villa/data/models/response/auth_response_model.dart';
-import 'package:capstone_project_villa/data/models/response/home_response_model.dart';
 import 'package:meta/meta.dart';
 
 part 'auth_event.dart';
@@ -22,12 +21,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final result = await ApiDataSource().register(event.registerRequestModel);
       result.fold((error) => emit(AuthError(message: error)),
           (success) => emit(AuthLoaded(authResponseModel: success)));
-    });
-    on<AuthGetUserEvent>((event, emit) async {
-      emit(AuthLoading());
-      final result = await ApiDataSource().getUser();
-      result.fold((error) => emit(AuthError(message: error)),
-          (success) => emit(AuthUserLoaded(user: success)));
     });
   }
 }

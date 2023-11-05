@@ -1,4 +1,5 @@
 import 'package:capstone_project_villa/presentation/bloc/auth/auth_bloc.dart';
+import 'package:capstone_project_villa/presentation/bloc/home/home_bloc.dart';
 import 'package:capstone_project_villa/presentation/pages/authentication/login_page.dart';
 import 'package:capstone_project_villa/presentation/pages/authentication/register_page.dart';
 import 'package:capstone_project_villa/presentation/pages/home/home_page.dart';
@@ -22,6 +23,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => AuthBloc(),
+        ),
+        BlocProvider(
+          create: (context) => HomeBloc(),
         )
       ],
       child: MaterialApp(

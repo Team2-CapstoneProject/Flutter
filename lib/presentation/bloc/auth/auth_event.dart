@@ -14,5 +14,3 @@ class AuthRegisterEvent extends AuthEvent {
 
   AuthRegisterEvent({required this.registerRequestModel});
 }
-
-class AuthGetUserEvent extends AuthEvent {}
