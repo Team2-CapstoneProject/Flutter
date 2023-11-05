@@ -1,8 +1,12 @@
+import 'package:another_flushbar/flushbar.dart';
+import 'package:capstone_project_villa/data/datasources/local/auth_local_datasource.dart';
+import 'package:capstone_project_villa/data/models/request/register_request_model.dart';
+import 'package:capstone_project_villa/presentation/bloc/auth/auth_bloc.dart';
 import 'package:capstone_project_villa/presentation/pages/authentication/login_page.dart';
-import 'package:capstone_project_villa/presentation/pages/authentication/widgets/register_profile_page.dart';
-import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
 import 'package:capstone_project_villa/common/constants.dart';
+import 'package:capstone_project_villa/presentation/pages/authentication/widgets/register_profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -51,6 +55,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Header
                     Text(
                       'Create new\naccount',
                       style: blackTextStyle.copyWith(
@@ -58,6 +63,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         fontWeight: semiBold,
                       ),
                     ),
+
+                    // Form Email
                     Container(
                       margin: const EdgeInsets.only(top: 56),
                       child: TextFormField(
@@ -101,6 +108,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         },
                       ),
                     ),
+
+                    // Form Password
                     Container(
                       margin: const EdgeInsets.only(top: 30, bottom: 24),
                       child: ValueListenableBuilder<bool>(
@@ -168,23 +177,122 @@ class _RegisterPageState extends State<RegisterPage> {
                         },
                       ),
                     ),
+
                     const SizedBox(
                       height: 30.0,
                     ),
-                    CustomButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const RegisterProfilePage(),
-                          ),
-                        );
-                      },
-                      text: 'Sign Up',
+
+                    // Button
+                    SizedBox(
+                      height: 55,
+                      width: MediaQuery.of(context).size.width,
+                      child: BlocConsumer<AuthBloc, AuthState>(
+                        listener: (context, state) async {
+                          if (state is AuthLoaded) {
+                            await AuthLocalDataSource().saveToken(
+                              state.authResponseModel.token,
+                            );
+                            print('token : ${state.authResponseModel.token}');
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RegisterProfilePage()),
+                            );
+                            Flushbar(
+                              message: state.authResponseModel.message,
+                              duration: const Duration(seconds: 3),
+                              margin: EdgeInsets.all(8),
+                              borderRadius: BorderRadius.circular(10),
+                              flushbarStyle: FlushbarStyle.FLOATING,
+                              flushbarPosition: FlushbarPosition.BOTTOM,
+                              padding: EdgeInsets.all(16),
+                            )..show(context);
+                          }
+                          if (state is AuthError) {
+                            Flushbar(
+                              message: state.message,
+                              duration: const Duration(seconds: 3),
+                              margin: EdgeInsets.all(8),
+                              borderRadius: BorderRadius.circular(10),
+                              flushbarStyle: FlushbarStyle.FLOATING,
+                              flushbarPosition: FlushbarPosition.BOTTOM,
+                              padding: EdgeInsets.all(16),
+                            )..show(context);
+                          }
+                        },
+                        builder: (context, state) {
+                          if (state is AuthLoading) {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          return ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: primaryColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                            onPressed: () {
+                              if (formKey.currentState!.validate()) {
+                                final registerModel = RegisterRequestModel(
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                );
+                                // print(registerModel.toJson());
+                                context.read<AuthBloc>().add(
+                                      AuthRegisterEvent(
+                                        registerRequestModel: registerModel,
+                                      ),
+                                    );
+                              }
+                            },
+                            child: Text(
+                              'Sign In',
+                              style: whiteTextStyle.copyWith(
+                                fontSize: 14,
+                                fontWeight: semiBold,
+                                letterSpacing: 0.5,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                     ),
+                    // CustomButton(
+                    //   onPressed: () {
+                    //     final requestModel = RegisterRequestModel(
+                    //         email: _emailController.text,
+                    //         password: _passwordController.text);
+
+                    //     context.read<RegisterBloc>().add(SaveRegisterEvent(
+                    //         registerRequestModel: requestModel));
+                    //     // BlocConsumer<RegisterBloc, RegisterState>(
+                    //     //     builder: (context, state) {
+                    //     //       return
+                    //     //     },
+                    //     //     listener: (context, state) {
+                    //     //       if (state is RegisterLoaded) {
+                    //     //         ScaffoldMessenger.of(context).showSnackBar(
+                    //     //             SnackBar(
+                    //     //                 content: Text('Register Success')));
+                    //     //       }
+                    //     //     });
+                    //     // Navigator.push(
+                    //     //   context,
+                    //     //   MaterialPageRoute(
+                    //     //     builder: (context) => const RegisterProfilePage(),
+                    //     //   ),
+                    //     // );
+                    //   },
+                    //   text: 'Sign Up',
+                    // ),
+
                     const SizedBox(
                       height: 40.0,
                     ),
+
+                    // Text Or
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -209,6 +317,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       ],
                     ),
+
+                    // Login with Google
                     Container(
                       margin: const EdgeInsets.only(top: 40, bottom: 52),
                       height: 55,
@@ -247,6 +357,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       ),
                     ),
+
+                    // Footer
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

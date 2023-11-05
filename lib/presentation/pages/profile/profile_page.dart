@@ -1,3 +1,5 @@
+import 'package:capstone_project_villa/data/datasources/local/auth_local_datasource.dart';
+import 'package:capstone_project_villa/presentation/pages/authentication/login_page.dart';
 import 'package:capstone_project_villa/presentation/pages/profile/widgets/edit_profile_page.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_dialog.dart';
 import 'package:capstone_project_villa/presentation/pages/profile/widgets/custom_list_tile.dart';
@@ -115,11 +117,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   CustomListTile(
                     icon: Iconsax.logout,
                     text: 'Logout',
-                    onTap: () {
-                      showDialog(
-                        barrierDismissible: false,
-                        context: context,
-                        builder: (context) => const CustomDialog(),
+                    onTap: () async {
+                      await AuthLocalDataSource().removeToken();
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        LoginPage.routeName,
+                        (route) => false,
                       );
                     },
                   ),

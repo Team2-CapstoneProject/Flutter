@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+String baseUrl = 'https://fullstak-vila-reservation.vercel.app/api';
+
 // Color
 Color primaryColor = const Color(0xFF1D3557);
 Color whiteColor = const Color(0xffFFFFFF);
