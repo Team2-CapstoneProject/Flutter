@@ -1,44 +1,41 @@
 import 'dart:convert';
 
 class RegisterRequestModel {
-  String? google_id;
-  String? image;
-  String? email;
-  String? fullname;
-  String? nickname;
-  String? password;
-  int? phoneNumber;
+  final String? email;
+  // final String? fullname;
+  // final String? image;
+  // final String? nickname;
+  final String? password;
+  // final String? phone_number;
+
   RegisterRequestModel({
-    this.google_id,
-    this.image,
-    this.email,
-    this.fullname,
-    this.nickname,
-    this.password,
-    this.phoneNumber,
+    required this.email,
+    // this.fullname,
+    // this.image,
+    // this.nickname,
+    required this.password,
+    // this.phone_number,
   });
 
   Map<String, dynamic> toMap() {
     return {
-      'google_id': google_id,
-      'image': image,
       'email': email,
-      'fullname': fullname,
-      'nickname': nickname,
+      // 'fullname': fullname,
+      // 'image': image,
+      // 'nickname': nickname,
       'password': password,
-      'phoneNumber': phoneNumber,
+      // 'phone_number': phone_number,
     };
   }
 
   factory RegisterRequestModel.fromMap(Map<String, dynamic> map) {
     return RegisterRequestModel(
-      google_id: map['google_id'],
-      image: map['image'],
       email: map['email'],
-      fullname: map['fullname'],
-      nickname: map['nickname'],
+      // fullname: map['fullname'],
+      // image: map['image'],
+      // nickname: map['nickname'],
       password: map['password'],
-      phoneNumber: map['phoneNumber']?.toInt(),
+      // phone_number: map['phone_number'],
     );
   }
 

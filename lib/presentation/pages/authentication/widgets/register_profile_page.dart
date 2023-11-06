@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:capstone_project_villa/data/models/response/auth_response_model.dart';
 import 'package:capstone_project_villa/presentation/pages/navbar/bottom_navbar.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
 import 'package:capstone_project_villa/common/constants.dart';
@@ -8,7 +9,10 @@ import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 
 class RegisterProfilePage extends StatefulWidget {
-  const RegisterProfilePage({super.key});
+  static const String routeName = '/registerprofile';
+
+  final AuthResponseModel data;
+  const RegisterProfilePage({super.key, required this.data});
 
   @override
   State<RegisterProfilePage> createState() => _RegisterProfilePageState();
@@ -45,6 +49,11 @@ class _RegisterProfilePageState extends State<RegisterProfilePage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -57,38 +66,6 @@ class _RegisterProfilePageState extends State<RegisterProfilePage> {
                 children: [
                   const SizedBox(
                     height: 30.0,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: const Text('Konfirmasi'),
-                            content: const Text('Apakah Anda ingin kembali?'),
-                            actions: <Widget>[
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Text('Ya'),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Text('Tidak'),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                    child: Icon(
-                      Icons.arrow_back,
-                      size: 24,
-                      color: darkGrey,
-                    ),
                   ),
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 30),
@@ -183,35 +160,24 @@ class _RegisterProfilePageState extends State<RegisterProfilePage> {
                       ),
                     ),
                   ),
-                  // Container(
-                  //   margin: const EdgeInsets.only(top: 20),
-                  //   child: TextFormField(
-                  //     textInputAction: TextInputAction.next,
-                  //     keyboardType: TextInputType.emailAddress,
-                  //     controller: _emailController,
-                  //     decoration: InputDecoration(
-                  //       border: const OutlineInputBorder(),
-                  //       enabledBorder: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(20),
-                  //         borderSide: BorderSide(
-                  //           color: grey95,
-                  //         ),
-                  //       ),
-                  //       focusedBorder: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(20),
-                  //         borderSide: BorderSide(
-                  //           color: blackColor.withOpacity(0.1),
-                  //         ),
-                  //       ),
-                  //       labelText: 'Email',
-                  //       labelStyle: TextStyle(color: greyColor),
-                  //       prefixIcon: Icon(
-                  //         Iconsax.sms,
-                  //         color: greyColor,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 20),
+                    child: TextFormField(
+                      enabled: false,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(
+                            color: grey95,
+                          ),
+                        ),
+                        hintText: widget.data.email,
+                        prefixIcon: Icon(
+                          Iconsax.sms,
+                        ),
+                      ),
+                    ),
+                  ),
                   Container(
                     margin: const EdgeInsets.only(top: 20),
                     child: TextFormField(

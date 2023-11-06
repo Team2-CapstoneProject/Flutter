@@ -1,4 +1,3 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:capstone_project_villa/data/datasources/local/auth_local_datasource.dart';
 import 'package:capstone_project_villa/data/models/request/login_request_model.dart';
 import 'package:capstone_project_villa/presentation/bloc/auth/auth_bloc.dart';
@@ -227,26 +226,26 @@ class _LoginPageState extends State<LoginPage> {
                             BottomNavbarPage.routeName,
                             (route) => false,
                           );
-                          Flushbar(
-                            message: state.authResponseModel.message,
-                            duration: const Duration(seconds: 3),
-                            margin: EdgeInsets.all(8),
-                            borderRadius: BorderRadius.circular(10),
-                            flushbarStyle: FlushbarStyle.FLOATING,
-                            flushbarPosition: FlushbarPosition.BOTTOM,
-                            padding: EdgeInsets.all(16),
-                          )..show(context);
+                          // Flushbar(
+                          //   message: state.authResponseModel.message,
+                          //   duration: const Duration(seconds: 3),
+                          //   margin: EdgeInsets.all(8),
+                          //   borderRadius: BorderRadius.circular(10),
+                          //   flushbarStyle: FlushbarStyle.FLOATING,
+                          //   flushbarPosition: FlushbarPosition.BOTTOM,
+                          //   padding: EdgeInsets.all(16),
+                          // )..show(context);
                         }
                         if (state is AuthError) {
-                          Flushbar(
-                            message: state.message,
-                            duration: const Duration(seconds: 3),
-                            margin: EdgeInsets.all(8),
-                            borderRadius: BorderRadius.circular(10),
-                            flushbarStyle: FlushbarStyle.FLOATING,
-                            flushbarPosition: FlushbarPosition.BOTTOM,
-                            padding: EdgeInsets.all(16),
-                          )..show(context);
+                          // Flushbar(
+                          //   message: state.message,
+                          //   duration: const Duration(seconds: 3),
+                          //   margin: EdgeInsets.all(8),
+                          //   borderRadius: BorderRadius.circular(10),
+                          //   flushbarStyle: FlushbarStyle.FLOATING,
+                          //   flushbarPosition: FlushbarPosition.BOTTOM,
+                          //   padding: EdgeInsets.all(16),
+                          // )..show(context);
                         }
                       },
                       builder: (context, state) {

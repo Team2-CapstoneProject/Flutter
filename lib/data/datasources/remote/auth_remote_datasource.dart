@@ -42,6 +42,10 @@ class ApiDataSource {
 
     if (response.statusCode == 201) {
       return Right(AuthResponseModel.fromJson(jsonDecode(response.body)));
+    } else if (response.statusCode == 400) {
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      return Left(errorMessage);
     } else {
       return Left('Registrasi Failed');
     }
@@ -59,7 +63,7 @@ class ApiDataSource {
       body: registerProfileRequestModel.toJson(),
     );
 
-    if (response == 201) {
+    if (response.statusCode == 201) {
       return Right(AuthResponseModel.fromJson(jsonDecode(response.body)));
     } else {
       return Left('Failed update');

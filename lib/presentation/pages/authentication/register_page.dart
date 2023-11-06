@@ -1,6 +1,6 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:capstone_project_villa/data/datasources/local/auth_local_datasource.dart';
 import 'package:capstone_project_villa/data/models/request/register_request_model.dart';
+import 'package:capstone_project_villa/data/models/response/auth_response_model.dart';
 import 'package:capstone_project_villa/presentation/bloc/auth/auth_bloc.dart';
 import 'package:capstone_project_villa/presentation/pages/authentication/login_page.dart';
 import 'package:capstone_project_villa/common/constants.dart';
@@ -192,33 +192,23 @@ class _RegisterPageState extends State<RegisterPage> {
                             await AuthLocalDataSource().saveToken(
                               state.authResponseModel.token,
                             );
-                            print('token : ${state.authResponseModel.token}');
+                            // print('token : ${state.authResponseModel.token}');
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => RegisterProfilePage()),
+                                builder: (context) => RegisterProfilePage(
+                                  data: AuthResponseModel(
+                                      token: '',
+                                      email: _emailController.text,
+                                      fullname: '',
+                                      image: '',
+                                      nickname: '',
+                                      phoneNumber: ''),
+                                ),
+                              ),
                             );
-                            Flushbar(
-                              message: state.authResponseModel.message,
-                              duration: const Duration(seconds: 3),
-                              margin: EdgeInsets.all(8),
-                              borderRadius: BorderRadius.circular(10),
-                              flushbarStyle: FlushbarStyle.FLOATING,
-                              flushbarPosition: FlushbarPosition.BOTTOM,
-                              padding: EdgeInsets.all(16),
-                            )..show(context);
                           }
-                          if (state is AuthError) {
-                            Flushbar(
-                              message: state.message,
-                              duration: const Duration(seconds: 3),
-                              margin: EdgeInsets.all(8),
-                              borderRadius: BorderRadius.circular(10),
-                              flushbarStyle: FlushbarStyle.FLOATING,
-                              flushbarPosition: FlushbarPosition.BOTTOM,
-                              padding: EdgeInsets.all(16),
-                            )..show(context);
-                          }
+                          if (state is AuthError) {}
                         },
                         builder: (context, state) {
                           if (state is AuthLoading) {
@@ -239,7 +229,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   email: _emailController.text,
                                   password: _passwordController.text,
                                 );
-                                // print(registerModel.toJson());
+                                print(registerModel.toJson());
                                 context.read<AuthBloc>().add(
                                       AuthRegisterEvent(
                                         registerRequestModel: registerModel,
@@ -259,34 +249,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         },
                       ),
                     ),
-                    // CustomButton(
-                    //   onPressed: () {
-                    //     final requestModel = RegisterRequestModel(
-                    //         email: _emailController.text,
-                    //         password: _passwordController.text);
-
-                    //     context.read<RegisterBloc>().add(SaveRegisterEvent(
-                    //         registerRequestModel: requestModel));
-                    //     // BlocConsumer<RegisterBloc, RegisterState>(
-                    //     //     builder: (context, state) {
-                    //     //       return
-                    //     //     },
-                    //     //     listener: (context, state) {
-                    //     //       if (state is RegisterLoaded) {
-                    //     //         ScaffoldMessenger.of(context).showSnackBar(
-                    //     //             SnackBar(
-                    //     //                 content: Text('Register Success')));
-                    //     //       }
-                    //     //     });
-                    //     // Navigator.push(
-                    //     //   context,
-                    //     //   MaterialPageRoute(
-                    //     //     builder: (context) => const RegisterProfilePage(),
-                    //     //   ),
-                    //     // );
-                    //   },
-                    //   text: 'Sign Up',
-                    // ),
 
                     const SizedBox(
                       height: 40.0,

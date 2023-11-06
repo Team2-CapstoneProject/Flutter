@@ -15,8 +15,11 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  // late TabController _tabController;
   bool showMoreCategories = false;
+
   @override
   void initState() {
     context.read<HomeBloc>().add(HomeGetUserEvent());
@@ -454,7 +457,10 @@ class _HomePageState extends State<HomePage> {
               ),
 
               // TabBar & Card Recommended
-
+              // Container(
+              //   child: TabBar(tabs:
+              //   ),
+              // )
               // ForYou
             ],
           ),
