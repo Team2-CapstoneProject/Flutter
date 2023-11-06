@@ -1,10 +1,13 @@
 import 'dart:io';
 
+import 'package:capstone_project_villa/data/models/request/register_profile_request_model.dart';
 import 'package:capstone_project_villa/data/models/response/auth_response_model.dart';
+import 'package:capstone_project_villa/presentation/bloc/auth/auth_bloc.dart';
 import 'package:capstone_project_villa/presentation/pages/navbar/bottom_navbar.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -206,57 +209,76 @@ class _RegisterProfilePageState extends State<RegisterProfilePage> {
                   const SizedBox(
                     height: 50.0,
                   ),
-                  CustomButton(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          Future.delayed(Duration(seconds: 2), () {
-                            Navigator.of(context).pop();
-                            Navigator.pushReplacementNamed(
-                              context,
-                              BottomNavbarPage.routeName,
+                  BlocConsumer<AuthBloc, AuthState>(
+                    listener: (context, state) {
+                      if (state is AuthLoaded) {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            Future.delayed(Duration(seconds: 2), () {
+                              Navigator.of(context).pop();
+                              Navigator.pushReplacementNamed(
+                                context,
+                                BottomNavbarPage.routeName,
+                              );
+                            });
+                            return AlertDialog(
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    'assets/auth/success_regis.png',
+                                    height: 174,
+                                    width: 174,
+                                  ),
+                                  const SizedBox(
+                                    height: 25.0,
+                                  ),
+                                  Text(
+                                    'Register Successfull',
+                                    style: primaryTextStyle.copyWith(
+                                      fontSize: 20,
+                                      fontWeight: bold,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 9.0,
+                                  ),
+                                  Text(
+                                    'Successfully register your new account',
+                                    textAlign: TextAlign.center,
+                                    style: grey2TextStyle.copyWith(
+                                      fontSize: 17,
+                                      fontWeight: semiBold,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             );
-                          });
-                          return AlertDialog(
-                            content: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  'assets/auth/success_regis.png',
-                                  height: 174,
-                                  width: 174,
-                                ),
-                                const SizedBox(
-                                  height: 25.0,
-                                ),
-                                Text(
-                                  'Register Successfull',
-                                  style: primaryTextStyle.copyWith(
-                                    fontSize: 20,
-                                    fontWeight: bold,
+                          },
+                        );
+                      }
+                    },
+                    builder: (context, state) {
+                      return CustomButton(
+                        onPressed: () {
+                          context.read<AuthBloc>().add(
+                                AuthUpdateProfileEvent(
+                                  registerProfileRequestModel:
+                                      RegisterProfileRequestModel(
+                                    fullname: _fullNameController.text,
+                                    nickname: _nickNameController.text,
+                                    phone_number: _phoneController.text,
+                                    image: file != null ? file?.path : null,
                                   ),
                                 ),
-                                const SizedBox(
-                                  height: 9.0,
-                                ),
-                                Text(
-                                  'Successfully register your new account',
-                                  textAlign: TextAlign.center,
-                                  style: grey2TextStyle.copyWith(
-                                    fontSize: 17,
-                                    fontWeight: semiBold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
+                              );
                         },
+                        text: 'Register',
                       );
                     },
-                    text: 'Register',
                   ),
                 ],
               ),
