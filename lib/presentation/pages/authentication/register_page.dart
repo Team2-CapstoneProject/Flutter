@@ -208,7 +208,6 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                             );
                           }
-                          if (state is AuthError) {}
                         },
                         builder: (context, state) {
                           if (state is AuthLoading) {
@@ -229,7 +228,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   email: _emailController.text,
                                   password: _passwordController.text,
                                 );
-                                print(registerModel.toJson());
+                                // print(registerModel.toJson());
                                 context.read<AuthBloc>().add(
                                       AuthRegisterEvent(
                                         registerRequestModel: registerModel,

@@ -49,11 +49,6 @@ class _RegisterProfilePageState extends State<RegisterProfilePage> {
   }
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -213,9 +208,52 @@ class _RegisterProfilePageState extends State<RegisterProfilePage> {
                   ),
                   CustomButton(
                     onPressed: () {
-                      Navigator.pushReplacementNamed(
-                        context,
-                        BottomNavbarPage.routeName,
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          Future.delayed(Duration(seconds: 2), () {
+                            Navigator.of(context).pop();
+                            Navigator.pushReplacementNamed(
+                              context,
+                              BottomNavbarPage.routeName,
+                            );
+                          });
+                          return AlertDialog(
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/auth/success_regis.png',
+                                  height: 174,
+                                  width: 174,
+                                ),
+                                const SizedBox(
+                                  height: 25.0,
+                                ),
+                                Text(
+                                  'Register Successfull',
+                                  style: primaryTextStyle.copyWith(
+                                    fontSize: 20,
+                                    fontWeight: bold,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 9.0,
+                                ),
+                                Text(
+                                  'Successfully register your new account',
+                                  textAlign: TextAlign.center,
+                                  style: grey2TextStyle.copyWith(
+                                    fontSize: 17,
+                                    fontWeight: semiBold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
                       );
                     },
                     text: 'Register',

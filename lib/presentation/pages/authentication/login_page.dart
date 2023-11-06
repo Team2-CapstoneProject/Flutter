@@ -8,7 +8,6 @@ import 'package:capstone_project_villa/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:iconsax/iconsax.dart';
 
 class LoginPage extends StatefulWidget {
@@ -226,26 +225,15 @@ class _LoginPageState extends State<LoginPage> {
                             BottomNavbarPage.routeName,
                             (route) => false,
                           );
-                          // Flushbar(
-                          //   message: state.authResponseModel.message,
-                          //   duration: const Duration(seconds: 3),
-                          //   margin: EdgeInsets.all(8),
-                          //   borderRadius: BorderRadius.circular(10),
-                          //   flushbarStyle: FlushbarStyle.FLOATING,
-                          //   flushbarPosition: FlushbarPosition.BOTTOM,
-                          //   padding: EdgeInsets.all(16),
-                          // )..show(context);
                         }
                         if (state is AuthError) {
-                          // Flushbar(
-                          //   message: state.message,
-                          //   duration: const Duration(seconds: 3),
-                          //   margin: EdgeInsets.all(8),
-                          //   borderRadius: BorderRadius.circular(10),
-                          //   flushbarStyle: FlushbarStyle.FLOATING,
-                          //   flushbarPosition: FlushbarPosition.BOTTOM,
-                          //   padding: EdgeInsets.all(16),
-                          // )..show(context);
+                          final snackBar = SnackBar(
+                            content: Text(state.message),
+                            backgroundColor: Colors.red,
+                            duration: Duration(seconds: 2),
+                          );
+
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
                       },
                       builder: (context, state) {
