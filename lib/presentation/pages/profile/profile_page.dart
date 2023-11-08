@@ -1,4 +1,5 @@
 import 'package:capstone_project_villa/data/datasources/local/auth_local_datasource.dart';
+import 'package:capstone_project_villa/data/models/response/profile_response_model.dart';
 import 'package:capstone_project_villa/presentation/bloc/profile/profile_bloc.dart';
 import 'package:capstone_project_villa/presentation/pages/authentication/login_page.dart';
 import 'package:capstone_project_villa/presentation/pages/profile/widgets/edit_profile_page.dart';
@@ -33,7 +34,7 @@ class _ProfilePageState extends State<ProfilePage> {
         child: BlocBuilder<ProfileBloc, ProfileState>(
           builder: (context, state) {
             if (state is ProfileLoaded) {
-              final user = state.profile.profileWithoutPassword!;
+              final user = state.profileResponseModel.profileWithoutPassword;
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -45,16 +46,17 @@ class _ProfilePageState extends State<ProfilePage> {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
-                          image: NetworkImage(
-                            user.image.toString(),
-                          ),
-                          fit: BoxFit.cover),
+                        image: NetworkImage(
+                          user?.image.toString() ?? 'Kosong Broh',
+                        ),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
 
                   // Username
                   Text(
-                    user.nickname.toString(),
+                    user?.nickname.toString() ?? '',
                     style: blackTextStyle.copyWith(
                         fontSize: 24, fontWeight: semiBold),
                   ),
@@ -62,7 +64,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                   // Email
                   Text(
-                    user.email.toString(),
+                    user?.email.toString() ?? '',
                     style:
                         greyTextStyle.copyWith(fontSize: 14, fontWeight: light),
                   ),
@@ -88,7 +90,16 @@ class _ProfilePageState extends State<ProfilePage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const EditProfilePage(),
+                                builder: (context) => EditProfilePage(
+                                  data: ProfileWithoutPassword(
+                                    email: state.profileResponseModel
+                                            .profileWithoutPassword?.email ??
+                                        '',
+                                    image: state.profileResponseModel
+                                            .profileWithoutPassword?.image ??
+                                        '',
+                                  ),
+                                ),
                               ),
                             );
                           },

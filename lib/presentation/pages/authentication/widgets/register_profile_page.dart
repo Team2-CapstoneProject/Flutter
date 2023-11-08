@@ -24,14 +24,12 @@ class RegisterProfilePage extends StatefulWidget {
 class _RegisterProfilePageState extends State<RegisterProfilePage> {
   final _fullNameController = TextEditingController();
   final _nickNameController = TextEditingController();
-  final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
 
   @override
   void dispose() {
     _fullNameController.dispose();
     _nickNameController.dispose();
-    _emailController.dispose();
     _phoneController.dispose();
     super.dispose();
   }

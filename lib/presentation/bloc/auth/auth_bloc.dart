@@ -23,6 +23,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       result.fold((error) => emit(AuthError(message: error)),
           (success) => emit(AuthLoaded(authResponseModel: success)));
     });
+
+    
     on<AuthUpdateProfileEvent>((event, emit) async {
       emit(AuthLoading());
       final result = await ApiDataSource()

@@ -8,9 +8,9 @@ final class ProfileInitial extends ProfileState {}
 final class ProfileLoading extends ProfileState {}
 
 final class ProfileLoaded extends ProfileState {
-  final ProfileResponseModel profile;
+  final ProfileResponseModel profileResponseModel;
 
-  ProfileLoaded({required this.profile});
+  ProfileLoaded({required this.profileResponseModel});
 }
 
 final class ProfileError extends ProfileState {
