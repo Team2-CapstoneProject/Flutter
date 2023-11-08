@@ -1,3 +1,4 @@
+import 'package:capstone_project_villa/presentation/pages/home/history/history_page.dart';
 import 'package:capstone_project_villa/presentation/pages/home/home_page.dart';
 import 'package:capstone_project_villa/presentation/pages/profile/profile_page.dart';
 import 'package:capstone_project_villa/common/constants.dart';
@@ -21,8 +22,7 @@ class _BottomNavbarPageState extends State<BottomNavbarPage> {
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     SearchPage(),
-    Text('Booking Page',
-        style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+    HistoryPage(),
     ProfilePage()
   ];
 
