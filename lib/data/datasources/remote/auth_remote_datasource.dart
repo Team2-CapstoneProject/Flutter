@@ -38,7 +38,7 @@ class ApiDataSource {
       body: registerRequestModel.toJson(),
     );
 
-    print(response.body);
+    // print(response.body);
 
     if (response.statusCode == 201) {
       return Right(AuthResponseModel.fromJson(jsonDecode(response.body)));
