@@ -1,5 +1,5 @@
-import 'package:capstone_project_villa/data/datasources/local/auth_local_datasource.dart';
 import 'package:capstone_project_villa/data/models/response/profile_response_model.dart';
+import 'package:capstone_project_villa/presentation/bloc/auth/auth_bloc.dart';
 import 'package:capstone_project_villa/presentation/bloc/profile/profile_bloc.dart';
 import 'package:capstone_project_villa/presentation/pages/authentication/login_page.dart';
 import 'package:capstone_project_villa/presentation/pages/profile/widgets/edit_profile_page.dart';
@@ -158,15 +158,23 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
 
                         // Logout
-                        CustomListTile(
-                          icon: Iconsax.logout,
-                          text: 'Logout',
-                          onTap: () async {
-                            await AuthLocalDataSource().removeToken();
-                            Navigator.pushNamedAndRemoveUntil(
-                              context,
-                              LoginPage.routeName,
-                              (route) => false,
+                        BlocConsumer<AuthBloc, AuthState>(
+                          listener: (context, state) {
+                            if (state is AuthLoaded) {
+                              Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                LoginPage.routeName,
+                                (route) => false,
+                              );
+                            }
+                          },
+                          builder: (context, state) {
+                            return CustomListTile(
+                              icon: Iconsax.logout,
+                              text: 'Logout',
+                              onTap: () {
+                                context.read<AuthBloc>().add(AuthLogoutEvent());
+                              },
                             );
                           },
                         ),

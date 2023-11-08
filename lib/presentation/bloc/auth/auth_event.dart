@@ -20,3 +20,5 @@ class AuthUpdateProfileEvent extends AuthEvent {
 
   AuthUpdateProfileEvent({required this.registerProfileRequestModel});
 }
+
+class AuthLogoutEvent extends AuthEvent {}

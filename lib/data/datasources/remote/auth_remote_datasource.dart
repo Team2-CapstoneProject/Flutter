@@ -69,4 +69,18 @@ class ApiDataSource {
       return Left('Failed update');
     }
   }
+
+  Future<Either<String, AuthResponseModel>> logout() async {
+    final token = await AuthLocalDataSource().removeToken();
+    final response = await http.post(
+      Uri.parse('$baseUrl/auth/logout'),
+      headers: {'Authorization': 'Bearer $token'},
+    );
+
+    if (response.statusCode == 200) {
+      return Right(AuthResponseModel.fromJson(jsonDecode(response.body)));
+    } else {
+      return Left('Failed Logout');
+    }
+  }
 }
