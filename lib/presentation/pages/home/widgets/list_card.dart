@@ -1,4 +1,5 @@
 import 'package:capstone_project_villa/common/constants.dart';
+import 'package:capstone_project_villa/common/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -7,6 +8,7 @@ class CardCustom extends StatelessWidget {
   final String? location;
   final int? price;
   final double? score;
+  final String? image;
 
   const CardCustom({
     Key? key,
@@ -14,6 +16,7 @@ class CardCustom extends StatelessWidget {
     this.location,
     this.price,
     this.score,
+    this.image,
   }) : super(key: key);
 
   @override
@@ -22,9 +25,89 @@ class CardCustom extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
-      color: redCandy,
+      color: grey2Color,
       child: Stack(
         children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              image: DecorationImage(
+                image: NetworkImage(image!),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Container(
+              padding: EdgeInsets.only(left: 16, bottom: 18),
+              width: 206,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name.toString(),
+                    overflow: TextOverflow.ellipsis,
+                    style: whiteTextStyle.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5.0,
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Iconsax.location,
+                        color: whiteColor,
+                      ),
+                      const SizedBox(
+                        width: 10.0,
+                      ),
+                      Flexible(
+                        child: Text(
+                          location.toString(),
+                          overflow: TextOverflow.ellipsis,
+                          style: whiteTextStyle.copyWith(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 5.0,
+                  ),
+                  Text(
+                    Utils.currencyFormat(price!),
+                    style: whiteTextStyle.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5.0,
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Iconsax.star,
+                        color: whiteColor,
+                      ),
+                      const SizedBox(
+                        width: 5.0,
+                      ),
+                      Text(
+                        score.toString(),
+                        style: whiteTextStyle.copyWith(
+                            fontSize: 14, fontWeight: semiBold),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
           Container(
             padding: EdgeInsets.only(left: 16, bottom: 18),
             width: 206,
@@ -71,7 +154,7 @@ class CardCustom extends StatelessWidget {
                   TextSpan(
                     children: <TextSpan>[
                       TextSpan(
-                        text: 'Rp $price',
+                        text: Utils.currencyFormat(price!),
                         style: whiteTextStyle.copyWith(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -94,14 +177,15 @@ class CardCustom extends StatelessWidget {
                   children: [
                     Icon(
                       Iconsax.star,
-                      color: whiteColor,
+                      color: Colors.yellow,
                     ),
                     const SizedBox(
                       width: 5.0,
                     ),
                     Text(
                       score.toString(),
-                      style: whiteTextStyle,
+                      style: whiteTextStyle.copyWith(
+                          fontSize: 14, fontWeight: semiBold),
                     )
                   ],
                 )
@@ -113,7 +197,7 @@ class CardCustom extends StatelessWidget {
             right: 17.0,
             child: Icon(
               Iconsax.archive_1,
-              color: whiteColor,
+              color: greyColor,
               size: 28.0,
             ),
           ),
