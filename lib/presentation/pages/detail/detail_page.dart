@@ -47,6 +47,9 @@ class _DetailPageState extends State<DetailPage> {
           BlocBuilder<DetailVilaBloc, DetailVilaState>(
             builder: (context, state) {
               if (state is DetailVilaLoaded) {
+                final details = state.detail.vila;
+                final facilities = state.detail.vila[0].vilaFacilities;
+                final transaction = state.detail.vila[0].transactions;
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -56,13 +59,14 @@ class _DetailPageState extends State<DetailPage> {
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: state.detail.vila.isNotEmpty &&
-                                  state.detail.vila[0].vilaImages.isNotEmpty &&
-                                  state.detail.vila[0].vilaImages[0].sliderImage
+                          image: details.isNotEmpty &&
+                                  details[0].vilaImages.isNotEmpty &&
+                                  details[0]
+                                      .vilaImages[0]
+                                      .sliderImage
                                       .isNotEmpty
                               ? NetworkImage(
-                                  state
-                                      .detail.vila[0].vilaImages[0].sliderImage,
+                                  details[0].vilaImages[0].sliderImage,
                                 )
                               : NetworkImage(
                                   'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -73,32 +77,27 @@ class _DetailPageState extends State<DetailPage> {
                     ),
 
                     Container(
-                      margin: EdgeInsets.only(
-                        top: 30,
-                        left: 30,
-                        right: 30,
-                        bottom: 30,
-                      ),
+                      margin: EdgeInsets.all(30),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          
                           // Name Vila
-                          Text(
-                            state.detail.vila[0].name,
-                            style: blackTextStyle.copyWith(
-                              fontSize: 24,
-                              fontWeight: semiBold,
+                          Container(
+                            margin: EdgeInsets.only(bottom: 5),
+                            child: Text(
+                              details[0].name,
+                              style: blackTextStyle.copyWith(
+                                fontSize: 24,
+                                fontWeight: semiBold,
+                              ),
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-
-                          const SizedBox(
-                            height: 5.0,
                           ),
 
                           // Location Vila
                           Text(
-                            state.detail.vila[0].location,
+                            details[0].location,
                             style: greyTextStyle.copyWith(
                               fontSize: 14,
                               fontWeight: light,
@@ -111,58 +110,63 @@ class _DetailPageState extends State<DetailPage> {
                             color: white70Color,
                           ),
 
-                          const SizedBox(
-                            height: 20.0,
-                          ),
-
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          // Slider Image
+                          Column(
                             children: [
-                              Text(
-                                'Gallery Photos',
-                                style: blackTextStyle.copyWith(
-                                  fontSize: 14,
-                                  fontWeight: semiBold,
+                              Container(
+                                margin: EdgeInsets.symmetric(vertical: 20),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Gallery Photos',
+                                      style: blackTextStyle.copyWith(
+                                        fontSize: 14,
+                                        fontWeight: semiBold,
+                                      ),
+                                    ),
+                                    Text(
+                                      'See All',
+                                      style: primaryTextStyle.copyWith(
+                                        fontSize: 12,
+                                        fontWeight: light,
+                                      ),
+                                    )
+                                  ],
                                 ),
                               ),
-                              Text('See All')
-                            ],
-                          ),
-
-                          const SizedBox(
-                            height: 20.0,
-                          ),
-
-                          Container(
-                            height: 105,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: state.detail.vila[0].vilaImages.length,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  margin: EdgeInsets.only(right: 10),
-                                  width: 150,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    image: DecorationImage(
-                                      image: NetworkImage(
-                                        state.detail.vila[0].vilaImages[index]
-                                            .sliderImage,
+                              Container(
+                                height: 105,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: details[0].vilaImages.length,
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                      margin: EdgeInsets.only(right: 10),
+                                      width: 150,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                        image: DecorationImage(
+                                          image: NetworkImage(
+                                            details[0]
+                                                .vilaImages[index]
+                                                .sliderImage,
+                                          ),
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-
-                          const SizedBox(
-                            height: 20.0,
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
 
                           // Descriptions Vila
                           Container(
+                            margin: EdgeInsets.symmetric(vertical: 20),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -178,10 +182,11 @@ class _DetailPageState extends State<DetailPage> {
                                 ),
                                 isExpanded
                                     ? Text(
-                                        state.detail.vila.isNotEmpty &&
-                                                state.detail.vila[0].description
+                                        details.isNotEmpty &&
+                                                details[0]
+                                                    .description
                                                     .isNotEmpty
-                                            ? state.detail.vila[0].description
+                                            ? details[0].description
                                             : 'No description available',
                                         textAlign: TextAlign.justify,
                                         style: greyTextStyle.copyWith(
@@ -190,18 +195,17 @@ class _DetailPageState extends State<DetailPage> {
                                         ),
                                       )
                                     : Text(
-                                        state.detail.vila.isNotEmpty &&
-                                                state.detail.vila[0].description
+                                        details.isNotEmpty &&
+                                                details[0]
+                                                    .description
                                                     .isNotEmpty
-                                            ? (state.detail.vila[0].description
-                                                        .length >
+                                            ? (details[0].description.length >
                                                     137
-                                                ? state.detail.vila[0]
+                                                ? details[0]
                                                         .description
                                                         .substring(0, 137) +
                                                     '...'
-                                                : state
-                                                    .detail.vila[0].description)
+                                                : details[0].description)
                                             : 'No description available',
                                         textAlign: TextAlign.justify,
                                         style: greyTextStyle.copyWith(
@@ -233,10 +237,6 @@ class _DetailPageState extends State<DetailPage> {
                             ),
                           ),
 
-                          const SizedBox(
-                            height: 25.0,
-                          ),
-
                           // Facilities Vila
                           Container(
                             child: Column(
@@ -261,31 +261,20 @@ class _DetailPageState extends State<DetailPage> {
                                     crossAxisSpacing: 10,
                                     mainAxisSpacing: 10,
                                   ),
-                                  itemCount: state
-                                      .detail.vila[0].vilaFacilities.length,
+                                  itemCount: facilities.length,
                                   itemBuilder: (context, index) {
                                     return Container(
                                       child: Column(
                                         children: [
                                           Image.network(
-                                            state
-                                                .detail
-                                                .vila[0]
-                                                .vilaFacilities[index]
-                                                .facilities
-                                                .icon,
+                                            facilities[index].facilities.icon,
                                             width: 28,
                                             height: 28,
                                             color: primaryColor,
                                           ),
                                           SizedBox(height: 10),
                                           Text(
-                                            state
-                                                .detail
-                                                .vila[0]
-                                                .vilaFacilities[index]
-                                                .facilities
-                                                .label,
+                                            facilities[index].facilities.label,
                                             style: primaryTextStyle.copyWith(
                                               fontSize: 12,
                                               fontWeight: light,
@@ -301,59 +290,214 @@ class _DetailPageState extends State<DetailPage> {
                             ),
                           ),
 
-                          const SizedBox(
-                            height: 25.0,
-                          ),
-
                           // Review Vila
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          Column(
                             children: [
-                              Text(
-                                'Reviews',
-                                style: blackTextStyle.copyWith(
-                                  fontSize: 14,
-                                  fontWeight: medium,
-                                ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Reviews',
+                                    style: blackTextStyle.copyWith(
+                                      fontSize: 14,
+                                      fontWeight: medium,
+                                    ),
+                                  ),
+                                  Text(
+                                    'See All',
+                                    style: primaryTextStyle.copyWith(
+                                      fontSize: 12,
+                                      fontWeight: light,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                'See All',
-                                style: primaryTextStyle.copyWith(
-                                  fontSize: 12,
-                                  fontWeight: light,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 20.0,
-                          ),
-                          Container(
-                            height: 445,
-                            child: state.detail.vila.isEmpty ||
-                                    state.detail.vila[0].transactions.isEmpty
-                                ? Container(
-                                    child: Center(child: Text('No Review')),
-                                  )
-                                : ListView.builder(
-                                    shrinkWrap: true,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    itemCount: state
-                                        .detail.vila[0].transactions.length,
-                                    itemBuilder: (context, transactionIndex) {
-                                      if (state
-                                          .detail
-                                          .vila[0]
-                                          .transactions[transactionIndex]
-                                          .reviews
-                                          .isNotEmpty) {
-                                        return Column(
-                                          children: state
-                                              .detail
-                                              .vila[0]
-                                              .transactions[transactionIndex]
+                              Container(
+                                margin: EdgeInsets.only(top: 20),
+                                height: 445,
+                                child: details.isEmpty || transaction.isEmpty
+                                    ? Container(
+                                        child: Center(child: Text('No Review')),
+                                      )
+                                    : ListView.builder(
+                                        shrinkWrap: true,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        itemCount: transaction.length,
+                                        itemBuilder:
+                                            (context, transactionIndex) {
+                                          if (transaction[transactionIndex]
                                               .reviews
-                                              .map((review) {
+                                              .isNotEmpty) {
+                                            return Column(
+                                              children:
+                                                  transaction[transactionIndex]
+                                                      .reviews
+                                                      .map((review) {
+                                                return Container(
+                                                  margin: EdgeInsets.only(
+                                                      bottom: 20),
+                                                  height: 135,
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  decoration: BoxDecoration(
+                                                    color: grey95,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                      20,
+                                                    ),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                      left: 20,
+                                                      top: 22,
+                                                      right: 24,
+                                                    ),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Row(
+                                                          children: [
+                                                            Container(
+                                                              margin: EdgeInsets
+                                                                  .only(
+                                                                      right:
+                                                                          20),
+                                                              width: 40,
+                                                              height: 40,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                shape: BoxShape
+                                                                    .circle,
+                                                                image:
+                                                                    DecorationImage(
+                                                                  image:
+                                                                      NetworkImage(
+                                                                    transaction[
+                                                                            transactionIndex]
+                                                                        .users
+                                                                        .image,
+                                                                  ),
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  transaction[
+                                                                          transactionIndex]
+                                                                      .users
+                                                                      .fullname,
+                                                                  style: blackTextStyle
+                                                                      .copyWith(
+                                                                    fontSize:
+                                                                        16,
+                                                                    fontWeight:
+                                                                        semiBold,
+                                                                  ),
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
+                                                                ),
+                                                                Text(
+                                                                  Utils
+                                                                      .dateTimeFormat3(
+                                                                    transaction[
+                                                                            transactionIndex]
+                                                                        .reviews[
+                                                                            0]
+                                                                        .updatedAt,
+                                                                  ),
+                                                                  style: greyTextStyle
+                                                                      .copyWith(
+                                                                    fontSize:
+                                                                        14,
+                                                                    fontWeight:
+                                                                        regular,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Spacer(),
+                                                            Container(
+                                                              width: 65,
+                                                              height: 35,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color:
+                                                                    primaryColor,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20),
+                                                              ),
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Icon(
+                                                                    Iconsax
+                                                                        .star1,
+                                                                    color:
+                                                                        yellowColor,
+                                                                  ),
+                                                                  const SizedBox(
+                                                                    width: 3.0,
+                                                                  ),
+                                                                  Text(
+                                                                    review.score
+                                                                        .toString(),
+                                                                    style: whiteTextStyle
+                                                                        .copyWith(
+                                                                      fontSize:
+                                                                          14,
+                                                                      fontWeight:
+                                                                          semiBold,
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Container(
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  top: 10),
+                                                          child: Text(
+                                                            review.description,
+                                                            maxLines: 3,
+                                                            textAlign: TextAlign
+                                                                .justify,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            style:
+                                                                blackTextStyle
+                                                                    .copyWith(
+                                                              fontSize: 12,
+                                                              fontWeight:
+                                                                  regular,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                );
+                                              }).toList(),
+                                            );
+                                          } else {
                                             return Container(
                                               margin:
                                                   EdgeInsets.only(bottom: 20),
@@ -366,173 +510,18 @@ class _DetailPageState extends State<DetailPage> {
                                                 borderRadius:
                                                     BorderRadius.circular(20),
                                               ),
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                  left: 20,
-                                                  top: 22,
-                                                  right: 24,
-                                                ),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        Container(
-                                                          width: 40,
-                                                          height: 40,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            shape:
-                                                                BoxShape.circle,
-                                                            image:
-                                                                DecorationImage(
-                                                              image:
-                                                                  NetworkImage(
-                                                                state
-                                                                    .detail
-                                                                    .vila[0]
-                                                                    .transactions[
-                                                                        transactionIndex]
-                                                                    .users
-                                                                    .image,
-                                                              ),
-                                                              fit: BoxFit.cover,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        const SizedBox(
-                                                          width: 20.0,
-                                                        ),
-                                                        Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                              state
-                                                                  .detail
-                                                                  .vila[0]
-                                                                  .transactions[
-                                                                      transactionIndex]
-                                                                  .users
-                                                                  .fullname,
-                                                              style:
-                                                                  blackTextStyle
-                                                                      .copyWith(
-                                                                fontSize: 16,
-                                                                fontWeight:
-                                                                    semiBold,
-                                                              ),
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .ellipsis,
-                                                            ),
-                                                            Text(
-                                                              Utils
-                                                                  .dateTimeFormat3(
-                                                                state
-                                                                    .detail
-                                                                    .vila[0]
-                                                                    .transactions[
-                                                                        transactionIndex]
-                                                                    .reviews[0]
-                                                                    .updatedAt,
-                                                              ),
-                                                              style:
-                                                                  greyTextStyle
-                                                                      .copyWith(
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    regular,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Spacer(),
-                                                        Container(
-                                                          width: 65,
-                                                          height: 35,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: primaryColor,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        20),
-                                                          ),
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Icon(
-                                                                Iconsax.star1,
-                                                                color:
-                                                                    yellowColor,
-                                                              ),
-                                                              const SizedBox(
-                                                                width: 3.0,
-                                                              ),
-                                                              Text(
-                                                                review.score
-                                                                    .toString(),
-                                                                style:
-                                                                    whiteTextStyle
-                                                                        .copyWith(
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      semiBold,
-                                                                ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 10.0,
-                                                    ),
-                                                    Text(
-                                                      review.description,
-                                                      maxLines: 3,
-                                                      textAlign:
-                                                          TextAlign.justify,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      style: blackTextStyle
-                                                          .copyWith(
-                                                        fontSize: 12,
-                                                        fontWeight: regular,
-                                                      ),
-                                                    ),
-                                                  ],
+                                              child: Center(
+                                                child: Text(
+                                                  'No reviews for this transaction',
                                                 ),
                                               ),
                                             );
-                                          }).toList(),
-                                        );
-                                      } else {
-                                        return Container(
-                                          margin: EdgeInsets.only(bottom: 20),
-                                          height: 135,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          decoration: BoxDecoration(
-                                            color: grey95,
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              'No reviews for this transaction',
-                                            ),
-                                          ),
-                                        );
-                                      }
-                                    },
-                                  ),
-                          )
+                                          }
+                                        },
+                                      ),
+                              )
+                            ],
+                          ),
                         ],
                       ),
                     )
@@ -556,32 +545,29 @@ class _DetailPageState extends State<DetailPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    height: 12.0,
-                  ),
-                  RichText(
-                    text: TextSpan(
-                      style: blueBlackTextStyle.copyWith(
-                        fontSize: 24,
-                        fontWeight: semiBold,
-                      ),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text:
-                              '${Utils.currencyFormat(state.detail.vila[0].price)} ',
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 12),
+                    child: RichText(
+                      text: TextSpan(
+                        style: blueBlackTextStyle.copyWith(
+                          fontSize: 24,
+                          fontWeight: semiBold,
                         ),
-                        TextSpan(
-                          text: '/night',
-                          style: grey100kTextStyle.copyWith(
-                            fontSize: 16,
-                            fontWeight: regular,
+                        children: <TextSpan>[
+                          TextSpan(
+                            text:
+                                '${Utils.currencyFormat(state.detail.vila[0].price)} ',
                           ),
-                        ),
-                      ],
+                          TextSpan(
+                            text: '/night',
+                            style: grey100kTextStyle.copyWith(
+                              fontSize: 16,
+                              fontWeight: regular,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 12.0,
                   ),
                   CustomButton(onPressed: () {}, text: 'Book Now')
                 ],

@@ -69,18 +69,12 @@ class Vila {
         status: json["status"] ?? 0,
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
-        vilaImages: json["VilaImages"] == null
-            ? []
-            : List<VilaImage>.from(
-                json["VilaImages"]!.map((x) => VilaImage.fromJson(x))),
-        transactions: json["Transactions"] == null
-            ? []
-            : List<Transaction>.from(
-                json["Transactions"]!.map((x) => Transaction.fromJson(x))),
-        vilaFacilities: json["VilaFacilities"] == null
-            ? []
-            : List<VilaFacility>.from(
-                json["VilaFacilities"]!.map((x) => VilaFacility.fromJson(x))),
+        vilaImages: List<VilaImage>.from(
+            json["VilaImages"].map((x) => VilaImage.fromJson(x))),
+        transactions: List<Transaction>.from(
+            json["Transactions"].map((x) => Transaction.fromJson(x))),
+        vilaFacilities: List<VilaFacility>.from(
+            json["VilaFacilities"].map((x) => VilaFacility.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -94,15 +88,10 @@ class Vila {
         "status": status,
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),
-        "VilaImages": vilaImages == null
-            ? []
-            : List<dynamic>.from(vilaImages!.map((x) => x.toJson())),
-        "Transactions": transactions == null
-            ? []
-            : List<dynamic>.from(transactions!.map((x) => x.toJson())),
-        "VilaFacilities": vilaFacilities == null
-            ? []
-            : List<dynamic>.from(vilaFacilities!.map((x) => x.toJson())),
+        "VilaImages": List<dynamic>.from(vilaImages.map((x) => x.toJson())),
+        "Transactions": List<dynamic>.from(transactions.map((x) => x.toJson())),
+        "VilaFacilities":
+            List<dynamic>.from(vilaFacilities.map((x) => x.toJson())),
       };
 }
 
