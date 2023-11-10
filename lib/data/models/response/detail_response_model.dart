@@ -1,191 +1,22 @@
-// import 'dart:convert';
-
-// DetailResponModel detailResponModelFromJson(String str) =>
-//     DetailResponModel.fromJson(json.decode(str));
-
-// String detailResponModelToJson(DetailResponModel data) =>
-//     json.encode(data.toJson());
-
-// class DetailResponModel {
-//   final String message;
-//   final List<Vila> vila;
-
-//   DetailResponModel({
-//     required this.message,
-//     required this.vila,
-//   });
-
-//   factory DetailResponModel.fromJson(Map<String, dynamic> json) =>
-//       DetailResponModel(
-//         message: json["message"],
-//         vila: json["vila"],
-//       );
-
-//   Map<String, dynamic> toJson() => {"message": message, "vila": vila};
-// }
-
-// class Vila {
-//   final int id;
-//   final String name;
-//   final int price;
-//   final String description;
-//   final String location;
-//   final int? latitude;
-//   final int? longitude;
-//   //final dynamic status;
-//   final DateTime? createdAt;
-//   final DateTime? updatedAt;
-//   final List<VilaImage> vilaImages;
-//   //final List<dynamic>? transactions;
-//   //final List<VilaFacility>? vilaFacilities;
-
-//   Vila({
-//     required this.id,
-//     required this.name,
-//     required this.price,
-//     required this.description,
-//     required this.location,
-//     this.latitude,
-//     this.longitude,
-//     //this.status,
-//     this.createdAt,
-//     this.updatedAt,
-//     required this.vilaImages,
-//     //this.transactions,
-//     //this.vilaFacilities,
-//   });
-
-//   factory Vila.fromJson(Map<String, dynamic> json) => Vila(
-//         id: json["id"],
-//         name: json["name"],
-//         price: json["price"],
-//         description: json["description"],
-//         location: json["location"],
-//         latitude: json["latitude"],
-//         longitude: json["longitude"],
-//         //status: json["status"],
-//         createdAt: json["createdAt"] == null
-//             ? null
-//             : DateTime.parse(json["createdAt"]),
-//         updatedAt: json["updatedAt"] == null
-//             ? null
-//             : DateTime.parse(json["updatedAt"]),
-//         vilaImages: List<VilaImage>.from(
-//             json["VilaImages"].map((x) => VilaImage.fromJson(x))),
-//         // transactions: json["Transactions"] == null
-//         //     ? []
-//         //     : List<dynamic>.from(json["Transactions"]!.map((x) => x)),
-//         // vilaFacilities: json["VilaFacilities"] == null
-//         //     ? []
-//         //     : List<VilaFacility>.from(
-//         //         json["VilaFacilities"]!.map((x) => VilaFacility.fromJson(x))),
-//       );
-
-//   Map<String, dynamic> toJson() => {
-//         "id": id,
-//         "name": name,
-//         "price": price,
-//         "description": description,
-//         "location": location,
-//         "latitude": latitude,
-//         "longitude": longitude,
-//         //"status": status,
-//         "createdAt": createdAt?.toIso8601String(),
-//         "updatedAt": updatedAt?.toIso8601String(),
-//         "VilaImages": List<dynamic>.from(vilaImages.map((x) => x.toJson())),
-//         // "Transactions": transactions == null
-//         //     ? []
-//         //     : List<dynamic>.from(transactions!.map((x) => x)),
-//         // "VilaFacilities": vilaFacilities == null
-//         //     ? []
-//         //     : List<dynamic>.from(vilaFacilities!.map((x) => x.toJson())),
-//       };
-// }
-
-// class VilaFacility {
-//   final int? id;
-//   final Facilities? facilities;
-
-//   VilaFacility({
-//     this.id,
-//     this.facilities,
-//   });
-
-//   factory VilaFacility.fromJson(Map<String, dynamic> json) => VilaFacility(
-//         id: json["id"],
-//         facilities: json["Facilities"] == null
-//             ? null
-//             : Facilities.fromJson(json["Facilities"]),
-//       );
-
-//   Map<String, dynamic> toJson() => {
-//         "id": id,
-//         "Facilities": facilities?.toJson(),
-//       };
-// }
-
-// class Facilities {
-//   final String? label;
-//   final String? icon;
-
-//   Facilities({
-//     this.label,
-//     this.icon,
-//   });
-
-//   factory Facilities.fromJson(Map<String, dynamic> json) => Facilities(
-//         label: json["label"],
-//         icon: json["icon"],
-//       );
-
-//   Map<String, dynamic> toJson() => {
-//         "label": label,
-//         "icon": icon,
-//       };
-// }
-
-// class VilaImage {
-//   final int id;
-//   final String sliderImage;
-//   final DateTime updatedAt;
-
-//   VilaImage({
-//     required this.id,
-//     required this.sliderImage,
-//     required this.updatedAt,
-//   });
-
-//   factory VilaImage.fromJson(Map<String, dynamic> json) => VilaImage(
-//       id: json["id"],
-//       sliderImage: json["slider_image"],
-//       updatedAt: json["updatedAt"]);
-
-//   Map<String, dynamic> toJson() => {
-//         "id": id,
-//         "slider_image": sliderImage,
-//         "updatedAt": updatedAt,
-//       };
-// }
-
 import 'dart:convert';
 
-DetailResponModel detailResponModelFromJson(String str) =>
-    DetailResponModel.fromJson(json.decode(str));
+DetailResponseModel detailResponseModelFromJson(String str) =>
+    DetailResponseModel.fromJson(json.decode(str));
 
-String detailResponModelToJson(DetailResponModel data) =>
+String detailResponseModelToJson(DetailResponseModel data) =>
     json.encode(data.toJson());
 
-class DetailResponModel {
+class DetailResponseModel {
   final String message;
   final List<Vila> vila;
 
-  DetailResponModel({
+  DetailResponseModel({
     required this.message,
     required this.vila,
   });
 
-  factory DetailResponModel.fromJson(Map<String, dynamic> json) =>
-      DetailResponModel(
+  factory DetailResponseModel.fromJson(Map<String, dynamic> json) =>
+      DetailResponseModel(
         message: json["message"] ?? '',
         vila: List<Vila>.from(json["vila"].map((x) => Vila.fromJson(x))),
       );
@@ -204,11 +35,11 @@ class Vila {
   final String location;
   final int latitude;
   final int longitude;
-  final dynamic status;
+  final int status;
   final DateTime createdAt;
   final DateTime updatedAt;
   final List<VilaImage> vilaImages;
-  final List<dynamic> transactions;
+  final List<Transaction> transactions;
   final List<VilaFacility> vilaFacilities;
 
   Vila({
@@ -228,19 +59,20 @@ class Vila {
   });
 
   factory Vila.fromJson(Map<String, dynamic> json) => Vila(
-        id: json["id"] ?? 0,
+        id: json["id"],
         name: json["name"] ?? '',
         price: json["price"] ?? 0,
         description: json["description"] ?? '',
         location: json["location"] ?? '',
         latitude: json["latitude"] ?? 0,
         longitude: json["longitude"] ?? 0,
-        status: json["status"],
+        status: json["status"] ?? 0,
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         vilaImages: List<VilaImage>.from(
             json["VilaImages"].map((x) => VilaImage.fromJson(x))),
-        transactions: List<dynamic>.from(json["Transactions"].map((x) => x)),
+        transactions: List<Transaction>.from(
+            json["Transactions"].map((x) => Transaction.fromJson(x))),
         vilaFacilities: List<VilaFacility>.from(
             json["VilaFacilities"].map((x) => VilaFacility.fromJson(x))),
       );
@@ -257,9 +89,86 @@ class Vila {
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),
         "VilaImages": List<dynamic>.from(vilaImages.map((x) => x.toJson())),
-        "Transactions": List<dynamic>.from(transactions.map((x) => x)),
+        "Transactions": List<dynamic>.from(transactions.map((x) => x.toJson())),
         "VilaFacilities":
             List<dynamic>.from(vilaFacilities.map((x) => x.toJson())),
+      };
+}
+
+class Transaction {
+  final int id;
+  final Users users;
+  final List<Review> reviews;
+
+  Transaction({
+    required this.id,
+    required this.users,
+    required this.reviews,
+  });
+
+  factory Transaction.fromJson(Map<String, dynamic> json) => Transaction(
+        id: json["id"],
+        users: Users.fromJson(json["Users"]),
+        reviews:
+            List<Review>.from(json["Reviews"].map((x) => Review.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "Users": users.toJson(),
+        "Reviews": List<dynamic>.from(reviews.map((x) => x.toJson())),
+      };
+}
+
+class Review {
+  final int id;
+  final double score;
+  final String description;
+  final DateTime updatedAt;
+
+  Review({
+    required this.id,
+    required this.score,
+    required this.description,
+    required this.updatedAt,
+  });
+
+  factory Review.fromJson(Map<String, dynamic> json) => Review(
+        id: json["id"],
+        score: json["score"] == null ? null : json["score"].toDouble(),
+        description: json["description"] ?? '',
+        updatedAt: DateTime.parse(json["updatedAt"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "score": score,
+        "description": description,
+        "updatedAt": updatedAt.toIso8601String(),
+      };
+}
+
+class Users {
+  final int id;
+  final String image;
+  final String fullname;
+
+  Users({
+    required this.id,
+    required this.image,
+    required this.fullname,
+  });
+
+  factory Users.fromJson(Map<String, dynamic> json) => Users(
+        id: json["id"],
+        image: json["image"] ?? '',
+        fullname: json["fullname"] ?? '',
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "image": image,
+        "fullname": fullname,
       };
 }
 
@@ -273,7 +182,7 @@ class VilaFacility {
   });
 
   factory VilaFacility.fromJson(Map<String, dynamic> json) => VilaFacility(
-        id: json["id"] ?? 0,
+        id: json["id"],
         facilities: Facilities.fromJson(json["Facilities"]),
       );
 
@@ -315,7 +224,7 @@ class VilaImage {
   });
 
   factory VilaImage.fromJson(Map<String, dynamic> json) => VilaImage(
-        id: json["id"] ?? 0,
+        id: json["id"],
         sliderImage: json["slider_image"] ?? '',
         updatedAt: DateTime.parse(json["updatedAt"]),
       );

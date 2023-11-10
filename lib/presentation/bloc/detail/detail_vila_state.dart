@@ -8,7 +8,7 @@ final class DetailVilaInitial extends DetailVilaState {}
 final class DetailVilaLoading extends DetailVilaState {}
 
 final class DetailVilaLoaded extends DetailVilaState {
-  final DetailResponModel detail;
+  final DetailResponseModel detail;
 
   DetailVilaLoaded({required this.detail});
 }

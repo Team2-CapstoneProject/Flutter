@@ -18,6 +18,8 @@ Color redCandy = const Color(0xFFFF3055);
 Color blackColor = const Color(0xFF000000);
 Color blueBlack = const Color(0xFF070A13);
 Color grey100 = const Color(0xFF64748B);
+Color yellowColor = const Color(0xFFFFC700);
+
 
 // TextStyle
 TextStyle primaryTextStyle = GoogleFonts.poppins(color: primaryColor);

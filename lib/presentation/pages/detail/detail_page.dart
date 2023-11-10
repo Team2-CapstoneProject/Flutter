@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:capstone_project_villa/presentation/bloc/detail/detail_vila_bloc.dart';
+import 'package:iconsax/iconsax.dart';
 
 class DetailPage extends StatefulWidget {
   final int id;
@@ -68,8 +69,12 @@ class _DetailPageState extends State<DetailPage> {
                           ),
 
                           Container(
-                            margin:
-                                EdgeInsets.only(top: 30, left: 30, right: 30),
+                            margin: EdgeInsets.only(
+                              top: 30,
+                              left: 30,
+                              right: 30,
+                              bottom: 30,
+                            ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -293,10 +298,158 @@ class _DetailPageState extends State<DetailPage> {
                                 ),
 
                                 const SizedBox(
-                                  height: 20.0,
+                                  height: 25.0,
                                 ),
 
-                                Text('Reviews')
+                                // Review Vila
+                                Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Reviews',
+                                          style: blackTextStyle.copyWith(
+                                            fontSize: 14,
+                                            fontWeight: medium,
+                                          ),
+                                        ),
+                                        Text(
+                                          'See All',
+                                          style: primaryTextStyle.copyWith(
+                                            fontSize: 12,
+                                            fontWeight: light,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 20.0,
+                                    ),
+                                    Container(
+                                      height: 130,
+                                      width: MediaQuery.of(context).size.width,
+                                      decoration: BoxDecoration(
+                                        color: grey95,
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                          left: 20,
+                                          top: 22,
+                                          right: 24,
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  width: 40,
+                                                  height: 40,
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    image: DecorationImage(
+                                                      image: NetworkImage(
+                                                        state
+                                                            .detail
+                                                            .vila[0]
+                                                            .transactions[0]
+                                                            .users
+                                                            .image,
+                                                      ),
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 20.0,
+                                                ),
+                                                Column(
+                                                  children: [
+                                                    Text(
+                                                      state
+                                                          .detail
+                                                          .vila[0]
+                                                          .transactions[0]
+                                                          .users
+                                                          .fullname,
+                                                    ),
+                                                    Text(
+                                                      Utils.dateTimeFormat3(
+                                                        state
+                                                            .detail
+                                                            .vila[0]
+                                                            .transactions[0]
+                                                            .reviews[0]
+                                                            .updatedAt,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Spacer(),
+                                                Container(
+                                                  width: 65,
+                                                  height: 35,
+                                                  decoration: BoxDecoration(
+                                                    color: primaryColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                      20,
+                                                    ),
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Icon(
+                                                        Iconsax.star1,
+                                                        color: yellowColor,
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 3.0,
+                                                      ),
+                                                      Text(
+                                                        state
+                                                            .detail
+                                                            .vila[0]
+                                                            .transactions[0]
+                                                            .reviews[0]
+                                                            .score
+                                                            .toString(),
+                                                        style: whiteTextStyle
+                                                            .copyWith(
+                                                          fontSize: 14,
+                                                          fontWeight: semiBold,
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 10.0,
+                                            ),
+                                            Text(
+                                              state
+                                                  .detail
+                                                  .vila[0]
+                                                  .transactions[0]
+                                                  .reviews[0]
+                                                  .description,
+                                              maxLines: 3,
+                                              textAlign: TextAlign.justify,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                )
                               ],
                             ),
                           )

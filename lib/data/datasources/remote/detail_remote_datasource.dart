@@ -7,7 +7,7 @@ import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 
 class DetailDataSource {
-  Future<Either<String, DetailResponModel>> getDetail(int id) async {
+  Future<Either<String, DetailResponseModel>> getDetail(int id) async {
     final token = await AuthLocalDataSource().getToken();
     final response = await http.get(
       Uri.parse('$baseUrl/mobile/vila/$id'),
@@ -15,7 +15,7 @@ class DetailDataSource {
     );
 
     if (response.statusCode == 200) {
-      return Right(DetailResponModel.fromJson(jsonDecode(response.body)));
+      return Right(DetailResponseModel.fromJson(jsonDecode(response.body)));
     } else {
       return Left('Failed to fetch details');
     }
