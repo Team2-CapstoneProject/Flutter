@@ -657,7 +657,7 @@ class _HomePageState extends State<HomePage>
                                     name: vila.name.toString(),
                                     location: vila.location.toString(),
                                     price: vila.price,
-                                    score: vila.score,
+                                    score: vila.score ?? 0,
                                     image: vila.vilaImages.sliderImage,
                                   ),
                                 );
@@ -675,7 +675,7 @@ class _HomePageState extends State<HomePage>
                                   name: vila.name.toString(),
                                   location: vila.location.toString(),
                                   price: vila.price,
-                                  score: vila.score,
+                                  score: vila.score ?? 0,
                                   image: vila.vilaImages.sliderImage,
                                 );
                               },
@@ -692,7 +692,7 @@ class _HomePageState extends State<HomePage>
                                   name: vila.name.toString(),
                                   location: vila.location.toString(),
                                   price: vila.price,
-                                  score: vila.score,
+                                  score: vila.score ?? 0,
                                   image: vila.vilaImages.sliderImage,
                                 );
                               },
@@ -709,7 +709,7 @@ class _HomePageState extends State<HomePage>
                                   name: vila.name.toString(),
                                   location: vila.location.toString(),
                                   price: vila.price,
-                                  score: vila.score,
+                                  score: vila.score ?? 0,
                                   image: vila.vilaImages.sliderImage,
                                 );
                               },

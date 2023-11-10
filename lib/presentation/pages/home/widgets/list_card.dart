@@ -4,19 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
 class CardCustom extends StatelessWidget {
-  final String? name;
-  final String? location;
-  final int? price;
-  final double? score;
-  final String? image;
+  final String name;
+  final String location;
+  final int price;
+  final double score;
+  final String image;
 
   const CardCustom({
     Key? key,
-    this.name,
-    this.location,
-    this.price,
-    this.score,
-    this.image,
+    required this.name,
+    required this.location,
+    required this.price,
+    required this.score,
+    required this.image,
   }) : super(key: key);
 
   @override
@@ -32,7 +32,7 @@ class CardCustom extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               image: DecorationImage(
-                image: NetworkImage(image!),
+                image: NetworkImage(image),
                 fit: BoxFit.cover,
               ),
             ),
@@ -82,7 +82,7 @@ class CardCustom extends StatelessWidget {
                     TextSpan(
                       children: <TextSpan>[
                         TextSpan(
-                          text: Utils.currencyFormat(price!),
+                          text: Utils.currencyFormat(price),
                           style: whiteTextStyle.copyWith(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
