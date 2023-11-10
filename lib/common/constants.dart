@@ -19,6 +19,7 @@ Color blackColor = const Color(0xFF000000);
 Color blueBlack = const Color(0xFF070A13);
 Color grey100 = const Color(0xFF64748B);
 Color yellowColor = const Color(0xFFFFC700);
+Color grey3Color = const Color(0xF64748B);
 
 
 // TextStyle
@@ -31,6 +32,7 @@ TextStyle blackTextStyle = GoogleFonts.poppins(color: blackColor);
 TextStyle redCandyTextStyle = GoogleFonts.poppins(color: redCandy);
 TextStyle blueBlackTextStyle = GoogleFonts.poppins(color: blueBlack);
 TextStyle grey100kTextStyle = GoogleFonts.poppins(color: grey100);
+TextStyle grey3TextStyle = GoogleFonts.poppins(color: grey3Color);
 
 // FontWeight
 FontWeight thin = FontWeight.w100;

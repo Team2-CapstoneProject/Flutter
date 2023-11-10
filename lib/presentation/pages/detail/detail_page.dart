@@ -328,7 +328,7 @@ class _DetailPageState extends State<DetailPage> {
                                       height: 20.0,
                                     ),
                                     Container(
-                                      height: 130,
+                                      height: 135,
                                       width: MediaQuery.of(context).size.width,
                                       decoration: BoxDecoration(
                                         color: grey95,
@@ -368,6 +368,8 @@ class _DetailPageState extends State<DetailPage> {
                                                   width: 20.0,
                                                 ),
                                                 Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
                                                       state
@@ -376,6 +378,13 @@ class _DetailPageState extends State<DetailPage> {
                                                           .transactions[0]
                                                           .users
                                                           .fullname,
+                                                      style: blackTextStyle
+                                                          .copyWith(
+                                                        fontSize: 16,
+                                                        fontWeight: semiBold,
+                                                      ),
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
                                                     ),
                                                     Text(
                                                       Utils.dateTimeFormat3(
@@ -385,6 +394,11 @@ class _DetailPageState extends State<DetailPage> {
                                                             .transactions[0]
                                                             .reviews[0]
                                                             .updatedAt,
+                                                      ),
+                                                      style: greyTextStyle
+                                                          .copyWith(
+                                                        fontSize: 14,
+                                                        fontWeight: regular,
                                                       ),
                                                     ),
                                                   ],
@@ -443,6 +457,11 @@ class _DetailPageState extends State<DetailPage> {
                                                   .description,
                                               maxLines: 3,
                                               textAlign: TextAlign.justify,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: blackTextStyle.copyWith(
+                                                fontSize: 12,
+                                                fontWeight: regular,
+                                              ),
                                             ),
                                           ],
                                         ),
