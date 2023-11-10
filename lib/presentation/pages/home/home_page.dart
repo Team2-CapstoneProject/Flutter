@@ -70,7 +70,6 @@ class _HomePageState extends State<HomePage>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Text Welcome
             BlocBuilder<HomeBloc, HomeState>(
               builder: (context, state) {
                 if (state is HomeLoaded) {
@@ -90,12 +89,9 @@ class _HomePageState extends State<HomePage>
                           ),
                         ),
 
-                        const SizedBox(
-                          height: 20.0,
-                        ),
-
                         // Search Button
                         Container(
+                          margin: EdgeInsets.only(top: 20),
                           height: 55,
                           width: MediaQuery.of(context).size.width,
                           child: OutlinedButton(

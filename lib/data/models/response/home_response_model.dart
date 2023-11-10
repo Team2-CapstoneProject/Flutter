@@ -118,7 +118,7 @@ class Bookmark {
   });
 
   factory Bookmark.fromJson(Map<String, dynamic> json) => Bookmark(
-        id: json["id"] ?? 0,
+        id: json["id"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -199,28 +199,52 @@ class VilaImages {
 
 class UserData {
   final int id;
+  final String googleId;
+  final String image;
   final String email;
+  final String fullname;
   final String nickname;
-  final int iat;
+  final String password;
+  final String phoneNumber;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
   UserData({
     required this.id,
+    required this.googleId,
+    required this.image,
     required this.email,
+    required this.fullname,
     required this.nickname,
-    required this.iat,
+    required this.password,
+    required this.phoneNumber,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   factory UserData.fromJson(Map<String, dynamic> json) => UserData(
         id: json["id"],
-        email: json["email"],
-        nickname: json["nickname"],
-        iat: json["iat"],
+        googleId: json["google_id"] ?? 0,
+        image: json["image"] ?? 0,
+        email: json["email"] ?? '',
+        fullname: json["fullname"] ?? '',
+        nickname: json["nickname"] ?? '',
+        password: json["password"] ?? '',
+        phoneNumber: json["phone_number"] ?? '',
+        createdAt: DateTime.parse(json["createdAt"]),
+        updatedAt: DateTime.parse(json["updatedAt"]),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "google_id": googleId,
+        "image": image,
         "email": email,
+        "fullname": fullname,
         "nickname": nickname,
-        "iat": iat,
+        "password": password,
+        "phone_number": phoneNumber,
+        "createdAt": createdAt.toIso8601String(),
+        "updatedAt": updatedAt.toIso8601String(),
       };
 }
