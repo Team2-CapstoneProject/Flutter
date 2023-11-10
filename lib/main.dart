@@ -1,4 +1,6 @@
 import 'package:capstone_project_villa/presentation/bloc/auth/auth_bloc.dart';
+import 'package:capstone_project_villa/presentation/bloc/bookmark/bookmark_bloc.dart';
+import 'package:capstone_project_villa/presentation/bloc/detail/detail_vila_bloc.dart';
 import 'package:capstone_project_villa/presentation/bloc/home/home_bloc.dart';
 import 'package:capstone_project_villa/presentation/bloc/profile/profile_bloc.dart';
 import 'package:capstone_project_villa/presentation/pages/authentication/login_page.dart';
@@ -34,6 +36,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ProfileBloc(),
+        ),
+        BlocProvider(
+          create: (context) => DetailVilaBloc(),
+        ),
+        BlocProvider(
+          create: (context) => BookmarkBloc(),
         )
       ],
       child: MaterialApp(
@@ -51,6 +59,7 @@ class MyApp extends StatelessWidget {
           HomePage.routeName: (context) => const HomePage(),
           ProfilePage.routeName: (context) => const ProfilePage(),
           SearchPage.routeName: (context) => const SearchPage(),
+          // DetailPage.routeName: (context) => DetailPage(id: ModalRoute.of(context)!.settings.arguments as DetailResponModel)
         },
       ),
     );

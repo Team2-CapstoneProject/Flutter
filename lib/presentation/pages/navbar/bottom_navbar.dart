@@ -1,4 +1,4 @@
-import 'package:capstone_project_villa/presentation/pages/home/history/history_page.dart';
+import 'package:capstone_project_villa/presentation/pages/history/history_page.dart';
 import 'package:capstone_project_villa/presentation/pages/home/home_page.dart';
 import 'package:capstone_project_villa/presentation/pages/profile/profile_page.dart';
 import 'package:capstone_project_villa/common/constants.dart';

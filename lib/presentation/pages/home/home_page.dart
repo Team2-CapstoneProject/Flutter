@@ -1,16 +1,22 @@
-import 'package:capstone_project_villa/common/constants.dart';
-import 'package:capstone_project_villa/presentation/bloc/home/home_bloc.dart';
-import 'package:capstone_project_villa/presentation/pages/home/widgets/list_card.dart';
-import 'package:capstone_project_villa/presentation/pages/search/search_page.dart';
+import 'package:capstone_project_villa/presentation/pages/detail/detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:shimmer/shimmer.dart';
 
+import 'package:capstone_project_villa/common/constants.dart';
+import 'package:capstone_project_villa/presentation/bloc/home/home_bloc.dart';
+import 'package:capstone_project_villa/presentation/pages/home/widgets/list_card.dart';
+import 'package:capstone_project_villa/presentation/pages/search/search_page.dart';
+
 class HomePage extends StatefulWidget {
+  // final Vila vila;
   static const String routeName = '/home';
-  const HomePage({super.key});
+  const HomePage({
+    Key? key,
+    // required this.vila,
+  }) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -77,7 +83,7 @@ class _HomePageState extends State<HomePage>
                       children: [
                         // Text Nickname
                         Text(
-                          'Hello, ${user.userData!.nickname}',
+                          'Hello, ${user.userData.nickname}',
                           style: blackTextStyle.copyWith(
                             fontSize: 24,
                             fontWeight: semiBold,
@@ -636,15 +642,24 @@ class _HomePageState extends State<HomePage>
                             ListView.builder(
                               padding: EdgeInsets.only(left: 30),
                               scrollDirection: Axis.horizontal,
-                              itemCount: state.user.recommendVilas?.length,
+                              itemCount: state.user.recommendVilas.length,
                               itemBuilder: (context, index) {
-                                final vila = state.user.recommendVilas![index];
-                                return CardCustom(
-                                  name: vila.name.toString(),
-                                  location: vila.location.toString(),
-                                  price: vila.price,
-                                  score: vila.score,
-                                  image: vila.vilaImages?.sliderImage,
+                                final vila = state.user.recommendVilas[index];
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                DetailPage(id: vila.id)));
+                                  },
+                                  child: CardCustom(
+                                    name: vila.name.toString(),
+                                    location: vila.location.toString(),
+                                    price: vila.price,
+                                    score: vila.score,
+                                    image: vila.vilaImages.sliderImage,
+                                  ),
                                 );
                               },
                             ),
@@ -653,15 +668,15 @@ class _HomePageState extends State<HomePage>
                             ListView.builder(
                               padding: EdgeInsets.only(left: 30),
                               scrollDirection: Axis.horizontal,
-                              itemCount: state.user.allVilas?.length,
+                              itemCount: state.user.allVilas.length,
                               itemBuilder: (context, index) {
-                                final vila = state.user.allVilas![index];
+                                final vila = state.user.allVilas[index];
                                 return CardCustom(
                                   name: vila.name.toString(),
                                   location: vila.location.toString(),
                                   price: vila.price,
                                   score: vila.score,
-                                  image: vila.vilaImages?.sliderImage,
+                                  image: vila.vilaImages.sliderImage,
                                 );
                               },
                             ),
@@ -670,15 +685,15 @@ class _HomePageState extends State<HomePage>
                             ListView.builder(
                               padding: EdgeInsets.only(left: 30),
                               scrollDirection: Axis.horizontal,
-                              itemCount: state.user.popularVilas?.length,
+                              itemCount: state.user.popularVilas.length,
                               itemBuilder: (context, index) {
-                                final vila = state.user.popularVilas![index];
+                                final vila = state.user.popularVilas[index];
                                 return CardCustom(
                                   name: vila.name.toString(),
                                   location: vila.location.toString(),
                                   price: vila.price,
                                   score: vila.score,
-                                  image: vila.vilaImages?.sliderImage,
+                                  image: vila.vilaImages.sliderImage,
                                 );
                               },
                             ),
@@ -687,15 +702,15 @@ class _HomePageState extends State<HomePage>
                             ListView.builder(
                               padding: EdgeInsets.only(left: 30),
                               scrollDirection: Axis.horizontal,
-                              itemCount: state.user.recommendVilas?.length,
+                              itemCount: state.user.recommendVilas.length,
                               itemBuilder: (context, index) {
-                                final vila = state.user.recommendVilas![index];
+                                final vila = state.user.recommendVilas[index];
                                 return CardCustom(
                                   name: vila.name.toString(),
                                   location: vila.location.toString(),
                                   price: vila.price,
                                   score: vila.score,
-                                  image: vila.vilaImages?.sliderImage,
+                                  image: vila.vilaImages.sliderImage,
                                 );
                               },
                             ),
