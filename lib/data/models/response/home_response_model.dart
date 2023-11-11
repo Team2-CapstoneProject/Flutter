@@ -224,8 +224,8 @@ class UserData {
 
   factory UserData.fromJson(Map<String, dynamic> json) => UserData(
         id: json["id"],
-        googleId: json["google_id"] ?? 0,
-        image: json["image"] ?? 0,
+        googleId: json["google_id"] ?? '',
+        image: json["image"] ?? '',
         email: json["email"] ?? '',
         fullname: json["fullname"] ?? '',
         nickname: json["nickname"] ?? '',

@@ -60,9 +60,8 @@ class MyApp extends StatelessWidget {
           HomePage.routeName: (context) => const HomePage(),
           ProfilePage.routeName: (context) => const ProfilePage(),
           SearchPage.routeName: (context) => const SearchPage(),
-          DetailPage.routeName: (context) => DetailPage(
-                id: ModalRoute.of(context)!.settings.arguments as int,
-              )
+          DetailPage.routeName: (context) =>
+              DetailPage(id: ModalRoute.of(context)!.settings.arguments as int)
         },
       ),
     );
