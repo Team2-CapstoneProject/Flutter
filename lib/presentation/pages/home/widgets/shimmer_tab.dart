@@ -17,7 +17,7 @@ class ShimmerTabCard extends StatelessWidget {
         Container(
           height: 300,
           child: ListView.builder(
-            padding: EdgeInsets.only(left: 30),
+            padding: EdgeInsets.only(left: 30, bottom: 20),
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return Card(
@@ -34,6 +34,37 @@ class ShimmerTabCard extends StatelessWidget {
             },
           ),
         ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    height: 21,
+                    width: 52,
+                    color: white70Color,
+                  ),
+                  Container(
+                    height: 21,
+                    width: 52,
+                    color: white70Color,
+                  ),
+                ],
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 30, top: 20),
+                height: 145,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: white70Color,
+                ),
+              ),
+            ],
+          ),
+        )
       ],
     );
   }

@@ -129,7 +129,7 @@ class CardCustom extends StatelessWidget {
             right: 17.0,
             child: Icon(
               Iconsax.archive_1,
-              color: greyColor,
+              color: darkGrey,
               size: 28.0,
             ),
           ),
