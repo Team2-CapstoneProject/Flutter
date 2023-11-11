@@ -48,7 +48,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       shape: BoxShape.circle,
                       image: DecorationImage(
                         image: NetworkImage(
-                          user?.image.toString() ?? 'Kosong Broh',
+                          user?.image ?? '',
                         ),
                         fit: BoxFit.cover,
                       ),
@@ -161,7 +161,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         // Logout
                         BlocConsumer<AuthBloc, AuthState>(
                           listener: (context, state) {
-                            if (state is AuthLoaded) {
+                            if (state is AuthSucessLogout) {
                               Navigator.pushNamedAndRemoveUntil(
                                 context,
                                 LoginPage.routeName,

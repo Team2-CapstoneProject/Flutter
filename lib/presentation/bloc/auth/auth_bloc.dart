@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:capstone_project_villa/data/datasources/remote/auth_remote_datasource.dart';
+import 'package:capstone_project_villa/data/models/request/forget_password_request_model.dart';
 import 'package:capstone_project_villa/data/models/request/login_request_model.dart';
 import 'package:capstone_project_villa/data/models/request/register_profile_request_model.dart';
 import 'package:capstone_project_villa/data/models/request/register_request_model.dart';
@@ -29,13 +30,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final result = await ApiDataSource()
           .registerProfile(event.registerProfileRequestModel);
       result.fold((error) => emit(AuthError(message: error)),
+          (success) => emit(AuthSuccessRegister(authResponseModel: success)));
+    });
+
+    on<AuthForgetPasswordEvent>((event, emit) async {
+      emit(AuthLoading());
+      final result = await ApiDataSource()
+          .forgetPassword(event.forgetPasswordRequestModel);
+      result.fold((error) => emit(AuthError(message: error)),
           (success) => emit(AuthLoaded(authResponseModel: success)));
     });
 
     on<AuthLogoutEvent>((event, emit) async {
       final result = await ApiDataSource().logout();
       result.fold((error) => emit(AuthError(message: error)),
-          (success) => emit(AuthLoaded(authResponseModel: success)));
+          (success) => emit(AuthSucessLogout(authResponseModel: success)));
     });
   }
 }

@@ -104,7 +104,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                      image: NetworkImage(widget.data.image ?? ''),
+                      image: NetworkImage(widget.data.image),
                       fit: BoxFit.cover,
                     ),
                   ),

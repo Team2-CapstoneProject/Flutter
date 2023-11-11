@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:capstone_project_villa/data/datasources/local/auth_local_datasource.dart';
+import 'package:capstone_project_villa/data/models/request/forget_password_request_model.dart';
 import 'package:capstone_project_villa/data/models/request/login_request_model.dart';
 import 'package:capstone_project_villa/data/models/request/register_profile_request_model.dart';
 import 'package:capstone_project_villa/data/models/request/register_request_model.dart';
@@ -66,7 +67,7 @@ class ApiDataSource {
     if (response.statusCode == 201) {
       return Right(AuthResponseModel.fromJson(jsonDecode(response.body)));
     } else {
-      return Left('Failed update');
+      return Left('Failed Update Profile');
     }
   }
 
@@ -81,6 +82,21 @@ class ApiDataSource {
       return Right(AuthResponseModel.fromJson(jsonDecode(response.body)));
     } else {
       return Left('Failed Logout');
+    }
+  }
+
+  Future<Either<String, AuthResponseModel>> forgetPassword(
+      ForgetPasswordRequestModel forgetPasswordRequestModel) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/auth/updatepwd'),
+      headers: {'Content-Type': 'application/json'},
+      body: forgetPasswordRequestModel.toJson(),
+    );
+
+    if (response.statusCode == 201) {
+      return Right(AuthResponseModel.fromJson(jsonDecode(response.body)));
+    } else {
+      return Left('Failed Update Password');
     }
   }
 }

@@ -21,4 +21,10 @@ class AuthUpdateProfileEvent extends AuthEvent {
   AuthUpdateProfileEvent({required this.registerProfileRequestModel});
 }
 
+class AuthForgetPasswordEvent extends AuthEvent {
+  final ForgetPasswordRequestModel forgetPasswordRequestModel;
+
+  AuthForgetPasswordEvent({required this.forgetPasswordRequestModel});
+}
+
 class AuthLogoutEvent extends AuthEvent {}

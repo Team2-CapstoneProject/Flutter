@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 2), () async {
       final isLoggedIn = await AuthLocalDataSource().isUserLoggedIn();
       if (isLoggedIn) {
-        // print(isLoggedIn);
+        print(isLoggedIn);
         Navigator.pushReplacementNamed(context, BottomNavbarPage.routeName);
       } else {
         Navigator.pushReplacement(

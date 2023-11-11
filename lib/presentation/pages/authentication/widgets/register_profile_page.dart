@@ -12,8 +12,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 
 class RegisterProfilePage extends StatefulWidget {
-  static const String routeName = '/registerprofile';
-
+  static const String routeName = '/registerProf';
   final AuthResponseModel data;
   const RegisterProfilePage({super.key, required this.data});
 
@@ -209,15 +208,14 @@ class _RegisterProfilePageState extends State<RegisterProfilePage> {
                   ),
                   BlocConsumer<AuthBloc, AuthState>(
                     listener: (context, state) {
-                      if (state is AuthLoaded) {
+                      if (state is AuthSuccessRegister) {
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             Future.delayed(Duration(seconds: 2), () {
-                              Navigator.of(context).pop();
-                              Navigator.pushReplacementNamed(
-                                context,
+                              Navigator.of(context).pushNamedAndRemoveUntil(
                                 BottomNavbarPage.routeName,
+                                (route) => false,
                               );
                             });
                             return AlertDialog(
@@ -260,6 +258,11 @@ class _RegisterProfilePageState extends State<RegisterProfilePage> {
                       }
                     },
                     builder: (context, state) {
+                      if (state is AuthLoading) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
                       return CustomButton(
                         onPressed: () {
                           context.read<AuthBloc>().add(

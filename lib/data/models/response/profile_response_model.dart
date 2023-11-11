@@ -32,7 +32,7 @@ class ProfileResponseModel {
 class ProfileWithoutPassword {
   final int? id;
   final dynamic googleId;
-  final String? image;
+  final String image;
   final String email;
   final String? fullname;
   final String? nickname;
@@ -43,7 +43,7 @@ class ProfileWithoutPassword {
   ProfileWithoutPassword({
     this.id,
     this.googleId,
-    this.image,
+    required this.image,
     required this.email,
     this.fullname,
     this.nickname,
@@ -56,8 +56,9 @@ class ProfileWithoutPassword {
       ProfileWithoutPassword(
         id: json["id"],
         googleId: json["google_id"],
-        image: json["image"],
-        email: json["email"],
+        image: json["image"] ??
+            'https://images.unsplash.com/photo-1569516449771-41c89ee14ca3?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        email: json["email"] ?? '',
         fullname: json["fullname"],
         nickname: json["nickname"],
         phoneNumber: json["phone_number"],
@@ -72,7 +73,7 @@ class ProfileWithoutPassword {
   Map<String, dynamic> toJson() => {
         "id": id,
         "google_id": googleId,
-        "image": image ?? '',
+        "image": image,
         "email": email,
         "fullname": fullname ?? '',
         "nickname": nickname ?? '',

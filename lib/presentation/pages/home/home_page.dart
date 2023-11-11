@@ -15,11 +15,9 @@ import 'package:capstone_project_villa/presentation/pages/home/widgets/list_card
 import 'package:capstone_project_villa/presentation/pages/search/search_page.dart';
 
 class HomePage extends StatefulWidget {
-  // final Vila vila;
   static const String routeName = '/home';
   const HomePage({
     Key? key,
-    // required this.vila,
   }) : super(key: key);
 
   @override
@@ -396,7 +394,15 @@ class _HomePageState extends State<HomePage>
                                 itemCount: state.user.allVilas.length,
                                 itemBuilder: (context, index) {
                                   final vila = state.user.allVilas[index];
-                                  return ForYouCard(vila: vila);
+                                  return GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DetailPage(id: vila.id)));
+                                      },
+                                      child: ForYouCard(vila: vila));
                                 },
                               ),
                             ),

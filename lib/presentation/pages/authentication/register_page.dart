@@ -192,7 +192,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             await AuthLocalDataSource().saveToken(
                               state.authResponseModel.token,
                             );
-                            // print('token : ${state.authResponseModel.token}');
+                            print('token : ${state.authResponseModel.token}');
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(

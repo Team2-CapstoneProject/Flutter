@@ -5,6 +5,7 @@ import 'package:capstone_project_villa/presentation/pages/authentication/widgets
 import 'package:capstone_project_villa/presentation/pages/authentication/register_page.dart';
 import 'package:capstone_project_villa/presentation/pages/navbar/bottom_navbar.dart';
 import 'package:capstone_project_villa/common/constants.dart';
+import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -186,12 +187,8 @@ class _LoginPageState extends State<LoginPage> {
                   // Forget Password
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ForgotPage(),
-                        ),
-                      );
+                      Navigator.pushReplacementNamed(
+                          context, ForgotPage.routeName);
                     },
                     child: Align(
                       alignment: Alignment.bottomRight,
@@ -220,10 +217,9 @@ class _LoginPageState extends State<LoginPage> {
                             state.authResponseModel.token,
                           );
                           // print('token : ${state.authResponseModel.token}');
-                          Navigator.pushNamedAndRemoveUntil(
+                          Navigator.pushReplacementNamed(
                             context,
                             BottomNavbarPage.routeName,
-                            (route) => false,
                           );
                         }
                         if (state is AuthError) {
@@ -242,13 +238,7 @@ class _LoginPageState extends State<LoginPage> {
                             child: CircularProgressIndicator(),
                           );
                         }
-                        return ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: primaryColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
+                        return CustomButton(
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
                               final loginModel = LoginRequestModel(
@@ -263,14 +253,7 @@ class _LoginPageState extends State<LoginPage> {
                                   );
                             }
                           },
-                          child: Text(
-                            'Sign Up',
-                            style: whiteTextStyle.copyWith(
-                              fontSize: 14,
-                              fontWeight: semiBold,
-                              letterSpacing: 0.5,
-                            ),
-                          ),
+                          text: 'Sign Up',
                         );
                       },
                     ),
