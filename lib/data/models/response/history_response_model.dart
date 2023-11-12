@@ -18,10 +18,8 @@ class HistoryResponseModel {
   factory HistoryResponseModel.fromJson(Map<String, dynamic> json) =>
       HistoryResponseModel(
         message: json["message"] ?? '',
-        allTransactions: (json["allTransactions"] as List<dynamic>?)
-                ?.map((x) => AllTransaction.fromJson(x))
-                .toList() ??
-            [],
+        allTransactions: List<AllTransaction>.from(
+            json["allTransactions"].map((x) => AllTransaction.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -38,7 +36,7 @@ class AllTransaction {
   final String fullName;
   final DateTime createdAt;
   final Vilas vilas;
-  final List<dynamic>? transactionStatuses;
+  final List<TransactionStatus> transactionStatuses;
 
   AllTransaction({
     required this.id,
@@ -47,7 +45,7 @@ class AllTransaction {
     required this.fullName,
     required this.createdAt,
     required this.vilas,
-    this.transactionStatuses,
+    required this.transactionStatuses,
   });
 
   factory AllTransaction.fromJson(Map<String, dynamic> json) => AllTransaction(
@@ -57,10 +55,9 @@ class AllTransaction {
         fullName: json["full_name"] ?? '',
         createdAt: DateTime.parse(json["createdAt"]),
         vilas: Vilas.fromJson(json["Vilas"]),
-        transactionStatuses: (json["TransactionStatuses"] as List<dynamic>?)
-                ?.map((x) => x)
-                .toList() ??
-            [],
+        transactionStatuses: List<TransactionStatus>.from(
+            json["TransactionStatuses"]
+                .map((x) => TransactionStatus.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -70,9 +67,29 @@ class AllTransaction {
         "full_name": fullName,
         "createdAt": createdAt.toIso8601String(),
         "Vilas": vilas.toJson(),
-        "TransactionStatuses": transactionStatuses == null
-            ? []
-            : List<dynamic>.from(transactionStatuses!.map((x) => x)),
+        "TransactionStatuses":
+            List<dynamic>.from(transactionStatuses.map((x) => x.toJson())),
+      };
+}
+
+class TransactionStatus {
+  final int id;
+  final int statusId;
+
+  TransactionStatus({
+    required this.id,
+    required this.statusId,
+  });
+
+  factory TransactionStatus.fromJson(Map<String, dynamic> json) =>
+      TransactionStatus(
+        id: json["id"],
+        statusId: json["status_id"] ?? 0,
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "status_id": statusId,
       };
 }
 
@@ -82,7 +99,7 @@ class Vilas {
   final int price;
   final String location;
   final List<VilaImage> vilaImages;
-  final List<dynamic>? bookmarks;
+  final List<dynamic> bookmarks;
 
   Vilas({
     required this.id,
@@ -90,7 +107,7 @@ class Vilas {
     required this.price,
     required this.location,
     required this.vilaImages,
-    this.bookmarks,
+    required this.bookmarks,
   });
 
   factory Vilas.fromJson(Map<String, dynamic> json) => Vilas(
@@ -98,12 +115,9 @@ class Vilas {
         name: json["name"] ?? '',
         price: json["price"] ?? 0,
         location: json["location"] ?? '',
-        vilaImages: (json["VilaImages"] as List<dynamic>?)
-                ?.map((x) => VilaImage.fromJson(x))
-                .toList() ??
-            [],
-        bookmarks:
-            (json["Bookmarks"] as List<dynamic>?)?.map((x) => x).toList() ?? [],
+        vilaImages: List<VilaImage>.from(
+            json["VilaImages"].map((x) => VilaImage.fromJson(x))),
+        bookmarks: List<dynamic>.from(json["Bookmarks"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
@@ -112,9 +126,7 @@ class Vilas {
         "price": price,
         "location": location,
         "VilaImages": List<dynamic>.from(vilaImages.map((x) => x.toJson())),
-        "Bookmarks": bookmarks == null
-            ? []
-            : List<dynamic>.from(bookmarks!.map((x) => x)),
+        "Bookmarks": List<dynamic>.from(bookmarks.map((x) => x)),
       };
 }
 
