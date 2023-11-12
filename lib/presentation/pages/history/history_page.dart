@@ -1,6 +1,7 @@
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:capstone_project_villa/common/utils.dart';
 import 'package:capstone_project_villa/presentation/bloc/history/history_bloc.dart';
+import 'package:capstone_project_villa/presentation/widgets/custom_circular.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_separator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -279,8 +280,11 @@ class _HistoryPageState extends State<HistoryPage> {
                     ),
                   ],
                 );
+              } else if (state is HistoryLoading) {
+                return CustomCircular();
+              } else {
+                return SizedBox();
               }
-              return SizedBox();
             },
           ),
         ),
