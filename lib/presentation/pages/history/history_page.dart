@@ -1,7 +1,6 @@
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:capstone_project_villa/common/utils.dart';
 import 'package:capstone_project_villa/presentation/bloc/history/history_bloc.dart';
-import 'package:capstone_project_villa/presentation/widgets/custom_circular.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_search.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_separator.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +45,7 @@ class _HistoryPageState extends State<HistoryPage> {
                         context.read<HistoryBloc>().add(
                             GetHistoryByNameEvent(name: vilaController.text));
                       } else {
+                        vilaController.clear();
                         context.read<HistoryBloc>().add(GetHistoryEvent());
                       }
                     });
@@ -272,10 +272,24 @@ Widget buildResult(String searchTerm) {
             },
           );
         }
+      } else if (state is HistoryLoading) {
+        return ListView.builder(
+          itemCount: 10,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            return Container(
+              margin: EdgeInsets.only(bottom: 30),
+              height: 205,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: white70Color,
+              ),
+            );
+          },
+        );
       }
-      return Center(
-        child: CustomCircular(),
-      );
+      return SizedBox();
     },
   );
 }
@@ -471,10 +485,24 @@ Widget buildRecentVila() {
             );
           },
         );
+      } else if (state is HistoryLoading) {
+        return ListView.builder(
+          itemCount: 10,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            return Container(
+              margin: EdgeInsets.only(bottom: 30),
+              height: 205,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: white70Color,
+              ),
+            );
+          },
+        );
       }
-      return Center(
-        child: CustomCircular(),
-      );
+      return SizedBox();
     },
   );
 }
