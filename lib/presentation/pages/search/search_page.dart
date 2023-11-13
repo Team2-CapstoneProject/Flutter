@@ -1,3 +1,4 @@
+import 'package:capstone_project_villa/presentation/pages/search/widget/shimmer_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -81,7 +82,7 @@ class _SearchPageState extends State<SearchPage> {
                 BlocBuilder<SearchBloc, SearchState>(
                   builder: (context, state) {
                     if (state is SearchLoading) {
-                      return CircularProgressIndicator();
+                      return ShimmerSearch();
                     } else if (state is SearchSuccess) {
                       return state.searchResponse.allVilas.isEmpty
                           ? Text('No results found.')
