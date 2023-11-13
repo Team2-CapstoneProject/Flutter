@@ -13,6 +13,12 @@ final class HistoryLoaded extends HistoryState {
   HistoryLoaded({required this.historyResponseModel});
 }
 
+final class HistorySearchLoaded extends HistoryState {
+  final HistoryResponseModel historyResponseModel;
+
+  HistorySearchLoaded({required this.historyResponseModel});
+}
+
 final class HistoryError extends HistoryState {
   final String message;
 

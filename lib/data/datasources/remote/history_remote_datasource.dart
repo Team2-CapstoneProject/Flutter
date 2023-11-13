@@ -20,4 +20,19 @@ class HistoryDataSource {
       return Left('Failed to fetch history');
     }
   }
+
+  Future<Either<String, HistoryResponseModel>> getHistoryById(
+      String name) async {
+    final token = await AuthLocalDataSource().getToken();
+    final response = await http.get(
+      Uri.parse('$baseUrl/mobile/history/search?searchText=$name'),
+      headers: {'Authorization': 'Bearer $token'},
+    );
+
+    if (response.statusCode == 200) {
+      return Right(HistoryResponseModel.fromJson(jsonDecode(response.body)));
+    } else {
+      return Left('Failed to search history data');
+    }
+  }
 }
