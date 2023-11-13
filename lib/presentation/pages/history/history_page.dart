@@ -76,6 +76,12 @@ Widget buildResult(String searchTerm) {
                   .contains(searchTerm.toLowerCase()))
               .toList();
 
+          if (filteredList.isEmpty) {
+            return Center(
+              child: Text('No result found for "$searchTerm"'),
+            );
+          }
+
           return ListView.builder(
             itemCount: filteredList.length,
             shrinkWrap: true,
