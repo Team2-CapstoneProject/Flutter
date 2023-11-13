@@ -1,6 +1,7 @@
 import 'package:capstone_project_villa/presentation/bloc/auth/auth_bloc.dart';
 import 'package:capstone_project_villa/presentation/bloc/bookmark/bookmark_bloc.dart';
 import 'package:capstone_project_villa/presentation/bloc/detail/detail_vila_bloc.dart';
+import 'package:capstone_project_villa/presentation/bloc/history/history_bloc.dart';
 import 'package:capstone_project_villa/presentation/bloc/home/home_bloc.dart';
 import 'package:capstone_project_villa/presentation/bloc/profile/profile_bloc.dart';
 import 'package:capstone_project_villa/presentation/pages/authentication/login_page.dart';
@@ -44,6 +45,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => BookmarkBloc(),
+        ),
+        BlocProvider(
+          create: (context) => HistoryBloc(),
         )
       ],
       child: MaterialApp(

@@ -8,11 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
-
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:capstone_project_villa/presentation/bloc/home/home_bloc.dart';
 import 'package:capstone_project_villa/presentation/pages/home/widgets/list_card.dart';
-import 'package:capstone_project_villa/presentation/pages/search/search_page.dart';
 
 class HomePage extends StatefulWidget {
   static const String routeName = '/home';
@@ -105,12 +103,7 @@ class _HomePageState extends State<HomePage>
                                 borderRadius: BorderRadius.circular(20),
                               ),
                             ),
-                            onPressed: () {
-                              Navigator.pushReplacementNamed(
-                                context,
-                                SearchPage.routeName,
-                              );
-                            },
+                            onPressed: () {},
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
@@ -418,8 +411,6 @@ class _HomePageState extends State<HomePage>
                 }
               },
             ),
-
-            // ForYou
           ],
         ),
       ),

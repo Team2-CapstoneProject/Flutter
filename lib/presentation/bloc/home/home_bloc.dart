@@ -13,7 +13,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       final result = await HomeDataSource().getUser();
       result.fold((error) => emit(HomeError(message: error)),
           (success) => emit(HomeLoaded(user: success)));
-      
     });
   }
 }
