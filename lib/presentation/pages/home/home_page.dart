@@ -106,9 +106,11 @@ class _HomePageState extends State<HomePage>
                               ),
                             ),
                             onPressed: () {
-                              Navigator.pushReplacementNamed(
+                              Navigator.push(
                                 context,
-                                SearchPage.routeName,
+                                MaterialPageRoute(
+                                  builder: (context) => SearchPage(),
+                                ),
                               );
                             },
                             child: Row(
