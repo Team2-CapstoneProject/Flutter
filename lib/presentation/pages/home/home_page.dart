@@ -360,20 +360,13 @@ class _HomePageState extends State<HomePage>
                         child: Column(
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
                                   'For You',
                                   style: blackTextStyle.copyWith(
                                     fontSize: 14,
                                     fontWeight: medium,
-                                  ),
-                                ),
-                                Text(
-                                  'See All',
-                                  style: primaryTextStyle.copyWith(
-                                    fontSize: 12,
-                                    fontWeight: light,
                                   ),
                                 ),
                               ],
@@ -384,7 +377,7 @@ class _HomePageState extends State<HomePage>
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
                                 scrollDirection: Axis.vertical,
-                                itemCount: state.user.allVilas.length,
+                                itemCount: 5,
                                 itemBuilder: (context, index) {
                                   final vila = state.user.allVilas[index];
                                   return GestureDetector(
