@@ -48,13 +48,6 @@ class _SearchPageState extends State<SearchPage> {
                       ),
                     );
                   },
-                  onFieldSubmitted: (value) {
-                    BlocProvider.of<SearchBloc>(context).add(
-                      PerformSearch(
-                        SearchRequestModel(searchText: value),
-                      ),
-                    );
-                  },
                   controller: _searchController,
                 ),
                 SizedBox(height: 20),

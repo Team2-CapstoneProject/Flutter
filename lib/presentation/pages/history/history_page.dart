@@ -39,7 +39,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 // Search Button
                 CustomSearch(
                   controller: vilaController,
-                  onFieldSubmitted: (value) {
+                  onChanged: (value) {
                     setState(() {
                       if (value.isNotEmpty) {
                         context.read<HistoryBloc>().add(
@@ -50,6 +50,17 @@ class _HistoryPageState extends State<HistoryPage> {
                       }
                     });
                   },
+                  // onFieldSubmitted: (value) {
+                  //   setState(() {
+                  //     if (value.isNotEmpty) {
+                  //       context.read<HistoryBloc>().add(
+                  //           GetHistoryByNameEvent(name: vilaController.text));
+                  //     } else {
+                  //       vilaController.clear();
+                  //       context.read<HistoryBloc>().add(GetHistoryEvent());
+                  //     }
+                  //   });
+                  // },
                 ),
                 vilaController.text.isEmpty
                     ? buildRecentVila()
@@ -84,6 +95,7 @@ Widget buildResult(String searchTerm) {
 
           return ListView.builder(
             itemCount: filteredList.length,
+            physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemBuilder: (context, index) {
               final history = filteredList[index];
