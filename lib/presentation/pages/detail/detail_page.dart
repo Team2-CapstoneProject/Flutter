@@ -1,5 +1,6 @@
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:capstone_project_villa/common/utils.dart';
+import 'package:capstone_project_villa/presentation/pages/detail/detail_see_all_page.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_circular.dart';
 import 'package:flutter/material.dart';
@@ -81,7 +82,6 @@ class _DetailPageState extends State<DetailPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          
                           // Name Vila
                           Container(
                             margin: EdgeInsets.only(bottom: 5),
@@ -126,11 +126,28 @@ class _DetailPageState extends State<DetailPage> {
                                         fontWeight: semiBold,
                                       ),
                                     ),
-                                    Text(
-                                      'See All',
-                                      style: primaryTextStyle.copyWith(
-                                        fontSize: 12,
-                                        fontWeight: light,
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                DetailSeeAllPage(
+                                              galleryPhotos: details[0]
+                                                  .vilaImages
+                                                  .map((image) =>
+                                                      image.sliderImage)
+                                                  .toList(),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: Text(
+                                        'See All',
+                                        style: primaryTextStyle.copyWith(
+                                          fontSize: 12,
+                                          fontWeight: light,
+                                        ),
                                       ),
                                     )
                                   ],
