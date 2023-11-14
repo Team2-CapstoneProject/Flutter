@@ -1,5 +1,6 @@
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:capstone_project_villa/common/utils.dart';
+import 'package:capstone_project_villa/presentation/pages/detail/widgets/detail_date_page.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_circular.dart';
 import 'package:flutter/material.dart';
@@ -81,7 +82,6 @@ class _DetailPageState extends State<DetailPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          
                           // Name Vila
                           Container(
                             margin: EdgeInsets.only(bottom: 5),
@@ -569,7 +569,16 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ),
                   ),
-                  CustomButton(onPressed: () {}, text: 'Book Now')
+                  CustomButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailDatePage(),
+                          ),
+                        );
+                      },
+                      text: 'Book Now')
                 ],
               ),
             );
