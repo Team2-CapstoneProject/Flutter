@@ -4,6 +4,7 @@ import 'package:capstone_project_villa/presentation/pages/home/widgets/foryou_ca
 import 'package:capstone_project_villa/presentation/pages/home/widgets/shimmer.dart';
 import 'package:capstone_project_villa/presentation/pages/home/widgets/shimmer_tab.dart';
 import 'package:capstone_project_villa/presentation/pages/home/widgets/tab_card.dart';
+import 'package:capstone_project_villa/presentation/pages/search/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -103,7 +104,14 @@ class _HomePageState extends State<HomePage>
                                 borderRadius: BorderRadius.circular(20),
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SearchPage(),
+                                ),
+                              );
+                            },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
