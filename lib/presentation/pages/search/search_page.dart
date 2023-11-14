@@ -6,6 +6,7 @@ import 'package:capstone_project_villa/data/models/request/search_request_model.
 import 'package:capstone_project_villa/presentation/bloc/search/search_bloc.dart';
 
 import '../../../common/constants.dart';
+import '../../widgets/custom_search.dart';
 import 'widget/horizontal_card.dart';
 import '../detail/detail_page.dart';
 
@@ -39,44 +40,22 @@ class _SearchPageState extends State<SearchPage> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 20),
-                  height: 55,
-                  width: MediaQuery.of(context).size.width,
-                  child: TextFormField(
-                    textInputAction: TextInputAction.done,
-                    keyboardType: TextInputType.text,
-                    controller: _searchController,
-                    onChanged: (value) {
-                      // Live search as the user types
-                      BlocProvider.of<SearchBloc>(context).add(
-                        PerformSearch(
-                          SearchRequestModel(searchText: value),
-                        ),
-                      );
-                    },
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
+                CustomSearch(
+                  onChanged: (value) {
+                    BlocProvider.of<SearchBloc>(context).add(
+                      PerformSearch(
+                        SearchRequestModel(searchText: value),
                       ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(color: Colors.grey),
+                    );
+                  },
+                  onFieldSubmitted: (value) {
+                    BlocProvider.of<SearchBloc>(context).add(
+                      PerformSearch(
+                        SearchRequestModel(searchText: value),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                          color: Colors.black.withOpacity(0.1),
-                        ),
-                      ),
-                      hintText: 'Search',
-                      labelStyle: TextStyle(color: Colors.grey),
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
+                    );
+                  },
+                  controller: _searchController,
                 ),
                 SizedBox(height: 20),
                 BlocBuilder<SearchBloc, SearchState>(
