@@ -326,172 +326,6 @@ class _DetailPageState extends State<DetailPage> {
                                       fontWeight: medium,
                                     ),
                                   ),
-                                  Text(
-                                    'See_all'.tr(),
-                                    style: primaryTextStyle.copyWith(
-                                      fontSize: 12,
-                                      fontWeight: light,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(top: 20),
-                                height: 445,
-                                child: details.isEmpty || transaction.isEmpty
-                                    ? Container(
-                                        child: Center(
-                                            child: Text('no_review'.tr())),
-                                      )
-                                    : ListView.builder(
-                                        shrinkWrap: true,
-                                        physics: NeverScrollableScrollPhysics(),
-                                        itemCount: transaction.length,
-                                        itemBuilder:
-                                            (context, transactionIndex) {
-                                          if (transaction[transactionIndex]
-                                              .reviews
-                                              .isNotEmpty) {
-                                            return Column(
-                                              children:
-                                                  transaction[transactionIndex]
-                                                      .reviews
-                                                      .map((review) {
-                                                return Container(
-                                                  margin: EdgeInsets.only(
-                                                      bottom: 20),
-                                                  height: 135,
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width,
-                                                  decoration: BoxDecoration(
-                                                    color: grey95,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                      20,
-                                                    ),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                      left: 20,
-                                                      top: 22,
-                                                      right: 24,
-                                                    ),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Row(
-                                                          children: [
-                                                            Container(
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      right:
-                                                                          20),
-                                                              width: 40,
-                                                              height: 40,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                shape: BoxShape
-                                                                    .circle,
-                                                                image:
-                                                                    DecorationImage(
-                                                                  image:
-                                                                      NetworkImage(
-                                                                    transaction[
-                                                                            transactionIndex]
-                                                                        .users
-                                                                        .image,
-                                                                  ),
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                  transaction[
-                                                                          transactionIndex]
-                                                                      .users
-                                                                      .fullname,
-                                                                  style: blackTextStyle
-                                                                      .copyWith(
-                                                                    fontSize:
-                                                                        16,
-                                                                    fontWeight:
-                                                                        semiBold,
-                                                                  ),
-                                                                  overflow:
-                                                                      TextOverflow
-                                                                          .ellipsis,
-                                                                ),
-                                                                Text(
-                                                                  Utils
-                                                                      .dateTimeFormat3(
-                                                                    transaction[
-                                                                            transactionIndex]
-                                                                        .reviews[
-                                                                            0]
-                                                                        .updatedAt,
-                                                                  ),
-                                                                  style: greyTextStyle
-                                                                      .copyWith(
-                                                                    fontSize:
-                                                                        14,
-                                                                    fontWeight:
-                                                                        regular,
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Spacer(),
-                                                            Container(
-                                                              width: 65,
-                                                              height: 35,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color:
-                                                                    primaryColor,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            20),
-                                                              ),
-                                                              child: Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                children: [
-                                                                  Icon(
-                                                                    Iconsax
-                                                                        .star1,
-                                                                    color:
-                                                                        yellowColor,
-                                                                  ),
-                                                                  const SizedBox(
-                                                                    width: 3.0,
-                                                                  ),
-                                                                  Text(
-                                                                    review.score
-                                                                        .toString(),
-                                                                    style: whiteTextStyle
-                                                                        .copyWith(
-                                                                      fontSize:
-                                                                          14,
-                                                                      fontWeight:
-                                                                          semiBold,
-                                                                    ),
-                                                                  )
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ],
                                   GestureDetector(
                                     onTap: () {
                                       Navigator.push(
@@ -505,7 +339,7 @@ class _DetailPageState extends State<DetailPage> {
                                       );
                                     },
                                     child: Text(
-                                      'See All',
+                                      'see_all'.tr(),
                                       style: primaryTextStyle.copyWith(
                                         fontSize: 12,
                                         fontWeight: light,
@@ -663,17 +497,6 @@ class _DetailPageState extends State<DetailPage> {
                                                   ),
                                                 ],
                                               ),
-                                              child: Center(
-                                                child: Text(
-                                                  'no_reviews_for_this_transaction'
-                                                      .tr(),
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                        },
-                                      ),
-                              )
                                             ),
                                           );
                                         }).toList(),
@@ -683,7 +506,9 @@ class _DetailPageState extends State<DetailPage> {
                                   },
                                 )
                               else
-                                Text('No reviews for any transaction'),
+                                Text(
+                                  'no reviews for any transaction'.tr(),
+                                ),
                             ],
                           ),
                         ],

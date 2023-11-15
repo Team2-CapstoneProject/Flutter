@@ -379,13 +379,6 @@ class _HomePageState extends State<HomePage>
                                     fontWeight: medium,
                                   ),
                                 ),
-                                Text(
-                                  'see_all'.tr(),
-                                  style: primaryTextStyle.copyWith(
-                                    fontSize: 12,
-                                    fontWeight: light,
-                                  ),
-                                ),
                               ],
                             ),
                             Container(
