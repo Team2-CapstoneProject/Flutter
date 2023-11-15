@@ -14,6 +14,8 @@ class HistoryDataSource {
       headers: {'Authorization': 'Bearer $token'},
     );
 
+    print('API Response: ${response.statusCode} - ${response.body}');
+
     if (response.statusCode == 200) {
       return Right(HistoryResponseModel.fromJson(jsonDecode(response.body)));
     } else {
