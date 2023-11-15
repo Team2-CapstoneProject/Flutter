@@ -3,6 +3,7 @@ import 'package:capstone_project_villa/common/utils.dart';
 import 'package:capstone_project_villa/presentation/bloc/history/history_bloc.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_search.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_separator.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
@@ -199,7 +200,7 @@ Widget buildResult(String searchTerm) {
                                                 ),
                                               ),
                                               TextSpan(
-                                                text: ' /night',
+                                                text: ' night'.tr(),
                                                 style:
                                                     darkGreyTextStyle.copyWith(
                                                   fontSize: 12,
@@ -246,7 +247,7 @@ Widget buildResult(String searchTerm) {
                               ),
                               onPressed: () {},
                               child: Text(
-                                'Cancel Booking',
+                                'cancel_booking'.tr(),
                                 style: darkGreyTextStyle.copyWith(
                                   fontSize: 12,
                                   fontWeight: medium,
@@ -269,7 +270,7 @@ Widget buildResult(String searchTerm) {
                               ),
                               onPressed: () {},
                               child: Text(
-                                'View',
+                                'view'.tr(),
                                 style: whiteTextStyle.copyWith(
                                     fontSize: 12, fontWeight: medium),
                               ),
@@ -414,7 +415,7 @@ Widget buildRecentVila() {
                                               ),
                                             ),
                                             TextSpan(
-                                              text: ' /night',
+                                              text: ' night'.tr(),
                                               style: darkGreyTextStyle.copyWith(
                                                 fontSize: 12,
                                                 fontWeight: light,
@@ -460,7 +461,7 @@ Widget buildRecentVila() {
                             ),
                             onPressed: () {},
                             child: Text(
-                              'Cancel Booking',
+                              'cancel_booking'.tr(),
                               style: darkGreyTextStyle.copyWith(
                                 fontSize: 12,
                                 fontWeight: medium,
@@ -483,7 +484,7 @@ Widget buildRecentVila() {
                             ),
                             onPressed: () {},
                             child: Text(
-                              'View',
+                              'view'.tr(),
                               style: whiteTextStyle.copyWith(
                                   fontSize: 12, fontWeight: medium),
                             ),

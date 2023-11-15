@@ -1,6 +1,7 @@
 import 'package:capstone_project_villa/data/models/request/profile_request_model.dart';
 import 'package:capstone_project_villa/presentation/bloc/profile/profile_bloc.dart';
 import 'package:capstone_project_villa/presentation/pages/navbar/bottom_navbar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
@@ -92,7 +93,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   alignment: Alignment.topLeft,
                   margin: const EdgeInsets.only(top: 28),
                   child: Text(
-                    'Edit your Profile',
+                    'edit_your_profile'.tr(),
                     style: blackTextStyle.copyWith(
                         fontSize: 32, fontWeight: semiBold),
                   ),
@@ -133,7 +134,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     ),
                     filled: true,
                     fillColor: _isChangeFullName.value ? cyanBlue : whiteColor,
-                    hintText: 'Full Name',
+                    hintText: 'full_name'.tr(),
                     prefixIcon: Icon(
                       Iconsax.user,
                       color: greyColor,
@@ -173,7 +174,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     ),
                     filled: true,
                     fillColor: _isChangeNickname.value ? cyanBlue : whiteColor,
-                    hintText: 'Nickname',
+                    hintText: 'nickname'.tr(),
                     prefixIcon: Icon(
                       Iconsax.user,
                       color: greyColor,
@@ -233,7 +234,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     filled: true,
                     fillColor:
                         _isChangePhoneNumber.value ? cyanBlue : whiteColor,
-                    hintText: 'Phone Number',
+                    hintText: 'phone_number'.tr(),
                     prefixIcon: Icon(
                       Iconsax.call,
                       color: darkGrey,
@@ -277,7 +278,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   height: 25.0,
                                 ),
                                 Text(
-                                  'Update Profile Successfull',
+                                  'update_profile_successfull'.tr(),
                                   style: primaryTextStyle.copyWith(
                                     fontSize: 20,
                                     fontWeight: bold,
@@ -287,7 +288,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   height: 9.0,
                                 ),
                                 Text(
-                                  'Successfully update profile',
+                                  'successfully_update_profile'.tr(),
                                   textAlign: TextAlign.center,
                                   style: grey2TextStyle.copyWith(
                                     fontSize: 17,
@@ -316,7 +317,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               );
                         }
                       },
-                      text: 'Save',
+                      text: 'save'.tr(),
                     );
                   },
                 )

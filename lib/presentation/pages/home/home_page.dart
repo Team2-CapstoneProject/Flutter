@@ -5,6 +5,7 @@ import 'package:capstone_project_villa/presentation/pages/home/widgets/shimmer.d
 import 'package:capstone_project_villa/presentation/pages/home/widgets/shimmer_tab.dart';
 import 'package:capstone_project_villa/presentation/pages/home/widgets/tab_card.dart';
 import 'package:capstone_project_villa/presentation/pages/search/search_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -83,7 +84,8 @@ class _HomePageState extends State<HomePage>
                       children: [
                         // Text Nickname
                         Text(
-                          'Hello, ${user.userData.nickname}',
+                          'greeting'
+                              .tr(namedArgs: {'name': user.userData.nickname}),
                           style: blackTextStyle.copyWith(
                             fontSize: 24,
                             fontWeight: semiBold,
@@ -158,7 +160,7 @@ class _HomePageState extends State<HomePage>
                               ),
                               CategoryCard(
                                 icon: Iconsax.category,
-                                label: 'More',
+                                label: 'more'.tr(),
                                 onTap: () {
                                   setState(() {
                                     showMoreCategories = !showMoreCategories;
@@ -174,7 +176,7 @@ class _HomePageState extends State<HomePage>
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                'Our Accommodations',
+                                                'our_accommodation'.tr(),
                                                 style: blackTextStyle.copyWith(
                                                     fontSize: 14,
                                                     fontWeight: medium),
@@ -371,10 +373,17 @@ class _HomePageState extends State<HomePage>
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'For You',
+                                  'for_you'.tr(),
                                   style: blackTextStyle.copyWith(
                                     fontSize: 14,
                                     fontWeight: medium,
+                                  ),
+                                ),
+                                Text(
+                                  'see_all'.tr(),
+                                  style: primaryTextStyle.copyWith(
+                                    fontSize: 12,
+                                    fontWeight: light,
                                   ),
                                 ),
                               ],
