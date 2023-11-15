@@ -43,11 +43,11 @@ class _SplashScreenState extends State<SplashScreen> {
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
     ));
-    return const Scaffold(
+    return Scaffold(
       body: Center(
         child: Image(
           image: AssetImage('assets/logo.png'),
-          width: 120,
+          width: MediaQuery.of(context).size.width * 0.7,
         ),
       ),
     );
