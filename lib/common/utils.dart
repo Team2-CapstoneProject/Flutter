@@ -20,4 +20,11 @@ class Utils {
   static String dateTimeFormat3(DateTime dateTime) {
     return DateFormat('MMM d, y', 'id_ID').format(dateTime);
   }
+
+   /// Input parameter value DateTime, output a String.
+  ///
+  /// Example: DateTime.now() -> '19-09-2023 16:43'
+  static String dateTimeFormatCustom(DateTime dateTime) {
+    return DateFormat('dd-MM-yyyy HH:mm').format(dateTime);
+  }
 }

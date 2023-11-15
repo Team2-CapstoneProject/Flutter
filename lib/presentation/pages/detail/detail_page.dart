@@ -1,6 +1,7 @@
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:capstone_project_villa/common/utils.dart';
 import 'package:capstone_project_villa/presentation/pages/detail/detail_see_all_page.dart';
+import 'package:capstone_project_villa/presentation/pages/detail/detail_see_all_review_page.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_circular.dart';
 import 'package:flutter/material.dart';
@@ -322,11 +323,24 @@ class _DetailPageState extends State<DetailPage> {
                                       fontWeight: medium,
                                     ),
                                   ),
-                                  Text(
-                                    'See All',
-                                    style: primaryTextStyle.copyWith(
-                                      fontSize: 12,
-                                      fontWeight: light,
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              DetaikSeeAllReviewPage(
+                                            transactions: transaction,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: Text(
+                                      'See All',
+                                      style: primaryTextStyle.copyWith(
+                                        fontSize: 12,
+                                        fontWeight: light,
+                                      ),
                                     ),
                                   ),
                                 ],
