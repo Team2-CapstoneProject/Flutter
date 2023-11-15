@@ -45,7 +45,10 @@ class _SplashScreenState extends State<SplashScreen> {
     ));
     return const Scaffold(
       body: Center(
-        child: Image(image: AssetImage('assets/logo.png')),
+        child: Image(
+          image: AssetImage('assets/logo.png'),
+          width: 120,
+        ),
       ),
     );
   }
