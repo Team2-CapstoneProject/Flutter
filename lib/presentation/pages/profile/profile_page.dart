@@ -1,4 +1,3 @@
-import 'package:capstone_project_villa/data/models/response/profile_response_model.dart';
 import 'package:capstone_project_villa/presentation/bloc/auth/auth_bloc.dart';
 import 'package:capstone_project_villa/presentation/bloc/profile/profile_bloc.dart';
 import 'package:capstone_project_villa/presentation/pages/authentication/login_page.dart';
@@ -35,7 +34,7 @@ class _ProfilePageState extends State<ProfilePage> {
         child: BlocBuilder<ProfileBloc, ProfileState>(
           builder: (context, state) {
             if (state is ProfileLoaded) {
-              final user = state.profileResponseModel.profileWithoutPassword;
+              final user = state.profileResponseModel;
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -48,7 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       shape: BoxShape.circle,
                       image: DecorationImage(
                         image: NetworkImage(
-                          user?.image ?? '',
+                          user.image,
                         ),
                         fit: BoxFit.cover,
                       ),
@@ -57,7 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                   // Username
                   Text(
-                    user?.nickname.toString() ?? '',
+                    user.nickname.toString(),
                     style: blackTextStyle.copyWith(
                         fontSize: 24, fontWeight: semiBold),
                   ),
@@ -65,7 +64,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                   // Email
                   Text(
-                    user?.email.toString() ?? '',
+                    user.email.toString(),
                     style:
                         greyTextStyle.copyWith(fontSize: 14, fontWeight: light),
                   ),
@@ -91,16 +90,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => EditProfilePage(
-                                  data: ProfileWithoutPassword(
-                                    email: state.profileResponseModel
-                                            .profileWithoutPassword?.email ??
-                                        '',
-                                    image: state.profileResponseModel
-                                            .profileWithoutPassword?.image ??
-                                        '',
-                                  ),
-                                ),
+                                builder: (context) =>
+                                    EditProfilePage(data: user),
                               ),
                             );
                           },
