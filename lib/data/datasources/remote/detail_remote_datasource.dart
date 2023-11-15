@@ -14,7 +14,7 @@ class DetailDataSource {
       headers: {'Authorization': 'Bearer $token'},
     );
 
-    print(response);
+    // print(response);
 
     if (response.statusCode == 200) {
       return Right(DetailResponseModel.fromJson(jsonDecode(response.body)));

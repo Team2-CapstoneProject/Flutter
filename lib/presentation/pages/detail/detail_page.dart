@@ -1,6 +1,7 @@
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:capstone_project_villa/common/utils.dart';
-import 'package:capstone_project_villa/presentation/pages/detail/detail_see_all_page.dart';
+import 'package:capstone_project_villa/presentation/pages/detail/widgets/detail_see_all_page.dart';
+import 'package:capstone_project_villa/presentation/pages/detail/widgets/detail_see_all_review_page.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_circular.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -79,7 +80,8 @@ class _DetailPageState extends State<DetailPage> {
                     ),
 
                     Container(
-                      margin: EdgeInsets.all(30),
+                      margin: EdgeInsets.only(
+                          top: 30, right: 30, left: 30, bottom: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -490,46 +492,176 @@ class _DetailPageState extends State<DetailPage> {
                                                               ),
                                                             ),
                                                           ],
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              DetaikSeeAllReviewPage(
+                                            transactions: transaction,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: Text(
+                                      'See All',
+                                      style: primaryTextStyle.copyWith(
+                                        fontSize: 12,
+                                        fontWeight: light,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 20.0,
+                              ),
+                              if (transaction.any((t) => t.reviews.isNotEmpty))
+                                ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: transaction.length > 3
+                                      ? 3
+                                      : transaction.length,
+                                  itemBuilder: (context, transactionIndex) {
+                                    final users =
+                                        transaction[transactionIndex].users;
+                                    final reviews =
+                                        transaction[transactionIndex]
+                                            .reviews
+                                            .toList();
+
+                                    if (reviews.isNotEmpty) {
+                                      return Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: reviews.map((review) {
+                                          return Container(
+                                            margin: EdgeInsets.only(bottom: 20),
+                                            height: 135,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            decoration: BoxDecoration(
+                                              color: grey95,
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 20, top: 22, right: 24),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Container(
+                                                        margin: EdgeInsets.only(
+                                                            right: 20),
+                                                        width: 40,
+                                                        height: 40,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          image:
+                                                              DecorationImage(
+                                                            image: NetworkImage(
+                                                                users.image),
+                                                            fit: BoxFit.cover,
+                                                          ),
                                                         ),
-                                                        Container(
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  top: 10),
-                                                          child: Text(
-                                                            review.description,
-                                                            maxLines: 3,
-                                                            textAlign: TextAlign
-                                                                .justify,
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
+                                                      ),
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            users.fullname,
                                                             style:
                                                                 blackTextStyle
                                                                     .copyWith(
-                                                              fontSize: 12,
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  semiBold,
+                                                            ),
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                          ),
+                                                          Text(
+                                                            Utils.dateTimeFormat3(
+                                                                review
+                                                                    .updatedAt),
+                                                            style: greyTextStyle
+                                                                .copyWith(
+                                                              fontSize: 14,
                                                               fontWeight:
                                                                   regular,
                                                             ),
                                                           ),
+                                                        ],
+                                                      ),
+                                                      Spacer(),
+                                                      Container(
+                                                        width: 65,
+                                                        height: 35,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: primaryColor,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(20),
                                                         ),
-                                                      ],
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Icon(
+                                                              Iconsax.star1,
+                                                              color:
+                                                                  yellowColor,
+                                                            ),
+                                                            const SizedBox(
+                                                                width: 3.0),
+                                                            Text(
+                                                              review.score
+                                                                  .toString(),
+                                                              style:
+                                                                  whiteTextStyle
+                                                                      .copyWith(
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                    semiBold,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        top: 10),
+                                                    child: Text(
+                                                      review.description,
+                                                      maxLines: 3,
+                                                      textAlign:
+                                                          TextAlign.justify,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: blackTextStyle
+                                                          .copyWith(
+                                                        fontSize: 12,
+                                                        fontWeight: regular,
+                                                      ),
                                                     ),
                                                   ),
-                                                );
-                                              }).toList(),
-                                            );
-                                          } else {
-                                            return Container(
-                                              margin:
-                                                  EdgeInsets.only(bottom: 20),
-                                              height: 135,
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              decoration: BoxDecoration(
-                                                color: grey95,
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
+                                                ],
                                               ),
                                               child: Center(
                                                 child: Text(
@@ -542,6 +674,16 @@ class _DetailPageState extends State<DetailPage> {
                                         },
                                       ),
                               )
+                                            ),
+                                          );
+                                        }).toList(),
+                                      );
+                                    }
+                                    return SizedBox();
+                                  },
+                                )
+                              else
+                                Text('No reviews for any transaction'),
                             ],
                           ),
                         ],

@@ -394,7 +394,7 @@ class _HomePageState extends State<HomePage>
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
                                 scrollDirection: Axis.vertical,
-                                itemCount: state.user.allVilas.length,
+                                itemCount: 5,
                                 itemBuilder: (context, index) {
                                   final vila = state.user.allVilas[index];
                                   return GestureDetector(

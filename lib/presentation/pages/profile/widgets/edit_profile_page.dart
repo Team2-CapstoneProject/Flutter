@@ -11,7 +11,7 @@ import 'package:capstone_project_villa/data/models/response/profile_response_mod
 import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
 
 class EditProfilePage extends StatefulWidget {
-  final ProfileWithoutPassword data;
+  final ProfileResponseModel data;
   const EditProfilePage({
     Key? key,
     required this.data,
@@ -248,7 +248,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ),
 
                 const SizedBox(
-                  height: 60.0,
+                  height: 40.0,
                 ),
                 BlocConsumer<ProfileBloc, ProfileState>(
                   listener: (context, state) {
