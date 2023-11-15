@@ -30,8 +30,11 @@ class DetaikSeeAllReviewPage extends StatelessWidget {
         child: Column(
           children: [
             transactions.isEmpty
-                ? Center(
-                    child: Text('No reviews available'),
+                ? Container(
+                    height: MediaQuery.of(context).size.height * 0.8,
+                    child: Center(
+                      child: Text('No reviews available'),
+                    ),
                   )
                 : ListView.builder(
                     shrinkWrap: true,
