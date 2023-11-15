@@ -370,7 +370,7 @@ class _HomePageState extends State<HomePage>
                         child: Column(
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
                                   'for_you'.tr(),

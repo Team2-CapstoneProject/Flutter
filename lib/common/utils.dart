@@ -14,6 +14,13 @@ class Utils {
     return x;
   }
 
+   ///input paramter value DateTime, output a String.
+  ///
+  ///example: DateTime.now() -> 'Des 12'
+  static String dateTimeFormat2(DateTime dateTime) {
+    return DateFormat('MMM d', 'id_ID').format(dateTime);
+  }
+
   ///input paramter value DateTime, output a String.
   ///
   ///example: DateTime.now() -> 'Des 12, 2022'

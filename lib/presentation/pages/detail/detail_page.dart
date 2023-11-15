@@ -1,5 +1,6 @@
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:capstone_project_villa/common/utils.dart';
+import 'package:capstone_project_villa/presentation/pages/detail/widgets/detail_date_page.dart';
 import 'package:capstone_project_villa/presentation/pages/detail/widgets/detail_see_all_page.dart';
 import 'package:capstone_project_villa/presentation/pages/detail/widgets/detail_see_all_review_page.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
@@ -558,7 +559,16 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ),
                   ),
-                  CustomButton(onPressed: () {}, text: 'book_now'.tr())
+                  CustomButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailDatePage(),
+                          ),
+                        );
+                      },
+                      text: 'book_now'.tr())
                 ],
               ),
             );

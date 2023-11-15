@@ -47,6 +47,7 @@ dependencies:
   intl: ^0.18.1
   shared_preferences: ^2.2.2
   shimmer: ^3.0.0
+  table_calendar: ^3.0.9
 
 dev_dependencies:
   flutter_test:
