@@ -2,6 +2,7 @@ import 'package:capstone_project_villa/common/constants.dart';
 import 'package:capstone_project_villa/common/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CardCustom extends StatelessWidget {
   final String name;
@@ -89,7 +90,7 @@ class CardCustom extends StatelessWidget {
                           ),
                         ),
                         TextSpan(
-                          text: ' /night',
+                          text: ' night'.tr(),
                           style: whiteTextStyle.copyWith(
                             fontSize: 12,
                             fontWeight: FontWeight.w300,

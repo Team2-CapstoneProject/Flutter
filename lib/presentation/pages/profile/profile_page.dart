@@ -3,10 +3,12 @@ import 'package:capstone_project_villa/presentation/bloc/auth/auth_bloc.dart';
 import 'package:capstone_project_villa/presentation/bloc/profile/profile_bloc.dart';
 import 'package:capstone_project_villa/presentation/pages/authentication/login_page.dart';
 import 'package:capstone_project_villa/presentation/pages/profile/widgets/edit_profile_page.dart';
+import 'package:capstone_project_villa/presentation/pages/profile/widgets/locale_dialog.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_circular.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_dialog.dart';
 import 'package:capstone_project_villa/presentation/pages/profile/widgets/custom_list_tile.dart';
 import 'package:capstone_project_villa/common/constants.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
@@ -86,7 +88,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         // Edit Profile
                         CustomListTile(
                           icon: Iconsax.user,
-                          text: 'Edit Profile',
+                          text: 'edit_profile'.tr(),
                           onTap: () {
                             Navigator.push(
                               context,
@@ -109,7 +111,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         // Security
                         CustomListTile(
                           icon: Iconsax.frame_4,
-                          text: 'Security',
+                          text: 'security'.tr(),
                           onTap: () {
                             showDialog(
                               barrierDismissible: false,
@@ -122,7 +124,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         // Help
                         CustomListTile(
                           icon: Iconsax.info_circle,
-                          text: 'Help',
+                          text: 'help'.tr(),
                           onTap: () {
                             showDialog(
                               barrierDismissible: false,
@@ -135,20 +137,75 @@ class _ProfilePageState extends State<ProfilePage> {
                         // Language
                         CustomListTile(
                           icon: Iconsax.translate,
-                          text: 'Language',
+                          text: 'language'.tr(),
                           onTap: () {
                             showDialog(
-                              barrierDismissible: false,
-                              context: context,
-                              builder: (context) => const CustomDialog(),
-                            );
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text('select_language'.tr()),
+                                    content: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        LanguageOption(
+                                          languageCode: 'en',
+                                          languageNation: 'US',
+                                          languageText: 'english'.tr(),
+                                        ),
+                                        LanguageOption(
+                                          languageCode: 'id',
+                                          languageNation: 'ID',
+                                          languageText: 'indonesian'.tr(),
+                                        ),
+                                        LanguageOption(
+                                          languageCode: 'es',
+                                          languageNation: 'ES',
+                                          languageText: 'spanish'.tr(),
+                                        ),
+                                        LanguageOption(
+                                          languageCode: 'pt',
+                                          languageNation: 'PT',
+                                          languageText: 'portuguese'.tr(),
+                                        ),
+                                        LanguageOption(
+                                          languageCode: 'ko',
+                                          languageNation: 'KR',
+                                          languageText: 'korean'.tr(),
+                                        ),
+                                        LanguageOption(
+                                          languageCode: 'zh',
+                                          languageNation: 'CN',
+                                          languageText: 'china'.tr(),
+                                        ),
+                                        LanguageOption(
+                                          languageCode: 'it',
+                                          languageNation: 'IT',
+                                          languageText: 'italia'.tr(),
+                                        ),
+                                        LanguageOption(
+                                          languageCode: 'fr',
+                                          languageNation: 'FR',
+                                          languageText: 'french'.tr(),
+                                        ),
+                                        LanguageOption(
+                                          languageCode: 'de',
+                                          languageNation: 'DE',
+                                          languageText: 'netherland'.tr(),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                });
+                            // context.setLocale(Locale('id', 'ID'));
                           },
                         ),
 
                         // Dark Theme
                         CustomListTile(
                           icon: Iconsax.eye,
-                          text: 'Dark Theme',
+                          text: 'dark_theme'.tr(),
                           onTap: () {
                             showDialog(
                               barrierDismissible: false,
@@ -172,7 +229,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           builder: (context, state) {
                             return CustomListTile(
                               icon: Iconsax.logout,
-                              text: 'Logout',
+                              text: 'logout'.tr(),
                               onTap: () {
                                 context.read<AuthBloc>().add(AuthLogoutEvent());
                               },

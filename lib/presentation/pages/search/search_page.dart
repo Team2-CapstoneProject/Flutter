@@ -1,4 +1,5 @@
 import 'package:capstone_project_villa/presentation/pages/search/widget/shimmer_search.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -57,7 +58,7 @@ class _SearchPageState extends State<SearchPage> {
                       return ShimmerSearch();
                     } else if (state is SearchSuccess) {
                       return state.searchResponse.allVilas.isEmpty
-                          ? Text('No results found.')
+                          ? Text('no_results_found'.tr())
                           : Column(
                               children: state.searchResponse.allVilas
                                   .map(
@@ -79,15 +80,7 @@ class _SearchPageState extends State<SearchPage> {
                                   .toList(),
                             );
                     } else if (state is SearchError) {
-                      return Center(
-                        child: Column(
-                          children: [
-                            CircularProgressIndicator(),
-                            SizedBox(height: 30),
-                            Text("Please wait a few seconds"),
-                          ],
-                        ),
-                      );
+                      return ShimmerSearch();
                     } else {
                       return Container();
                     }

@@ -3,6 +3,7 @@ import 'package:capstone_project_villa/common/utils.dart';
 import 'package:capstone_project_villa/presentation/pages/detail/detail_see_all_page.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_circular.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -120,7 +121,7 @@ class _DetailPageState extends State<DetailPage> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Gallery Photos',
+                                      'gallery_photos'.tr(),
                                       style: blackTextStyle.copyWith(
                                         fontSize: 14,
                                         fontWeight: semiBold,
@@ -143,7 +144,7 @@ class _DetailPageState extends State<DetailPage> {
                                         );
                                       },
                                       child: Text(
-                                        'See All',
+                                        'see_all'.tr(),
                                         style: primaryTextStyle.copyWith(
                                           fontSize: 12,
                                           fontWeight: light,
@@ -188,7 +189,7 @@ class _DetailPageState extends State<DetailPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Description',
+                                  'description'.tr(),
                                   style: blackTextStyle.copyWith(
                                     fontSize: 14,
                                     fontWeight: medium,
@@ -204,7 +205,7 @@ class _DetailPageState extends State<DetailPage> {
                                                     .description
                                                     .isNotEmpty
                                             ? details[0].description
-                                            : 'No description available',
+                                            : 'no_description_available'.tr(),
                                         textAlign: TextAlign.justify,
                                         style: greyTextStyle.copyWith(
                                           fontSize: 12,
@@ -223,7 +224,7 @@ class _DetailPageState extends State<DetailPage> {
                                                         .substring(0, 137) +
                                                     '...'
                                                 : details[0].description)
-                                            : 'No description available',
+                                            : 'no_description_available'.tr(),
                                         textAlign: TextAlign.justify,
                                         style: greyTextStyle.copyWith(
                                           fontSize: 12,
@@ -240,7 +241,9 @@ class _DetailPageState extends State<DetailPage> {
                                         });
                                       },
                                       child: Text(
-                                        isExpanded ? 'See Less' : 'See More',
+                                        isExpanded
+                                            ? 'see_less'.tr()
+                                            : 'see_more'.tr(),
                                         style: primaryTextStyle.copyWith(
                                           decoration: TextDecoration.underline,
                                           fontSize: 12,
@@ -260,7 +263,7 @@ class _DetailPageState extends State<DetailPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Facilities',
+                                  'facilities'.tr(),
                                   style: blackTextStyle.copyWith(
                                     fontSize: 14,
                                     fontWeight: medium,
@@ -315,14 +318,14 @@ class _DetailPageState extends State<DetailPage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Reviews',
+                                    'reviews'.tr(),
                                     style: blackTextStyle.copyWith(
                                       fontSize: 14,
                                       fontWeight: medium,
                                     ),
                                   ),
                                   Text(
-                                    'See All',
+                                    'See_all'.tr(),
                                     style: primaryTextStyle.copyWith(
                                       fontSize: 12,
                                       fontWeight: light,
@@ -335,7 +338,8 @@ class _DetailPageState extends State<DetailPage> {
                                 height: 445,
                                 child: details.isEmpty || transaction.isEmpty
                                     ? Container(
-                                        child: Center(child: Text('No Review')),
+                                        child: Center(
+                                            child: Text('no_review'.tr())),
                                       )
                                     : ListView.builder(
                                         shrinkWrap: true,
@@ -529,7 +533,8 @@ class _DetailPageState extends State<DetailPage> {
                                               ),
                                               child: Center(
                                                 child: Text(
-                                                  'No reviews for this transaction',
+                                                  'no_reviews_for_this_transaction'
+                                                      .tr(),
                                                 ),
                                               ),
                                             );
@@ -576,7 +581,7 @@ class _DetailPageState extends State<DetailPage> {
                                 '${Utils.currencyFormat(state.detail.vila[0].price)} ',
                           ),
                           TextSpan(
-                            text: '/night',
+                            text: 'night'.tr(),
                             style: grey100kTextStyle.copyWith(
                               fontSize: 16,
                               fontWeight: regular,
@@ -586,7 +591,7 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ),
                   ),
-                  CustomButton(onPressed: () {}, text: 'Book Now')
+                  CustomButton(onPressed: () {}, text: 'book_now'.tr())
                 ],
               ),
             );
