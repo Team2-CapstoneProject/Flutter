@@ -1,12 +1,13 @@
 import 'package:capstone_project_villa/common/constants.dart';
+import 'package:capstone_project_villa/common/utils.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_separator.dart';
 import 'package:flutter/material.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 
 class CustomTicket extends StatelessWidget {
-  final String taxes;
-  final String night;
-  final String total;
+  final int taxes;
+  final int night;
+  final int total;
   const CustomTicket(
       {super.key,
       required this.taxes,
@@ -73,7 +74,7 @@ class CustomTicket extends StatelessWidget {
                   fontWeight: light,
                 ),
               ),
-              Text(taxes)
+              Text(Utils.currencyFormat2(night))
             ],
           ),
           const SizedBox(
@@ -89,7 +90,7 @@ class CustomTicket extends StatelessWidget {
                   fontWeight: light,
                 ),
               ),
-              Text(night)
+              Text(Utils.currencyFormat2(night))
             ],
           ),
           const SizedBox(
@@ -105,7 +106,7 @@ class CustomTicket extends StatelessWidget {
                   fontWeight: regular,
                 ),
               ),
-              Text(total)
+              Text(Utils.currencyFormat2(total))
             ],
           ),
         ],

@@ -142,9 +142,9 @@ class _DetailPaymentPageState extends State<DetailPaymentPage> {
                 ),
               ),
               CustomTicket(
-                taxes: payment.taxes.toString(),
-                night: payment.night.toString(),
-                total: payment.total.toString(),
+                taxes: payment.taxes,
+                night: payment.night,
+                total: payment.total,
               )
             ],
           )
