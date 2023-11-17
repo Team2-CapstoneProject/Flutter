@@ -5,6 +5,7 @@ import 'package:capstone_project_villa/presentation/bloc/history/history_bloc.da
 import 'package:capstone_project_villa/presentation/bloc/home/home_bloc.dart';
 import 'package:capstone_project_villa/presentation/bloc/profile/profile_bloc.dart';
 import 'package:capstone_project_villa/presentation/bloc/search/search_bloc.dart';
+import 'package:capstone_project_villa/presentation/bloc/transaction/transaction_bloc.dart';
 import 'package:capstone_project_villa/presentation/pages/authentication/login_page.dart';
 import 'package:capstone_project_villa/presentation/pages/authentication/register_page.dart';
 import 'package:capstone_project_villa/presentation/pages/authentication/widgets/forgot_page.dart';
@@ -74,6 +75,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => HistoryBloc(),
         ),
+        BlocProvider(
+          create: (context) => TransactionBloc(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

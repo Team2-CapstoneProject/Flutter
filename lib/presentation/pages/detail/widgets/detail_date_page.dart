@@ -1,11 +1,22 @@
-import 'package:capstone_project_villa/common/constants.dart';
-import 'package:capstone_project_villa/common/utils.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import 'package:capstone_project_villa/common/constants.dart';
+import 'package:capstone_project_villa/common/utils.dart';
+import 'package:capstone_project_villa/data/models/request/transaction_request_model.dart';
+import 'package:capstone_project_villa/data/models/response/detail_response_model.dart';
+import 'package:capstone_project_villa/presentation/bloc/transaction/transaction_bloc.dart';
+import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
+
 class DetailDatePage extends StatefulWidget {
-  const DetailDatePage({super.key});
+  final Vila vilas;
+  const DetailDatePage({
+    Key? key,
+    required this.vilas,
+  }) : super(key: key);
 
   @override
   State<DetailDatePage> createState() => _DetailDatePageState();
@@ -17,6 +28,7 @@ class _DetailDatePageState extends State<DetailDatePage> {
   DateTime? _selectedDay;
   DateTime? _rangeStart;
   DateTime? _rangeEnd;
+  int _nNight = 0;
 
   @override
   void initState() {
@@ -33,12 +45,32 @@ class _DetailDatePageState extends State<DetailDatePage> {
     }
   }
 
+  int calculateNumberOfDays(DateTime start, DateTime end) {
+    Duration difference = end.difference(start);
+    return difference.inDays;
+  }
+
   void _onRangeSelected(DateTime? start, DateTime? end, DateTime focusedDay) {
     setState(() {
       _selectedDay = null;
       _focusedDay = focusedDay;
       _rangeStart = start;
       _rangeEnd = end;
+
+      if (_rangeStart != null && _rangeEnd != null) {
+        int numberOfDays = calculateNumberOfDays(_rangeStart!, _rangeEnd!);
+        _nNight = numberOfDays;
+
+        context.read<TransactionBloc>().add(
+              GetTransaction(
+                transactionRequestModel: TransactionRequestModel(
+                  vila_id: widget.vilas.id,
+                  n_night: _nNight,
+                ),
+              ),
+            );
+        print("Number of days: $numberOfDays");
+      }
       print(_rangeStart);
       print(_rangeEnd);
     });
@@ -65,6 +97,7 @@ class _DetailDatePageState extends State<DetailDatePage> {
           ),
         ),
       ),
+      bottomNavigationBar: Container(child: calculateTotalPrice()),
     );
   }
 
@@ -193,6 +226,65 @@ class _DetailDatePageState extends State<DetailDatePage> {
           ],
         ),
       ],
+    );
+  }
+
+  Widget calculateTotalPrice() {
+    return BlocBuilder<TransactionBloc, TransactionState>(
+      builder: (context, state) {
+        if (state is TransactionLoaded) {
+          final totalNight = state.transactionResponse;
+          final totalPrice = _rangeStart != null && _rangeEnd != null
+              ? totalNight.night
+              : widget.vilas.price.toDouble();
+          return Container(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            height: MediaQuery.of(context).size.height * 0.16,
+            color: whiteColor,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 12),
+                  child: RichText(
+                    text: TextSpan(
+                      style: blueBlackTextStyle.copyWith(
+                        fontSize: 24,
+                        fontWeight: semiBold,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '${Utils.currencyFormat(totalPrice.toInt())} ',
+                        ),
+                        TextSpan(
+                          text: 'night'.tr(),
+                          style: grey100kTextStyle.copyWith(
+                            fontSize: 16,
+                            fontWeight: regular,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                CustomButton(onPressed: () {}, text: 'book_now'.tr())
+              ],
+            ),
+          );
+        } else if (state is TransactionLoading) {
+          return Container(
+            alignment: Alignment.topCenter,
+            height: 50,
+            width: 50,
+            child: Text(
+              'loading...'.tr(),
+              style: blackTextStyle.copyWith(fontSize: 24),
+            ),
+          );
+        } else {
+          return SizedBox();
+        }
+      },
     );
   }
 }
