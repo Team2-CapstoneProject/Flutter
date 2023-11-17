@@ -1,3 +1,4 @@
+import 'package:capstone_project_villa/presentation/pages/detail/widgets/detail_payment_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -267,7 +268,18 @@ class _DetailDatePageState extends State<DetailDatePage> {
                     ),
                   ),
                 ),
-                CustomButton(onPressed: () {}, text: 'book_now'.tr())
+                CustomButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailPaymentPage(
+                            data: state.transactionResponse,
+                          ),
+                        ),
+                      );
+                    },
+                    text: 'book_now'.tr())
               ],
             ),
           );
