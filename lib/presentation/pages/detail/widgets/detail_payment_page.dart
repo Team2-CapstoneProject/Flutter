@@ -1,10 +1,9 @@
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:capstone_project_villa/common/utils.dart';
 import 'package:capstone_project_villa/data/models/response/transaction_response_model.dart';
-import 'package:capstone_project_villa/presentation/widgets/custom_separator.dart';
+import 'package:capstone_project_villa/presentation/widgets/custom_ticket.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:ticket_widget/ticket_widget.dart';
 
 class DetailPaymentPage extends StatefulWidget {
   final TransactionResponseModel data;
@@ -18,6 +17,7 @@ class _DetailPaymentPageState extends State<DetailPaymentPage> {
   @override
   Widget build(BuildContext context) {
     final vila = widget.data.vila;
+    final payment = widget.data;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -141,101 +141,10 @@ class _DetailPaymentPageState extends State<DetailPaymentPage> {
                   ],
                 ),
               ),
-              TicketWidget(
-                color: grey95,
-                padding: EdgeInsets.all(25),
-                isCornerRounded: true,
-                width: MediaQuery.of(context).size.width,
-                height: 290,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Check In',
-                      style: darkGreyTextStyle.copyWith(
-                        fontSize: 12,
-                        fontWeight: light,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 16.0,
-                    ),
-                    Text(
-                      'Check Out',
-                      style: darkGreyTextStyle.copyWith(
-                        fontSize: 12,
-                        fontWeight: light,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 16.0,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          'Guest',
-                          style: darkGreyTextStyle.copyWith(
-                            fontSize: 12,
-                            fontWeight: light,
-                          ),
-                        ),
-                        // Text()
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 30.0,
-                    ),
-                    MySeparator(height: 3, color: whiteColor),
-                    const SizedBox(
-                      height: 30.0,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Taxes 5%',
-                          style: darkGreyTextStyle.copyWith(
-                            fontSize: 12,
-                            fontWeight: light,
-                          ),
-                        ),
-                        Text(widget.data.taxes.toString())
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 16.0,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Night',
-                          style: darkGreyTextStyle.copyWith(
-                            fontSize: 12,
-                            fontWeight: light,
-                          ),
-                        ),
-                        Text(widget.data.night.toString())
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 16.0,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Total',
-                          style: darkGreyTextStyle.copyWith(
-                            fontSize: 12,
-                            fontWeight: regular,
-                          ),
-                        ),
-                        Text(widget.data.total.toString())
-                      ],
-                    ),
-                  ],
-                ),
+              CustomTicket(
+                taxes: payment.taxes.toString(),
+                night: payment.night.toString(),
+                total: payment.total.toString(),
               )
             ],
           )
