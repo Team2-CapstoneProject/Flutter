@@ -9,6 +9,7 @@ import 'package:capstone_project_villa/presentation/bloc/transaction/transaction
 import 'package:capstone_project_villa/presentation/pages/authentication/login_page.dart';
 import 'package:capstone_project_villa/presentation/pages/authentication/register_page.dart';
 import 'package:capstone_project_villa/presentation/pages/authentication/widgets/forgot_page.dart';
+import 'package:capstone_project_villa/presentation/pages/category/category_vila_page.dart';
 import 'package:capstone_project_villa/presentation/pages/detail/detail_page.dart';
 import 'package:capstone_project_villa/presentation/pages/home/home_page.dart';
 import 'package:capstone_project_villa/presentation/pages/navbar/bottom_navbar.dart';
@@ -100,6 +101,7 @@ class MyApp extends StatelessWidget {
           DetailPage.routeName: (context) =>
               DetailPage(id: ModalRoute.of(context)!.settings.arguments as int),
           ForgotPage.routeName: (context) => ForgotPage(),
+          CategoryVilaPage.routeName: (context) => CategoryVilaPage()
         },
       ),
     );

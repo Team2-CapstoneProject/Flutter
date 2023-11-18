@@ -1,3 +1,4 @@
+import 'package:capstone_project_villa/presentation/pages/category/category_vila_page.dart';
 import 'package:capstone_project_villa/presentation/pages/detail/detail_page.dart';
 import 'package:capstone_project_villa/presentation/pages/home/widgets/category_card.dart';
 import 'package:capstone_project_villa/presentation/pages/home/widgets/foryou_card.dart';
@@ -146,7 +147,14 @@ class _HomePageState extends State<HomePage>
                               CategoryCard(
                                 icon: Iconsax.house_2,
                                 label: 'Villa',
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => CategoryVilaPage(),
+                                    ),
+                                  );
+                                },
                               ),
                               CategoryCard(
                                 icon: Iconsax.building_44,
@@ -204,7 +212,15 @@ class _HomePageState extends State<HomePage>
                                                 CategoryCard(
                                                   icon: Iconsax.house_2,
                                                   label: 'Villa',
-                                                  onTap: () {},
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            CategoryVilaPage(),
+                                                      ),
+                                                    );
+                                                  },
                                                 ),
                                                 CategoryCard(
                                                   icon: Iconsax.building,
