@@ -25,12 +25,16 @@ class CustomTicket extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Check In',
-            style: darkGreyTextStyle.copyWith(
-              fontSize: 12,
-              fontWeight: light,
-            ),
+          Row(
+            children: [
+              Text(
+                'Check In',
+                style: darkGreyTextStyle.copyWith(
+                  fontSize: 12,
+                  fontWeight: light,
+                ),
+              ),
+            ],
           ),
           const SizedBox(
             height: 16.0,

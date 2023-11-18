@@ -19,6 +19,12 @@ final class HistorySearchLoaded extends HistoryState {
   HistorySearchLoaded({required this.historyResponseModel});
 }
 
+final class HistorySpecificLoaded extends HistoryState {
+  final HistoryTransactionResponseModel historyTransactionResponseModel;
+
+  HistorySpecificLoaded({required this.historyTransactionResponseModel});
+}
+
 final class HistoryError extends HistoryState {
   final String message;
 

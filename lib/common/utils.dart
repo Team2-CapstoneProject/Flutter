@@ -43,6 +43,13 @@ class Utils {
 
   /// Input parameter value DateTime, output a String.
   ///
+  /// Example: DateTime.now() -> 'December 07, 2022'
+  static String dateTimeFormat4(DateTime dateTime) {
+    return DateFormat('MMMM dd, y', 'en_US').format(dateTime);
+  }
+
+  /// Input parameter value DateTime, output a String.
+  ///
   /// Example: DateTime.now() -> '19-09-2023 16:43'
   static String dateTimeFormatCustom(DateTime dateTime) {
     return DateFormat('dd-MM-yyyy HH:mm').format(dateTime);

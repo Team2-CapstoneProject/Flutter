@@ -10,3 +10,9 @@ class GetHistoryByNameEvent extends HistoryEvent {
 
   GetHistoryByNameEvent({required this.name});
 }
+
+class GetSpecificEvent extends HistoryEvent {
+  final int id;
+
+  GetSpecificEvent({required this.id});
+}
