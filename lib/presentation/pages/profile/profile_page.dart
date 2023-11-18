@@ -1,9 +1,9 @@
 import 'package:capstone_project_villa/presentation/bloc/auth/auth_bloc.dart';
 import 'package:capstone_project_villa/presentation/bloc/profile/profile_bloc.dart';
 import 'package:capstone_project_villa/presentation/pages/authentication/login_page.dart';
+import 'package:capstone_project_villa/presentation/pages/profile/widgets/custom_shimmer.dart';
 import 'package:capstone_project_villa/presentation/pages/profile/widgets/edit_profile_page.dart';
 import 'package:capstone_project_villa/presentation/pages/profile/widgets/locale_dialog.dart';
-import 'package:capstone_project_villa/presentation/widgets/custom_circular.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_dialog.dart';
 import 'package:capstone_project_villa/presentation/pages/profile/widgets/custom_list_tile.dart';
 import 'package:capstone_project_villa/common/constants.dart';
@@ -233,7 +233,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ],
               );
             } else if (state is ProfileLoading) {
-              return CustomCircular();
+              return ShimmerProfile();
             } else {
               return SizedBox();
             }
