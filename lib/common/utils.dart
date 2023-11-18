@@ -14,7 +14,20 @@ class Utils {
     return x;
   }
 
-   ///input paramter value DateTime, output a String.
+  /// Input parameter value int, output a String.
+  ///
+  /// example: 375000 -> 'Rp 375,000'
+  static String currencyFormat2(int value) {
+    final NumberFormat numberFormat = NumberFormat.currency(
+      locale: 'id',
+      symbol: 'Rp ',
+      decimalDigits: 0,
+    );
+    String x = numberFormat.format(value).replaceAll('.', ',');
+    return x;
+  }
+
+  ///input paramter value DateTime, output a String.
   ///
   ///example: DateTime.now() -> 'Des 12'
   static String dateTimeFormat2(DateTime dateTime) {
@@ -28,7 +41,7 @@ class Utils {
     return DateFormat('MMM d, y', 'id_ID').format(dateTime);
   }
 
-   /// Input parameter value DateTime, output a String.
+  /// Input parameter value DateTime, output a String.
   ///
   /// Example: DateTime.now() -> '19-09-2023 16:43'
   static String dateTimeFormatCustom(DateTime dateTime) {

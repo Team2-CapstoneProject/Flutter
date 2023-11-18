@@ -48,6 +48,7 @@ dependencies:
   shared_preferences: ^2.2.2
   shimmer: ^3.0.0
   table_calendar: ^3.0.9
+  ticket_widget: ^1.0.2
 
 dev_dependencies:
   flutter_test:

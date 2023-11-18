@@ -528,6 +528,7 @@ class _DetailPageState extends State<DetailPage> {
       bottomNavigationBar: BlocBuilder<DetailVilaBloc, DetailVilaState>(
         builder: (context, state) {
           if (state is DetailVilaLoaded) {
+            final vila = state.detail.vila[0];
             return Container(
               padding: EdgeInsets.symmetric(horizontal: 16),
               height: MediaQuery.of(context).size.height * 0.16,
@@ -545,8 +546,7 @@ class _DetailPageState extends State<DetailPage> {
                         ),
                         children: <TextSpan>[
                           TextSpan(
-                            text:
-                                '${Utils.currencyFormat(state.detail.vila[0].price)} ',
+                            text: '${Utils.currencyFormat(vila.price)} ',
                           ),
                           TextSpan(
                             text: 'night'.tr(),
@@ -564,7 +564,9 @@ class _DetailPageState extends State<DetailPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => DetailDatePage(),
+                            builder: (context) => DetailDatePage(
+                              vilas: vila,
+                            ),
                           ),
                         );
                       },
