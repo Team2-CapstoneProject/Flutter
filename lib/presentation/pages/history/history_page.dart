@@ -97,6 +97,7 @@ Widget buildResult(String searchTerm) {
                 name: history.name,
                 location: history.location,
                 price: history.price,
+                status: historyByName[index].transactionStatuses[0].statusId,
                 onViewPressed: () {
                   Navigator.push(
                       context,
@@ -132,6 +133,7 @@ Widget buildRecentVila() {
               name: history.name,
               location: history.location,
               price: history.price,
+              status: allHistory[index].transactionStatuses[0].statusId,
               onViewPressed: () {
                 Navigator.push(
                     context,

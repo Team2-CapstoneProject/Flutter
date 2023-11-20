@@ -83,7 +83,7 @@ class TransactionStatus {
 
   factory TransactionStatus.fromJson(Map<String, dynamic> json) =>
       TransactionStatus(
-        id: json["id"],
+        id: json["id"] ?? 0,
         statusId: json["status_id"] ?? 0,
       );
 

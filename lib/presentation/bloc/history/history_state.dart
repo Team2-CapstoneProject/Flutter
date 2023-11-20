@@ -25,6 +25,12 @@ final class HistorySpecificLoaded extends HistoryState {
   HistorySpecificLoaded({required this.historyTransactionResponseModel});
 }
 
+final class HistoryPaymentSuccess extends HistoryState {
+  final HistoryResponseModel historyResponseModel;
+
+  HistoryPaymentSuccess({required this.historyResponseModel});
+}
+
 final class HistoryError extends HistoryState {
   final String message;
 

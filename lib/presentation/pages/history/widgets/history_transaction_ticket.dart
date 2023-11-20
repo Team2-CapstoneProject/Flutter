@@ -1,6 +1,8 @@
 import 'package:capstone_project_villa/common/constants.dart';
+import 'package:capstone_project_villa/data/models/request/history_request_model.dart';
 import 'package:capstone_project_villa/presentation/bloc/history/history_bloc.dart';
 import 'package:capstone_project_villa/presentation/pages/history/widgets/history_ticket.dart';
+import 'package:capstone_project_villa/presentation/pages/navbar/bottom_navbar.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_card_vila.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_circular.dart';
 import 'package:flutter/material.dart';
@@ -85,34 +87,104 @@ class _HistoryTransactionTicketState extends State<HistoryTransactionTicket> {
                     state.historyTransactionResponseModel.transactionStatus;
 
                 if (transactionStatus == 1) {
-                  // Display Pay and Cancel buttons
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          // Handle payment
-                        },
-                        child: Text('Pay'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          // Handle cancellation
-                        },
-                        child: Text('Cancel'),
-                      ),
-                    ],
+                  return Container(
+                    margin: EdgeInsets.only(top: 30),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        BlocConsumer<HistoryBloc, HistoryState>(
+                          listener: (context, state) {
+                            Navigator.pushReplacementNamed(
+                              context,
+                              BottomNavbarPage.routeName,
+                            );
+                          },
+                          builder: (context, state) {
+                            return Container(
+                              height: 40,
+                              width: 150,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: redColor,
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  final cancelRequest = HistoryRequestModel(
+                                    transactionType: 'cancel',
+                                  );
+                                  print(
+                                      'Cancel request: ${cancelRequest.toJson()}');
+                                  context.read<HistoryBloc>().add(
+                                        HistoryPaymentEvent(
+                                          historyRequestModel: cancelRequest,
+                                        ),
+                                      );
+                                },
+                                child: Text('Cancel'),
+                              ),
+                            );
+                          },
+                        ),
+                        BlocConsumer<HistoryBloc, HistoryState>(
+                          listener: (context, state) {
+                            if (state is HistoryPaymentSuccess) {}
+                          },
+                          builder: (context, state) {
+                            return Container(
+                              height: 40,
+                              width: 150,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: primaryColor,
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  context.read<HistoryBloc>().add(
+                                        HistoryPaymentEvent(
+                                          historyRequestModel:
+                                              HistoryRequestModel(
+                                                  transactionType: 'pay'),
+                                        ),
+                                      );
+                                },
+                                child: Text('Pay'),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                   );
                 } else if (transactionStatus == 2) {
-                  // Display Review button
-                  return ElevatedButton(
-                    onPressed: () {
-                      // Handle review
-                    },
-                    child: Text('Review'),
+                  return Container(
+                    height: 55,
+                    margin: EdgeInsets.only(top: 30),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        backgroundColor: whiteColor,
+                        side: BorderSide(color: grey95),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: Text(
+                        'Leave a review',
+                        style: blackTextStyle.copyWith(
+                          fontSize: 14,
+                          fontWeight: semiBold,
+                        ),
+                      ),
+                    ),
                   );
                 } else {
-                  // Hide all buttons for other transactionStatus values
                   return SizedBox();
                 }
               }
