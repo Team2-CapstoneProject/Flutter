@@ -69,11 +69,52 @@ class _HistoryTransactionTicketState extends State<HistoryTransactionTicket> {
                       checkIn: data.tglCheckin,
                       checkOut: data.tglCheckout,
                       guest: data.nGuest,
-                    )
+                    ),
                   ],
                 );
               } else if (state is HistoryLoading) {
                 return CustomCircular();
+              }
+              return SizedBox();
+            },
+          ),
+          BlocBuilder<HistoryBloc, HistoryState>(
+            builder: (context, state) {
+              if (state is HistorySpecificLoaded) {
+                final transactionStatus =
+                    state.historyTransactionResponseModel.transactionStatus;
+
+                if (transactionStatus == 1) {
+                  // Display Pay and Cancel buttons
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          // Handle payment
+                        },
+                        child: Text('Pay'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          // Handle cancellation
+                        },
+                        child: Text('Cancel'),
+                      ),
+                    ],
+                  );
+                } else if (transactionStatus == 2) {
+                  // Display Review button
+                  return ElevatedButton(
+                    onPressed: () {
+                      // Handle review
+                    },
+                    child: Text('Review'),
+                  );
+                } else {
+                  // Hide all buttons for other transactionStatus values
+                  return SizedBox();
+                }
               }
               return SizedBox();
             },

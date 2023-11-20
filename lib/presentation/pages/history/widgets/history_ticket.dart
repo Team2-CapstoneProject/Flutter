@@ -133,7 +133,7 @@ class HistoryTicket extends StatelessWidget {
                 ),
               ),
               Text(
-                Utils.currencyFormat2(night),
+                Utils.currencyFormat2(taxes),
                 style:
                     blackTextStyle.copyWith(fontSize: 14, fontWeight: medium),
               )

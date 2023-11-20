@@ -16,14 +16,20 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState extends State<HistoryPage> {
   final vilaController = TextEditingController();
+  late HistoryBloc historyBloc;
 
   @override
   void initState() {
-    context.read<HistoryBloc>().add(GetHistoryEvent());
-    context
-        .read<HistoryBloc>()
-        .add(GetHistoryByNameEvent(name: vilaController.text));
+    historyBloc = context.read<HistoryBloc>();
+    historyBloc.add(GetHistoryEvent());
+    historyBloc.add(GetHistoryByNameEvent(name: vilaController.text));
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    vilaController.dispose();
+    super.dispose();
   }
 
   @override
@@ -40,12 +46,11 @@ class _HistoryPageState extends State<HistoryPage> {
                   controller: vilaController,
                   onChanged: (value) {
                     setState(() {
-                      if (value.isNotEmpty) {
-                        context.read<HistoryBloc>().add(
-                            GetHistoryByNameEvent(name: vilaController.text));
+                      if (value.isEmpty) {
+                        historyBloc.add(GetHistoryEvent());
                       } else {
-                        vilaController.clear();
-                        context.read<HistoryBloc>().add(GetHistoryEvent());
+                        historyBloc.add(
+                            GetHistoryByNameEvent(name: vilaController.text));
                       }
                     });
                   },
@@ -97,7 +102,7 @@ Widget buildResult(String searchTerm) {
                       context,
                       MaterialPageRoute(
                           builder: (context) => HistoryTransactionTicket(
-                              id: historyByName[0].id)));
+                              id: historyByName[index].id)));
                 },
               );
             },
@@ -131,8 +136,8 @@ Widget buildRecentVila() {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            HistoryTransactionTicket(id: allHistory[0].id)));
+                        builder: (context) => HistoryTransactionTicket(
+                            id: allHistory[index].id)));
               },
             );
           },
