@@ -37,8 +37,8 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
 
     on<HistoryPaymentEvent>((event, emit) async {
       emit(HistoryLoading());
-      final result =
-          await HistoryDataSource().payment(event.historyRequestModel);
+      final result = await HistoryDataSource()
+          .payment(event.historyRequestModel, event.id);
       result.fold(
           (error) => emit(HistoryError(message: error)),
           (success) =>

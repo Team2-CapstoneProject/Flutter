@@ -57,10 +57,10 @@ class HistoryDataSource {
   }
 
   Future<Either<String, HistoryResponseModel>> payment(
-      HistoryRequestModel historyRequestModel, ) async {
+      HistoryRequestModel historyRequestModel, int id) async {
     final token = await AuthLocalDataSource().getToken();
     final response = await http.post(
-      Uri.parse('$baseUrl/mobile/history/specific/2'),
+      Uri.parse('$baseUrl/mobile/history/specific/$id'),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token'
@@ -70,12 +70,13 @@ class HistoryDataSource {
 
     if (response.statusCode == 201) {
       return Right(HistoryResponseModel.fromJson(jsonDecode(response.body)));
-    } else if (response.statusCode == 400) {
-      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
-      final String errorMessage = errorResponse['message'];
-      return Left(errorMessage);
     } else {
-      return const Left('Payment Success');
+      return const Left('Unexpected Error');
     }
+    // } else if (response.statusCode == 400) {
+    //   final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+    //   final String errorMessage = errorResponse['message'];
+    //   return Left(errorMessage);
+    // }
   }
 }

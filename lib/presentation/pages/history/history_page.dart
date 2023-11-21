@@ -103,7 +103,9 @@ Widget buildResult(String searchTerm) {
                       context,
                       MaterialPageRoute(
                           builder: (context) => HistoryTransactionTicket(
-                              id: historyByName[index].id)));
+                                id: historyByName[index].id,
+                                data: historyByName[index],
+                              )));
                 },
               );
             },
@@ -139,7 +141,9 @@ Widget buildRecentVila() {
                     context,
                     MaterialPageRoute(
                         builder: (context) => HistoryTransactionTicket(
-                            id: allHistory[index].id)));
+                              id: allHistory[index].id,
+                              data: allHistory[index],
+                            )));
               },
             );
           },

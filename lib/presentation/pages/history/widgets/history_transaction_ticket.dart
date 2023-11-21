@@ -1,5 +1,6 @@
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:capstone_project_villa/data/models/request/history_request_model.dart';
+import 'package:capstone_project_villa/data/models/response/history_response_model.dart';
 import 'package:capstone_project_villa/presentation/bloc/history/history_bloc.dart';
 import 'package:capstone_project_villa/presentation/pages/history/widgets/history_ticket.dart';
 import 'package:capstone_project_villa/presentation/pages/navbar/bottom_navbar.dart';
@@ -9,9 +10,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HistoryTransactionTicket extends StatefulWidget {
-  static const String routeName = '/historydetail';
+  // static const String routeName = '/historydetail';
   final int id;
-  const HistoryTransactionTicket({super.key, required this.id});
+  final AllTransaction data;
+  const HistoryTransactionTicket(
+      {super.key, required this.id, required this.data});
 
   @override
   State<HistoryTransactionTicket> createState() =>
@@ -120,6 +123,7 @@ class _HistoryTransactionTicketState extends State<HistoryTransactionTicket> {
                                   context.read<HistoryBloc>().add(
                                         HistoryPaymentEvent(
                                           historyRequestModel: cancelRequest,
+                                          id: widget.data.id,
                                         ),
                                       );
                                 },
@@ -145,11 +149,14 @@ class _HistoryTransactionTicketState extends State<HistoryTransactionTicket> {
                                   ),
                                 ),
                                 onPressed: () {
+                                  final payRequest = HistoryRequestModel(
+                                    transactionType: 'pay',
+                                  );
+                                  print('Pay request: ${payRequest.toJson()}');
                                   context.read<HistoryBloc>().add(
                                         HistoryPaymentEvent(
-                                          historyRequestModel:
-                                              HistoryRequestModel(
-                                                  transactionType: 'pay'),
+                                          historyRequestModel: payRequest,
+                                          id: widget.data.id,
                                         ),
                                       );
                                 },
