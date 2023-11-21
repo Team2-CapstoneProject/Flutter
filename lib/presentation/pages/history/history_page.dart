@@ -21,8 +21,11 @@ class _HistoryPageState extends State<HistoryPage> {
   @override
   void initState() {
     historyBloc = context.read<HistoryBloc>();
-    historyBloc.add(GetHistoryEvent());
-    historyBloc.add(GetHistoryByNameEvent(name: vilaController.text));
+    if (vilaController.text.isEmpty) {
+      historyBloc.add(GetHistoryEvent());
+    } else {
+      historyBloc.add(GetHistoryByNameEvent(name: vilaController.text));
+    }
     super.initState();
   }
 
