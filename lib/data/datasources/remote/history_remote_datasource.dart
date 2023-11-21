@@ -68,15 +68,15 @@ class HistoryDataSource {
       body: historyRequestModel.toJson(),
     );
 
+    print(response.body);
+
     if (response.statusCode == 201) {
       return Right(HistoryResponseModel.fromJson(jsonDecode(response.body)));
-    } else {
-      return const Left('Unexpected Error');
+    } else if (response.statusCode == 400) {
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      return Left(errorMessage);
     }
-    // } else if (response.statusCode == 400) {
-    //   final Map<String, dynamic> errorResponse = jsonDecode(response.body);
-    //   final String errorMessage = errorResponse['message'];
-    //   return Left(errorMessage);
-    // }
+    return const Left('Unexpected Error');
   }
 }

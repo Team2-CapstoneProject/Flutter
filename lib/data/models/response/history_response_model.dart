@@ -15,12 +15,20 @@ class HistoryResponseModel {
     required this.allTransactions,
   });
 
-  factory HistoryResponseModel.fromJson(Map<String, dynamic> json) =>
-      HistoryResponseModel(
-        message: json["message"],
-        allTransactions: List<AllTransaction>.from(
-            json["allTransactions"].map((x) => AllTransaction.fromJson(x))),
-      );
+  factory HistoryResponseModel.fromJson(Map<String, dynamic> json) {
+    final List<dynamic>? transactionsJson = json["allTransactions"];
+
+    final List<AllTransaction> transactions = transactionsJson != null
+        ? List<AllTransaction>.from(
+            transactionsJson.map((x) => AllTransaction.fromJson(x)),
+          )
+        : [];
+
+    return HistoryResponseModel(
+      message: json["message"],
+      allTransactions: transactions,
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "message": message,
