@@ -20,9 +20,9 @@ class _HistoryPageState extends State<HistoryPage> {
   @override
   void initState() {
     context.read<HistoryBloc>().add(GetHistoryEvent());
-    context
-        .read<HistoryBloc>()
-        .add(GetHistoryByNameEvent(name: vilaController.text));
+    if (context.read<HistoryBloc>().state is! HistoryLoaded) {
+      context.read<HistoryBloc>().add(GetHistoryEvent());
+    }
     super.initState();
   }
 
@@ -39,6 +39,17 @@ class _HistoryPageState extends State<HistoryPage> {
                 CustomSearch(
                   controller: vilaController,
                   onChanged: (value) {
+                    setState(() {
+                      if (value.isNotEmpty) {
+                        context.read<HistoryBloc>().add(
+                            GetHistoryByNameEvent(name: vilaController.text));
+                      } else {
+                        vilaController.clear();
+                        context.read<HistoryBloc>().add(GetHistoryEvent());
+                      }
+                    });
+                  },
+                  onFieldSubmitted: (value) {
                     setState(() {
                       if (value.isNotEmpty) {
                         context.read<HistoryBloc>().add(
@@ -131,8 +142,9 @@ Widget buildRecentVila() {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            HistoryTransactionTicket(id: allHistory[0].id)));
+                      builder: (context) =>
+                          HistoryTransactionTicket(id: allHistory[0].id),
+                    ));
               },
             );
           },
