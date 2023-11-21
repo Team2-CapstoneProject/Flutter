@@ -15,12 +15,20 @@ class HistoryResponseModel {
     required this.allTransactions,
   });
 
-  factory HistoryResponseModel.fromJson(Map<String, dynamic> json) =>
-      HistoryResponseModel(
-        message: json["message"] ?? '',
-        allTransactions: List<AllTransaction>.from(
-            json["allTransactions"].map((x) => AllTransaction.fromJson(x))),
-      );
+  factory HistoryResponseModel.fromJson(Map<String, dynamic> json) {
+    final List<dynamic>? transactionsJson = json["allTransactions"];
+
+    final List<AllTransaction> transactions = transactionsJson != null
+        ? List<AllTransaction>.from(
+            transactionsJson.map((x) => AllTransaction.fromJson(x)),
+          )
+        : [];
+
+    return HistoryResponseModel(
+      message: json["message"],
+      allTransactions: transactions,
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "message": message,
@@ -52,7 +60,7 @@ class AllTransaction {
         id: json["id"],
         tglCheckin: DateTime.parse(json["tgl_checkin"]),
         tglCheckout: DateTime.parse(json["tgl_checkout"]),
-        fullName: json["full_name"] ?? '',
+        fullName: json["full_name"],
         createdAt: DateTime.parse(json["createdAt"]),
         vilas: Vilas.fromJson(json["Vilas"]),
         transactionStatuses: List<TransactionStatus>.from(
@@ -84,7 +92,7 @@ class TransactionStatus {
   factory TransactionStatus.fromJson(Map<String, dynamic> json) =>
       TransactionStatus(
         id: json["id"],
-        statusId: json["status_id"] ?? 0,
+        statusId: json["status_id"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -99,7 +107,7 @@ class Vilas {
   final int price;
   final String location;
   final List<VilaImage> vilaImages;
-  final List<dynamic> bookmarks;
+  final List<Bookmark> bookmarks;
 
   Vilas({
     required this.id,
@@ -117,7 +125,8 @@ class Vilas {
         location: json["location"] ?? '',
         vilaImages: List<VilaImage>.from(
             json["VilaImages"].map((x) => VilaImage.fromJson(x))),
-        bookmarks: List<dynamic>.from(json["Bookmarks"].map((x) => x)),
+        bookmarks: List<Bookmark>.from(
+            json["Bookmarks"].map((x) => Bookmark.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -126,7 +135,23 @@ class Vilas {
         "price": price,
         "location": location,
         "VilaImages": List<dynamic>.from(vilaImages.map((x) => x.toJson())),
-        "Bookmarks": List<dynamic>.from(bookmarks.map((x) => x)),
+        "Bookmarks": List<dynamic>.from(bookmarks.map((x) => x.toJson())),
+      };
+}
+
+class Bookmark {
+  final DateTime createdAt;
+
+  Bookmark({
+    required this.createdAt,
+  });
+
+  factory Bookmark.fromJson(Map<String, dynamic> json) => Bookmark(
+        createdAt: DateTime.parse(json["createdAt"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "createdAt": createdAt.toIso8601String(),
       };
 }
 

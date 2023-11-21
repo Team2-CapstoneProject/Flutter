@@ -78,7 +78,7 @@ class CustomTicket extends StatelessWidget {
                   fontWeight: light,
                 ),
               ),
-              Text(Utils.currencyFormat2(night))
+              Text(Utils.currencyFormat2(taxes))
             ],
           ),
           const SizedBox(

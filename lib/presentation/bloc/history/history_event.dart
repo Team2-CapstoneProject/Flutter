@@ -16,3 +16,10 @@ class GetSpecificEvent extends HistoryEvent {
 
   GetSpecificEvent({required this.id});
 }
+
+class HistoryPaymentEvent extends HistoryEvent {
+  final HistoryRequestModel historyRequestModel;
+  final int id;
+
+  HistoryPaymentEvent({required this.historyRequestModel, required this.id});
+}

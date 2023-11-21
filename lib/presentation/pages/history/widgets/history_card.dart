@@ -10,6 +10,7 @@ class HistoryCard extends StatelessWidget {
   final String name;
   final String location;
   final int price;
+  final int? status;
   final VoidCallback onViewPressed;
   const HistoryCard(
       {super.key,
@@ -17,7 +18,8 @@ class HistoryCard extends StatelessWidget {
       required this.name,
       required this.location,
       required this.price,
-      required this.onViewPressed});
+      required this.onViewPressed,
+      required this.status});
 
   @override
   Widget build(BuildContext context) {
@@ -137,55 +139,94 @@ class HistoryCard extends StatelessWidget {
                 color: whiteColor,
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  height: 34,
-                  width: MediaQuery.of(context).size.width * 0.35,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      elevation: 0,
-                      backgroundColor: whiteColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                          20,
-                        ),
-                      ),
+            if (status == 1)
+              Container(
+                height: 34,
+                width: MediaQuery.of(context).size.width,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    elevation: 0,
+                    backgroundColor: primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                    onPressed: () {},
-                    child: Text(
-                      'cancel_booking'.tr(),
-                      style: darkGreyTextStyle.copyWith(
-                        fontSize: 12,
-                        fontWeight: medium,
-                      ),
+                  ),
+                  onPressed: onViewPressed,
+                  child: Text(
+                    'view'.tr(),
+                    style: whiteTextStyle.copyWith(
+                      fontSize: 12,
+                      fontWeight: medium,
                     ),
                   ),
                 ),
-                Container(
-                  height: 34,
-                  width: MediaQuery.of(context).size.width * 0.35,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryColor,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                          20,
-                        ),
-                      ),
-                    ),
-                    onPressed: onViewPressed,
-                    child: Text(
-                      'view'.tr(),
-                      style: whiteTextStyle.copyWith(
-                          fontSize: 12, fontWeight: medium),
+              ),
+            if (status == 2)
+              Container(
+                height: 34,
+                width: MediaQuery.of(context).size.width,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    elevation: 0,
+                    backgroundColor: greenColor.withOpacity(0.35),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                )
-              ],
-            )
+                  onPressed: onViewPressed,
+                  child: Row(
+                    children: [
+                      Icon(
+                        Iconsax.tick_square,
+                        color: greenColor,
+                      ),
+                      const SizedBox(
+                        width: 15.0,
+                      ),
+                      Text(
+                        'You have a completed it!'.tr(),
+                        style: greenTextStyle.copyWith(
+                          fontSize: 12,
+                          fontWeight: medium,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            if (status == 3)
+              Container(
+                height: 34,
+                width: MediaQuery.of(context).size.width,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    elevation: 0,
+                    backgroundColor: redCandy.withOpacity(0.35),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  onPressed: onViewPressed,
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.cancel_outlined,
+                        color: redCandy,
+                      ),
+                      const SizedBox(
+                        width: 15.0,
+                      ),
+                      Text(
+                        'You canceled this reservation'.tr(),
+                        style: redCandyTextStyle.copyWith(
+                          fontSize: 12,
+                          fontWeight: medium,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
           ],
         ),
       ),
