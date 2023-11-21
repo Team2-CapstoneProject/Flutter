@@ -253,7 +253,7 @@ class _LoginPageState extends State<LoginPage> {
                                   );
                             }
                           },
-                          text: 'Sign Up',
+                          text: 'Sign In',
                         );
                       },
                     ),

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:capstone_project_villa/data/datasources/remote/auth_remote_datasource.dart';
 import 'package:capstone_project_villa/data/models/request/forget_password_request_model.dart';
@@ -27,10 +29,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     on<AuthUpdateProfileEvent>((event, emit) async {
       emit(AuthLoading());
-      final result = await ApiDataSource()
-          .registerProfile(event.registerProfileRequestModel);
-      result.fold((error) => emit(AuthError(message: error)),
-          (success) => emit(AuthSuccessRegister(authResponseModel: success)));
+
+      final result = await ApiDataSource().registerProfile(
+        event.registerProfileRequestModel,
+        event.imageFile,
+      );
+
+      result.fold(
+        (error) => emit(AuthError(message: error)),
+        (success) => emit(AuthSuccessRegister(authResponseModel: success)),
+      );
     });
 
     on<AuthForgetPasswordEvent>((event, emit) async {
@@ -44,7 +52,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthLogoutEvent>((event, emit) async {
       final result = await ApiDataSource().logout();
       result.fold((error) => emit(AuthError(message: error)),
-          (success) => emit(AuthSucessLogout(authResponseModel: success)));
+          (success) => emit(AuthSuccessLogout(authResponseModel: success)));
     });
   }
 }

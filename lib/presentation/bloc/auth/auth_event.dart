@@ -17,8 +17,12 @@ class AuthRegisterEvent extends AuthEvent {
 
 class AuthUpdateProfileEvent extends AuthEvent {
   final RegisterProfileRequestModel registerProfileRequestModel;
+  final File imageFile;
 
-  AuthUpdateProfileEvent({required this.registerProfileRequestModel});
+  AuthUpdateProfileEvent({
+    required this.registerProfileRequestModel,
+    required this.imageFile,
+  });
 }
 
 class AuthForgetPasswordEvent extends AuthEvent {

@@ -33,7 +33,6 @@ class _RegisterProfilePageState extends State<RegisterProfilePage> {
     super.dispose();
   }
 
-  String imageName = "";
   File? file;
 
   void _getImage() async {
@@ -44,7 +43,6 @@ class _RegisterProfilePageState extends State<RegisterProfilePage> {
 
     setState(() {
       file = imageTemporary;
-      imageName = img.name;
     });
   }
 
@@ -265,6 +263,10 @@ class _RegisterProfilePageState extends State<RegisterProfilePage> {
                       }
                       return CustomButton(
                         onPressed: () {
+                          print('Full Name: ${_fullNameController.text}');
+                          print('Nickname: ${_nickNameController.text}');
+                          print('Phone Number: ${_phoneController.text}');
+                          print('Image Path: ${file?.path}');
                           context.read<AuthBloc>().add(
                                 AuthUpdateProfileEvent(
                                   registerProfileRequestModel:
@@ -272,8 +274,8 @@ class _RegisterProfilePageState extends State<RegisterProfilePage> {
                                     fullname: _fullNameController.text,
                                     nickname: _nickNameController.text,
                                     phone_number: _phoneController.text,
-                                    image: file != null ? file?.path : null,
                                   ),
+                                  imageFile: file!,
                                 ),
                               );
                         },
