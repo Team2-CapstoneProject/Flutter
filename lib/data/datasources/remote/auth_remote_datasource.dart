@@ -1,0 +1,102 @@
+import 'dart:convert';
+
+import 'package:capstone_project_villa/common/constants.dart';
+import 'package:capstone_project_villa/data/datasources/local/auth_local_datasource.dart';
+import 'package:capstone_project_villa/data/models/request/forget_password_request_model.dart';
+import 'package:capstone_project_villa/data/models/request/login_request_model.dart';
+import 'package:capstone_project_villa/data/models/request/register_profile_request_model.dart';
+import 'package:capstone_project_villa/data/models/request/register_request_model.dart';
+import 'package:capstone_project_villa/data/models/response/auth_response_model.dart';
+import 'package:dartz/dartz.dart';
+import 'package:http/http.dart' as http;
+
+class ApiDataSource {
+  Future<Either<String, AuthResponseModel>> login(
+      LoginRequestModel loginRequestModel) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/auth/login'),
+      headers: {'Content-Type': 'application/json'},
+      body: loginRequestModel.toJson(),
+    );
+    // print('CheckLogin: ${response.body}');
+
+    if (response.statusCode == 201) {
+      return Right(AuthResponseModel.fromJson(jsonDecode(response.body)));
+    } else if (response.statusCode == 400) {
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      return Left(errorMessage);
+    } else {
+      return const Left('Login Failed');
+    }
+  }
+
+  Future<Either<String, AuthResponseModel>> register(
+      RegisterRequestModel registerRequestModel) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/auth/registeruser'),
+      headers: {'Content-Type': 'application/json'},
+      body: registerRequestModel.toJson(),
+    );
+
+    // print(response.body);
+
+    if (response.statusCode == 201) {
+      return Right(AuthResponseModel.fromJson(jsonDecode(response.body)));
+    } else if (response.statusCode == 400) {
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      return Left(errorMessage);
+    } else {
+      return Left('Registrasi Failed');
+    }
+  }
+
+  Future<Either<String, AuthResponseModel>> registerProfile(
+      RegisterProfileRequestModel registerProfileRequestModel) async {
+    final token = await AuthLocalDataSource().getToken();
+    final response = await http.post(
+      Uri.parse('$baseUrl/auth/registeruserprof'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token'
+      },
+      body: registerProfileRequestModel.toJson(),
+    );
+
+    if (response.statusCode == 201) {
+      return Right(AuthResponseModel.fromJson(jsonDecode(response.body)));
+    } else {
+      return Left('Failed Update Profile');
+    }
+  }
+
+  Future<Either<String, AuthResponseModel>> logout() async {
+    final token = await AuthLocalDataSource().removeToken();
+    final response = await http.post(
+      Uri.parse('$baseUrl/auth/logout'),
+      headers: {'Authorization': 'Bearer $token'},
+    );
+
+    if (response.statusCode == 200) {
+      return Right(AuthResponseModel.fromJson(jsonDecode(response.body)));
+    } else {
+      return Left('Failed Logout');
+    }
+  }
+
+  Future<Either<String, AuthResponseModel>> forgetPassword(
+      ForgetPasswordRequestModel forgetPasswordRequestModel) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/auth/updatepwd'),
+      headers: {'Content-Type': 'application/json'},
+      body: forgetPasswordRequestModel.toJson(),
+    );
+
+    if (response.statusCode == 201) {
+      return Right(AuthResponseModel.fromJson(jsonDecode(response.body)));
+    } else {
+      return Left('Failed Update Password');
+    }
+  }
+}
