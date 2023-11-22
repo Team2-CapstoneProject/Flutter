@@ -2,20 +2,20 @@ import 'dart:convert';
 
 class BookmarkRequestModel {
   int id;
-  
+
   BookmarkRequestModel({
     required this.id,
   });
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
+      'vilaId': id,
     };
   }
 
   factory BookmarkRequestModel.fromMap(Map<String, dynamic> map) {
     return BookmarkRequestModel(
-      id: map['id']?.toInt() ?? 0,
+      id: map['vilaId']?.toInt() ?? 0,
     );
   }
 
