@@ -29,7 +29,7 @@ class BookmarkDataSource {
       Uri.parse('$baseUrl/mobile/dobookmark'),
       headers: {
         'Authorization': 'Bearer $token',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: bookmarkRequestModel.toJson(),
     );

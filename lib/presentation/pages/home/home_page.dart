@@ -1,3 +1,4 @@
+import 'package:capstone_project_villa/presentation/pages/bookmark/bookmark_page.dart';
 import 'package:capstone_project_villa/presentation/pages/category/category_vila_page.dart';
 import 'package:capstone_project_villa/presentation/pages/detail/detail_page.dart';
 import 'package:capstone_project_villa/presentation/pages/home/widgets/category_card.dart';
@@ -56,10 +57,9 @@ class _HomePageState extends State<HomePage>
               children: [
                 GestureDetector(
                   onTap: () {
-                    showDialog(
-                      barrierDismissible: false,
-                      context: context,
-                      builder: (context) => const CustomDialog(),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => BookmarkPage()),
                     );
                   },
                   child: Icon(
