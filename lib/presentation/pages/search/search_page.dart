@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:capstone_project_villa/data/models/request/search_request_model.dart';
 import 'package:capstone_project_villa/presentation/bloc/search/search_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../common/constants.dart';
 import '../../widgets/custom_search.dart';
@@ -28,6 +29,7 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        toolbarHeight: 0,
         backgroundColor: whiteColor,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: whiteColor,
@@ -37,7 +39,7 @@ class _SearchPageState extends State<SearchPage> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
+          padding: const EdgeInsets.only(top: 30, left: 30, right: 30),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -64,10 +66,19 @@ class _SearchPageState extends State<SearchPage> {
                   },
                   controller: _searchController,
                 ),
-                SizedBox(height: 20),
                 BlocBuilder<SearchBloc, SearchState>(
                   builder: (context, state) {
-                    if (state is SearchLoading) {
+                    if (_searchController.text.isEmpty) {
+                      return Column(
+                        children: [
+                          Lottie.asset('assets/lottie/search.json'),
+                          Text(
+                            'Please do a search',
+                            style: primaryTextStyle.copyWith(fontSize: 14),
+                          ).tr(),
+                        ],
+                      );
+                    } else if (state is SearchLoading) {
                       return ShimmerSearch();
                     } else if (state is SearchSuccess) {
                       return state.searchResponse.allVilas.isEmpty

@@ -5,6 +5,7 @@ import 'package:capstone_project_villa/presentation/pages/history/widgets/histor
 import 'package:capstone_project_villa/presentation/widgets/custom_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 class HistoryPage extends StatefulWidget {
   static const String routeName = '/history';
@@ -138,6 +139,15 @@ Widget buildRecentVila() {
     builder: (context, state) {
       if (state is HistoryLoaded) {
         final allHistory = state.historyResponseModel.allTransactions;
+
+        if (allHistory.isEmpty) {
+          return Container(
+              margin: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.1,
+              ),
+              child: Lottie.asset('assets/lottie/nodata.json'));
+        }
+
         return ListView.builder(
           itemCount: state.historyResponseModel.allTransactions.length,
           shrinkWrap: true,

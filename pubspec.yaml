@@ -45,6 +45,7 @@ dependencies:
   iconsax: ^0.0.8
   image_picker: ^1.0.4
   intl: ^0.18.1
+  lottie: ^2.7.0
   shared_preferences: ^2.2.2
   shimmer: ^3.0.0
   table_calendar: ^3.0.9
@@ -83,6 +84,7 @@ flutter:
     - assets/onboarding/
     - assets/profile/
     - assets/i18n/
+    - assets/lottie/
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
