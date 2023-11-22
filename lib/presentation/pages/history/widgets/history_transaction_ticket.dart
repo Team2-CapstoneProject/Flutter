@@ -2,6 +2,7 @@ import 'package:capstone_project_villa/common/constants.dart';
 import 'package:capstone_project_villa/data/models/request/history_request_model.dart';
 import 'package:capstone_project_villa/data/models/response/history_response_model.dart';
 import 'package:capstone_project_villa/presentation/bloc/history/history_bloc.dart';
+import 'package:capstone_project_villa/presentation/pages/history/widgets/history_review.dart';
 import 'package:capstone_project_villa/presentation/pages/history/widgets/history_ticket.dart';
 import 'package:capstone_project_villa/presentation/pages/navbar/bottom_navbar.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_card_vila.dart';
@@ -181,7 +182,29 @@ class _HistoryTransactionTicketState extends State<HistoryTransactionTicket> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          builder: (BuildContext context) {
+                            return SingleChildScrollView(
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                  bottom:
+                                      MediaQuery.of(context).viewInsets.bottom,
+                                ),
+                                child: ReviewFormWidget(),
+                              ),
+                            );
+                          },
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                            ),
+                          ),
+                        );
+                      },
                       child: Text(
                         'Leave a review',
                         style: blackTextStyle.copyWith(
