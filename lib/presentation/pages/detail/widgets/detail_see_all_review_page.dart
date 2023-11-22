@@ -142,14 +142,8 @@ class DetaikSeeAllReviewPage extends StatelessWidget {
                             )
                           ],
                         );
-                      } else {
-                        return Container(
-                          height: MediaQuery.of(context).size.height * 0.8,
-                          child: Center(
-                            child: Text('No Review'),
-                          ),
-                        );
                       }
+                      return SizedBox();
                     },
                   ),
           ],

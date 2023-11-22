@@ -22,6 +22,11 @@ class CardCustom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int totalStars = 5;
+    int filledStars = (score / 2).floor();
+    double remainingScore = score - (filledStars * 2);
+    bool hasHalfStar = remainingScore >= 1;
+
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
@@ -103,14 +108,28 @@ class CardCustom extends StatelessWidget {
                     height: 5.0,
                   ),
                   Row(
-                    // mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(
-                        Iconsax.star1,
-                        color: yellowColor,
-                        size: 25,
-                      ),
+                      for (int i = 0; i < filledStars; i++)
+                        Icon(
+                          Iconsax.star1,
+                          color: yellowColor,
+                          size: 25,
+                        ),
+                      if (hasHalfStar)
+                        Icon(
+                          Iconsax.star_11,
+                          color: yellowColor,
+                          size: 25,
+                        ),
+                      for (int i = 0;
+                          i < totalStars - filledStars - (hasHalfStar ? 1 : 0);
+                          i++)
+                        Icon(
+                          Iconsax.star,
+                          color: yellowColor,
+                          size: 25,
+                        ),
                       const SizedBox(
                         width: 5.0,
                       ),
