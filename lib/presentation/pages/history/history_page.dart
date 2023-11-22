@@ -57,6 +57,17 @@ class _HistoryPageState extends State<HistoryPage> {
                       }
                     });
                   },
+                  onFieldSubmitted: (value) {
+                    setState(() {
+                      if (value.isNotEmpty) {
+                        context.read<HistoryBloc>().add(
+                            GetHistoryByNameEvent(name: vilaController.text));
+                      } else {
+                        vilaController.clear();
+                        context.read<HistoryBloc>().add(GetHistoryEvent());
+                      }
+                    });
+                  },
                 ),
                 vilaController.text.isEmpty
                     ? buildRecentVila()

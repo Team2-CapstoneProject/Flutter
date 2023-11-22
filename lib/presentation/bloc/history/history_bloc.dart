@@ -13,17 +13,31 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
     on<GetHistoryEvent>((event, emit) async {
       emit(HistoryLoading());
       final result = await HistoryDataSource().getHistory();
-      result.fold((error) => emit(HistoryError(message: error)),
-          (success) => emit(HistoryLoaded(historyResponseModel: success)));
+      result.fold(
+        (error) {
+          print("Error getting history data: $error");
+          emit(HistoryError(message: error));
+        },
+        (success) {
+          print("History data received successfully");
+          emit(HistoryLoaded(historyResponseModel: success));
+        },
+      );
     });
 
     on<GetHistoryByNameEvent>((event, emit) async {
       emit(HistoryLoading());
       final result = await HistoryDataSource().getHistoryById(event.name);
       result.fold(
-          (error) => emit(HistoryError(message: error)),
-          (success) =>
-              emit(HistorySearchLoaded(historyResponseModel: success)));
+        (error) {
+          print("Error getting history data: $error");
+          emit(HistoryError(message: error));
+        },
+        (success) {
+          print("History data received successfully");
+          emit(HistorySearchLoaded(historyResponseModel: success));
+        },
+      );
     });
 
     on<GetSpecificEvent>((event, emit) async {

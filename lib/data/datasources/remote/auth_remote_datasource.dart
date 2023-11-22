@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:capstone_project_villa/data/datasources/local/auth_local_datasource.dart';
@@ -9,6 +10,8 @@ import 'package:capstone_project_villa/data/models/request/register_request_mode
 import 'package:capstone_project_villa/data/models/response/auth_response_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
+import 'package:path/path.dart' as path;
+import 'package:async/async.dart';
 
 class ApiDataSource {
   Future<Either<String, AuthResponseModel>> login(
@@ -53,21 +56,45 @@ class ApiDataSource {
   }
 
   Future<Either<String, AuthResponseModel>> registerProfile(
-      RegisterProfileRequestModel registerProfileRequestModel) async {
+    RegisterProfileRequestModel registerProfileRequestModel,
+    File imageFile,
+  ) async {
     final token = await AuthLocalDataSource().getToken();
-    final response = await http.post(
+
+    var request = http.MultipartRequest(
+      'POST',
       Uri.parse('$baseUrl/auth/registeruserprof'),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token'
-      },
-      body: registerProfileRequestModel.toJson(),
     );
 
-    if (response.statusCode == 201) {
-      return Right(AuthResponseModel.fromJson(jsonDecode(response.body)));
-    } else {
-      return Left('Failed Update Profile');
+    request.headers['Authorization'] = 'Bearer $token';
+
+    request.fields['fullname'] = registerProfileRequestModel.fullname!;
+    request.fields['nickname'] = registerProfileRequestModel.nickname!;
+    request.fields['phone_number'] = registerProfileRequestModel.phone_number!;
+
+    var imageStream =
+        http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+    var length = await imageFile.length();
+
+    var multipartFile = http.MultipartFile(
+      'image',
+      imageStream,
+      length,
+      filename: path.basename(imageFile.path),
+    );
+    request.files.add(multipartFile);
+
+    try {
+      var response = await request.send();
+
+      if (response.statusCode == 201) {
+        var responseJson = await response.stream.bytesToString();
+        return Right(AuthResponseModel.fromJson(jsonDecode(responseJson)));
+      } else {
+        return Left('Failed Update Profile');
+      }
+    } catch (e) {
+      return Left('Error: $e');
     }
   }
 

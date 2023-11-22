@@ -237,7 +237,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               }
                             },
                             child: Text(
-                              'Sign In',
+                              'Sign Up',
                               style: whiteTextStyle.copyWith(
                                 fontSize: 14,
                                 fontWeight: semiBold,

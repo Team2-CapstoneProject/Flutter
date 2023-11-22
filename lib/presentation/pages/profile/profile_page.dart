@@ -209,7 +209,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         // Logout
                         BlocConsumer<AuthBloc, AuthState>(
                           listener: (context, state) {
-                            if (state is AuthSucessLogout) {
+                            if (state is AuthSuccessLogout) {
                               Navigator.pushNamedAndRemoveUntil(
                                 context,
                                 LoginPage.routeName,

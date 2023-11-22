@@ -1,9 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 class RegisterProfileRequestModel {
   String? fullname;
   String? nickname;
-  String? image;
+  File? image;
   String? phone_number;
   RegisterProfileRequestModel({
     this.fullname,
@@ -16,7 +17,7 @@ class RegisterProfileRequestModel {
     return {
       'fullname': fullname,
       'nickname': nickname,
-      'image': image,
+      'image': image!.path,
       'phone_number': phone_number,
     };
   }
@@ -25,7 +26,7 @@ class RegisterProfileRequestModel {
     return RegisterProfileRequestModel(
       fullname: map['fullname'],
       nickname: map['nickname'],
-      image: map['image'],
+      image: File(map['image']),
       phone_number: map['phone_number'],
     );
   }

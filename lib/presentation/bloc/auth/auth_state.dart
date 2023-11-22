@@ -19,10 +19,10 @@ final class AuthSuccessRegister extends AuthState {
   AuthSuccessRegister({required this.authResponseModel});
 }
 
-final class AuthSucessLogout extends AuthState {
+final class AuthSuccessLogout extends AuthState {
   final AuthResponseModel authResponseModel;
 
-  AuthSucessLogout({required this.authResponseModel});
+  AuthSuccessLogout({required this.authResponseModel});
 }
 
 final class AuthError extends AuthState {
