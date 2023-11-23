@@ -1,6 +1,5 @@
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:capstone_project_villa/data/models/request/history_request_model.dart';
-import 'package:capstone_project_villa/data/models/response/history_response_model.dart';
 import 'package:capstone_project_villa/presentation/bloc/history/history_bloc.dart';
 import 'package:capstone_project_villa/presentation/pages/history/widgets/history_review.dart';
 import 'package:capstone_project_villa/presentation/pages/history/widgets/history_ticket.dart';
@@ -11,11 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HistoryTransactionTicket extends StatefulWidget {
-  // static const String routeName = '/historydetail';
   final int id;
-  final AllTransaction data;
-  const HistoryTransactionTicket(
-      {super.key, required this.id, required this.data});
+  const HistoryTransactionTicket({super.key, required this.id});
 
   @override
   State<HistoryTransactionTicket> createState() =>
@@ -87,6 +83,7 @@ class _HistoryTransactionTicketState extends State<HistoryTransactionTicket> {
           BlocBuilder<HistoryBloc, HistoryState>(
             builder: (context, state) {
               if (state is HistorySpecificLoaded) {
+                final user = state.historyTransactionResponseModel.id;
                 final transactionStatus =
                     state.historyTransactionResponseModel.transactionStatus;
 
@@ -124,7 +121,7 @@ class _HistoryTransactionTicketState extends State<HistoryTransactionTicket> {
                                   context.read<HistoryBloc>().add(
                                         HistoryPaymentEvent(
                                           historyRequestModel: cancelRequest,
-                                          id: widget.data.id,
+                                          id: user,
                                         ),
                                       );
                                 },
@@ -157,7 +154,7 @@ class _HistoryTransactionTicketState extends State<HistoryTransactionTicket> {
                                   context.read<HistoryBloc>().add(
                                         HistoryPaymentEvent(
                                           historyRequestModel: payRequest,
-                                          id: widget.data.id,
+                                          id: user,
                                         ),
                                       );
                                 },

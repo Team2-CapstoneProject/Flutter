@@ -119,7 +119,6 @@ Widget buildResult(String searchTerm) {
                       MaterialPageRoute(
                           builder: (context) => HistoryTransactionTicket(
                                 id: historyByName[index].id,
-                                data: historyByName[index],
                               )));
                 },
               );
@@ -162,7 +161,6 @@ Widget buildRecentVila() {
                     MaterialPageRoute(
                         builder: (context) => HistoryTransactionTicket(
                               id: allHistory[index].id,
-                              data: allHistory[index],
                             )));
               },
             );
