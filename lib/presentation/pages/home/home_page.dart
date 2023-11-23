@@ -354,7 +354,7 @@ class _HomePageState extends State<HomePage>
                                   name: vila.name.toString(),
                                   location: vila.location.toString(),
                                   price: vila.price,
-                                  score: vila.score ?? 0,
+                                  score: vila.score.toDouble(),
                                   image: vila.vilaImages.sliderImage,
                                 ),
                               );
@@ -380,7 +380,7 @@ class _HomePageState extends State<HomePage>
                                   name: vila.name.toString(),
                                   location: vila.location.toString(),
                                   price: vila.price,
-                                  score: vila.score ?? 0,
+                                  score: vila.score.toDouble(),
                                   image: vila.vilaImages.sliderImage,
                                 ),
                               );
@@ -406,7 +406,7 @@ class _HomePageState extends State<HomePage>
                                   name: vila.name.toString(),
                                   location: vila.location.toString(),
                                   price: vila.price,
-                                  score: vila.score ?? 0,
+                                  score: vila.score.toDouble(),
                                   image: vila.vilaImages.sliderImage,
                                 ),
                               );
@@ -432,7 +432,7 @@ class _HomePageState extends State<HomePage>
                                   name: vila.name.toString(),
                                   location: vila.location.toString(),
                                   price: vila.price,
-                                  score: vila.score ?? 0,
+                                  score: vila.score.toDouble(),
                                   image: vila.vilaImages.sliderImage,
                                 ),
                               );
