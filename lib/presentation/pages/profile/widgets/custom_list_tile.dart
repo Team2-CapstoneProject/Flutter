@@ -11,12 +11,14 @@ class CustomListTile extends StatelessWidget {
   const CustomListTile(
       {super.key, required this.icon, required this.text, required this.onTap});
 
+  get currentTheme => null;
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: Icon(
         icon,
-        color: icon == Iconsax.logout ? redCandy : greyColor,
+        color: (icon == Iconsax.logout ? redCandy : greyColor),
         size: 24,
       ),
       title: Text(

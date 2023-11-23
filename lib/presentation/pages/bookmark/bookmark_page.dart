@@ -35,6 +35,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
         ),
         backgroundColor: whiteColor,
         elevation: 0,
+        iconTheme: IconThemeData(color: darkGrey),
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 30),

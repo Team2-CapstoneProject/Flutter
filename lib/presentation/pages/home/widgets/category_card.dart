@@ -13,6 +13,8 @@ class CategoryCard extends StatelessWidget {
     required this.onTap,
   }) : super(key: key);
 
+  get currentTheme => null;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -35,10 +37,15 @@ class CategoryCard extends StatelessWidget {
           SizedBox(height: 5),
           Text(
             label,
-            style: blackTextStyle.copyWith(
-              fontSize: 12,
-              fontWeight: regular,
-            ),
+            style: currentTheme == ThemeData.light()
+                ? blackTextStyle.copyWith(
+                    fontSize: 12,
+                    fontWeight: regular,
+                  )
+                : whiteTextStyle.copyWith(
+                    fontSize: 12,
+                    fontWeight: regular,
+                  ),
           ),
         ],
       ),

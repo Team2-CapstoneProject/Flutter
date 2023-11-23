@@ -1,9 +1,11 @@
+import 'package:capstone_project_villa/presentation/bloc/theme/theme_bloc.dart';
 import 'package:capstone_project_villa/presentation/pages/history/history_page.dart';
 import 'package:capstone_project_villa/presentation/pages/home/home_page.dart';
 import 'package:capstone_project_villa/presentation/pages/profile/profile_page.dart';
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:capstone_project_villa/presentation/pages/search/search_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -28,57 +30,78 @@ class _BottomNavbarPageState extends State<BottomNavbarPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _widgetOptions.elementAt(_selectedIndex),
-      bottomNavigationBar: Container(
-        height: 94,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: GNav(
-          gap: 6,
-          activeColor: darkerGrey,
-          iconSize: 24,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
+      ThemeData currentTheme =
+          (state is ThemeUpdated) ? state.themeData : ThemeData.light();
+      return Scaffold(
+        body: _widgetOptions.elementAt(_selectedIndex),
+        bottomNavigationBar: Container(
+          height: 94,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: GNav(
+            gap: 6,
+            activeColor:
+                currentTheme == ThemeData.light() ? darkGrey : whiteColor,
+            iconSize: 24,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+            ),
+            duration: const Duration(milliseconds: 400),
+            tabBackgroundColor: currentTheme == ThemeData.light()
+                ? const Color(0xFF539DF3).withOpacity(0.37)
+                : darkGrey,
+            color: darkGrey,
+            tabs: [
+              GButton(
+                icon: Iconsax.home,
+                text: 'Home',
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                textStyle: currentTheme == ThemeData.light()
+                    ? primaryTextStyle.copyWith(
+                        fontSize: 14, fontWeight: medium)
+                    : whiteTextStyle.copyWith(fontSize: 14, fontWeight: medium),
+                iconColor: currentTheme == ThemeData.light()
+                    ? primaryColor
+                    : whiteColor,
+              ),
+              GButton(
+                icon: Iconsax.search_normal_1,
+                text: 'Search',
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                iconColor: currentTheme == ThemeData.light()
+                    ? primaryColor
+                    : whiteColor,
+              ),
+              GButton(
+                icon: Iconsax.note,
+                text: 'History',
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                iconColor: currentTheme == ThemeData.light()
+                    ? primaryColor
+                    : whiteColor,
+              ),
+              GButton(
+                icon: Iconsax.user,
+                text: 'Profile',
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                iconColor: currentTheme == ThemeData.light()
+                    ? primaryColor
+                    : whiteColor,
+              ),
+            ],
+            selectedIndex: _selectedIndex,
+            onTabChange: (index) {
+              setState(() {
+                _selectedIndex = index;
+              });
+            },
           ),
-          duration: const Duration(milliseconds: 400),
-          tabBackgroundColor: const Color(0xFF539DF3).withOpacity(0.37),
-          color: darkerGrey,
-          tabs: [
-            GButton(
-              icon: Iconsax.home,
-              text: 'Home',
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-              textStyle:
-                  primaryTextStyle.copyWith(fontSize: 14, fontWeight: medium),
-              iconColor: primaryColor,
-            ),
-            GButton(
-              icon: Iconsax.search_normal_1,
-              text: 'Search',
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-              iconColor: primaryColor,
-            ),
-            GButton(
-              icon: Iconsax.note,
-              text: 'History',
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-              iconColor: primaryColor,
-            ),
-            GButton(
-              icon: Iconsax.user,
-              text: 'Profile',
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-              iconColor: primaryColor,
-            ),
-          ],
-          selectedIndex: _selectedIndex,
-          onTabChange: (index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
         ),
-      ),
-    );
+      );
+    });
   }
 }
