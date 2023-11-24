@@ -1,24 +1,32 @@
 import 'dart:convert';
 
 class TransactionRequestModel {
-  int vila_id;
-  int n_night;
+  int vilaId;
+  int nNight;
+  String tglCheckin;
+  String tglCheckout;
   TransactionRequestModel({
-    required this.vila_id,
-    required this.n_night,
+    required this.vilaId,
+    required this.nNight,
+    required this.tglCheckin,
+    required this.tglCheckout,
   });
 
   Map<String, dynamic> toMap() {
     return {
-      'vila_id': vila_id,
-      'n_night': n_night,
+      'vilaId': vilaId,
+      'nNight': nNight,
+      'tglCheckin': tglCheckin,
+      'tglCheckout': tglCheckout,
     };
   }
 
   factory TransactionRequestModel.fromMap(Map<String, dynamic> map) {
     return TransactionRequestModel(
-      vila_id: map['vila_id']?.toInt() ?? 0,
-      n_night: map['n_night']?.toInt() ?? 0,
+      vilaId: map['vilaId']?.toInt() ?? 0,
+      nNight: map['nNight']?.toInt() ?? 0,
+      tglCheckin: map['tglCheckin'] ?? '',
+      tglCheckout: map['tglCheckout'] ?? '',
     );
   }
 

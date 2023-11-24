@@ -8,19 +8,20 @@ class HistoryTicket extends StatelessWidget {
   final String name;
   final DateTime checkIn;
   final DateTime checkOut;
-  final int guest;
+  // final int guest;
   final int taxes;
   final int night;
   final int total;
-  const HistoryTicket(
-      {super.key,
-      required this.taxes,
-      required this.night,
-      required this.total,
-      required this.name,
-      required this.checkIn,
-      required this.checkOut,
-      required this.guest});
+  const HistoryTicket({
+    super.key,
+    required this.taxes,
+    required this.night,
+    required this.total,
+    required this.name,
+    required this.checkIn,
+    required this.checkOut,
+    // required this.guest,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,7 @@ class HistoryTicket extends StatelessWidget {
             ],
           ),
           const SizedBox(
-            height: 12.0,
+            height: 14.0,
           ),
           // Check In
           Row(
@@ -73,7 +74,7 @@ class HistoryTicket extends StatelessWidget {
             ],
           ),
           const SizedBox(
-            height: 12.0,
+            height: 14.0,
           ),
           // Check Out
           Row(
@@ -94,28 +95,28 @@ class HistoryTicket extends StatelessWidget {
             ],
           ),
           const SizedBox(
-            height: 12.0,
+            height: 14.0,
           ),
           // Guest
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Guest',
-                style: darkGreyTextStyle.copyWith(
-                  fontSize: 12,
-                  fontWeight: light,
-                ),
-              ),
-              Text(
-                guest.toString(),
-                style:
-                    blackTextStyle.copyWith(fontSize: 14, fontWeight: medium),
-              )
-            ],
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: [
+          //     Text(
+          //       'Guest',
+          //       style: darkGreyTextStyle.copyWith(
+          //         fontSize: 12,
+          //         fontWeight: light,
+          //       ),
+          //     ),
+          //     Text(
+          //       guest.toString(),
+          //       style:
+          //           blackTextStyle.copyWith(fontSize: 14, fontWeight: medium),
+          //     )
+          //   ],
+          // ),
           const SizedBox(
-            height: 8.0,
+            height: 22.0,
           ),
           MySeparator(height: 3, color: whiteColor),
           const SizedBox(

@@ -11,10 +11,13 @@ class TransactionDataSource {
   Future<Either<String, TransactionResponseModel>> getTransaction(
       TransactionRequestModel transaction) async {
     final token = await AuthLocalDataSource().getToken();
-    final response = await http.get(
-      Uri.parse(
-          '$baseUrl/mobile/calculate?vila_id=${transaction.vila_id}&n_night=${transaction.n_night}'),
-      headers: {'Authorization': 'Bearer $token'},
+    final response = await http.post(
+      Uri.parse('$baseUrl/mobile/calculate'),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      },
+      body: transaction.toJson(),
     );
 
     print(response.body);

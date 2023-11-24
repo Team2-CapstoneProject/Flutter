@@ -42,25 +42,4 @@ class ProfileDataSource {
       return Left('Failed update');
     }
   }
-
-  // Future<Either<String, ProfileResponseModel>> updateProfile(
-  //     ProfileRequestModel profileRequestModel) async {
-  //   final token = await AuthLocalDataSource().getToken();
-  //   final response = await http.post(
-  //     Uri.parse('$baseUrl/mobile/updateprofile'),
-  //     headers: {
-  //       'Authorization': 'Bearer $token',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: profileRequestModel.toJson(),
-  //   );
-
-  //   print('Check $response');
-
-  //   if (response.statusCode == 201) {
-  //     return Right(ProfileResponseModel.fromJson(jsonDecode(response.body)));
-  //   } else {
-  //     return Left('Failed update profile');
-  //   }
-  // }
 }

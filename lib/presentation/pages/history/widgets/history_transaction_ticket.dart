@@ -79,7 +79,7 @@ class _HistoryTransactionTicketState extends State<HistoryTransactionTicket> {
                           name: data.fullName,
                           checkIn: data.tglCheckin,
                           checkOut: data.tglCheckout,
-                          guest: data.nGuest,
+                          // guest: data.nGuest,
                         ),
                       ],
                     );

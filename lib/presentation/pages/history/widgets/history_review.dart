@@ -20,6 +20,8 @@ class ReviewFormWidget extends StatefulWidget {
 class _ReviewFormWidgetState extends State<ReviewFormWidget> {
   final _reviewController = TextEditingController();
   double selectedRating = 0;
+  bool isLoading = false;
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -89,29 +91,38 @@ class _ReviewFormWidgetState extends State<ReviewFormWidget> {
 
           BlocConsumer<HistoryBloc, HistoryState>(listener: (context, state) {
             if (state is HistoryReviewLoaded) {
+              setState(() {
+                isLoading = false;
+              });
               Navigator.pushReplacementNamed(
                 context,
                 BottomNavbarPage.routeName,
               );
+            } else if (state is HistoryLoading) {
+              setState(() {
+                isLoading = true;
+              });
             }
           }, builder: (context, state) {
-            return CustomButton(
-                onPressed: () {
-                  final reviewModel = ReviewRequestModel(
-                    transactionId: widget.reviewId.id,
-                    score: selectedRating.toInt(),
-                    description: _reviewController.text,
-                  );
-
-                  print(reviewModel);
-
-                  context.read<HistoryBloc>().add(
-                        HistoryReviewEvent(
-                          review: reviewModel,
-                        ),
+            return isLoading
+                ? CircularProgressIndicator()
+                : CustomButton(
+                    onPressed: () {
+                      final reviewModel = ReviewRequestModel(
+                        transactionId: widget.reviewId.id,
+                        score: selectedRating.toInt(),
+                        description: _reviewController.text,
                       );
-                },
-                text: 'Done');
+
+                      // print(reviewModel);
+
+                      context.read<HistoryBloc>().add(
+                            HistoryReviewEvent(
+                              review: reviewModel,
+                            ),
+                          );
+                    },
+                    text: 'Done');
           })
         ],
       ),
