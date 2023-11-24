@@ -1,14 +1,24 @@
 import 'package:capstone_project_villa/common/constants.dart';
+import 'package:capstone_project_villa/data/models/request/review_request_model.dart';
+import 'package:capstone_project_villa/data/models/response/history_transaction_response_model.dart';
+import 'package:capstone_project_villa/presentation/bloc/history/history_bloc.dart';
+import 'package:capstone_project_villa/presentation/pages/navbar/bottom_navbar.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class ReviewFormWidget extends StatefulWidget {
+  final HistoryTransactionResponseModel reviewId;
+
+  const ReviewFormWidget({super.key, required this.reviewId});
+
   @override
   State<ReviewFormWidget> createState() => _ReviewFormWidgetState();
 }
 
 class _ReviewFormWidgetState extends State<ReviewFormWidget> {
+  final _reviewController = TextEditingController();
   double selectedRating = 0;
   @override
   Widget build(BuildContext context) {
@@ -60,6 +70,7 @@ class _ReviewFormWidgetState extends State<ReviewFormWidget> {
           TextFormField(
             textCapitalization: TextCapitalization.words,
             textInputAction: TextInputAction.done,
+            controller: _reviewController,
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
@@ -76,7 +87,32 @@ class _ReviewFormWidgetState extends State<ReviewFormWidget> {
             height: 15.0,
           ),
 
-          CustomButton(onPressed: () {}, text: 'Done')
+          BlocConsumer<HistoryBloc, HistoryState>(listener: (context, state) {
+            if (state is HistoryReviewLoaded) {
+              Navigator.pushReplacementNamed(
+                context,
+                BottomNavbarPage.routeName,
+              );
+            }
+          }, builder: (context, state) {
+            return CustomButton(
+                onPressed: () {
+                  final reviewModel = ReviewRequestModel(
+                    transactionId: widget.reviewId.id,
+                    score: selectedRating.toInt(),
+                    description: _reviewController.text,
+                  );
+
+                  print(reviewModel);
+
+                  context.read<HistoryBloc>().add(
+                        HistoryReviewEvent(
+                          review: reviewModel,
+                        ),
+                      );
+                },
+                text: 'Done');
+          })
         ],
       ),
     );

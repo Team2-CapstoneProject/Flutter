@@ -131,9 +131,7 @@ class _HistoryTransactionTicketState extends State<HistoryTransactionTicket> {
                           },
                         ),
                         BlocConsumer<HistoryBloc, HistoryState>(
-                          listener: (context, state) {
-                            if (state is HistoryPaymentSuccess) {}
-                          },
+                          listener: (context, state) {},
                           builder: (context, state) {
                             return Container(
                               height: 40,
@@ -167,51 +165,59 @@ class _HistoryTransactionTicketState extends State<HistoryTransactionTicket> {
                     ),
                   );
                 } else if (transactionStatus == 2) {
-                  return Container(
-                    height: 55,
-                    margin: EdgeInsets.only(top: 30),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        elevation: 0,
-                        backgroundColor: whiteColor,
-                        side: BorderSide(color: grey95),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                      onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          builder: (BuildContext context) {
-                            return SingleChildScrollView(
-                              child: Container(
-                                padding: EdgeInsets.only(
-                                  bottom:
-                                      MediaQuery.of(context).viewInsets.bottom,
-                                ),
-                                child: ReviewFormWidget(),
-                              ),
-                            );
-                          },
+                  final checkReview =
+                      state.historyTransactionResponseModel.reviewScore;
+
+                  if (checkReview == 0) {
+                    return Container(
+                      height: 55,
+                      margin: EdgeInsets.only(top: 30),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          elevation: 0,
+                          backgroundColor: whiteColor,
+                          side: BorderSide(color: grey95),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                            ),
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                        );
-                      },
-                      child: Text(
-                        'Leave a review',
-                        style: blackTextStyle.copyWith(
-                          fontSize: 14,
-                          fontWeight: semiBold,
+                        ),
+                        onPressed: () {
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            builder: (BuildContext context) {
+                              return SingleChildScrollView(
+                                child: Container(
+                                  padding: EdgeInsets.only(
+                                    bottom: MediaQuery.of(context)
+                                        .viewInsets
+                                        .bottom,
+                                  ),
+                                  child: ReviewFormWidget(reviewId: state.historyTransactionResponseModel,),
+                                ),
+                              );
+                            },
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                              ),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          'Leave a review',
+                          style: blackTextStyle.copyWith(
+                            fontSize: 14,
+                            fontWeight: semiBold,
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                } else {
+                    );
+                  } else {
+                    return SizedBox();
+                  }
+                } else if (transactionStatus == 3) {
                   return SizedBox();
                 }
               }
