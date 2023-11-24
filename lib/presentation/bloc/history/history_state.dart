@@ -31,6 +31,12 @@ final class HistoryPaymentSuccess extends HistoryState {
   HistoryPaymentSuccess({required this.historyResponseModel});
 }
 
+final class HistoryReviewLoaded extends HistoryState {
+  final HistoryResponseModel historyResponseModel;
+
+  HistoryReviewLoaded({required this.historyResponseModel});
+}
+
 final class HistoryError extends HistoryState {
   final String message;
 

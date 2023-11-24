@@ -312,7 +312,7 @@ class Vila {
   final int jumlahBookmark;
   final int jumlahTransaction;
   final int nReview;
-  final int score;
+  final double score;
 
   Vila({
     required this.id,
@@ -343,7 +343,7 @@ class Vila {
         jumlahBookmark: json["jumlahBookmark"] ?? 0,
         jumlahTransaction: json["jumlahTransaction"] ?? 0,
         nReview: json["nReview"] ?? 0,
-        score: json["score"] ?? 0,
+        score: (json["score"] ?? 0).toDouble(),
       );
 
   Map<String, dynamic> toJson() => {

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:capstone_project_villa/data/datasources/local/auth_local_datasource.dart';
 import 'package:capstone_project_villa/data/models/request/history_request_model.dart';
+import 'package:capstone_project_villa/data/models/request/review_request_model.dart';
 import 'package:capstone_project_villa/data/models/response/history_response_model.dart';
 import 'package:capstone_project_villa/data/models/response/history_transaction_response_model.dart';
 import 'package:dartz/dartz.dart';
@@ -68,7 +69,31 @@ class HistoryDataSource {
       body: historyRequestModel.toJson(),
     );
 
-    print(response.body);
+    // print(response.body);
+
+    if (response.statusCode == 201) {
+      return Right(HistoryResponseModel.fromJson(jsonDecode(response.body)));
+    } else if (response.statusCode == 400) {
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      return Left(errorMessage);
+    }
+    return const Left('Unexpected Error');
+  }
+
+  Future<Either<String, HistoryResponseModel>> review(
+      ReviewRequestModel reviewRequestModel) async {
+    final token = await AuthLocalDataSource().getToken();
+    final response = await http.post(
+      Uri.parse('$baseUrl/mobile/review'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token'
+      },
+      body: reviewRequestModel.toJson(),
+    );
+
+    print('API Response: ${response.statusCode} - ${response.body}');
 
     if (response.statusCode == 201) {
       return Right(HistoryResponseModel.fromJson(jsonDecode(response.body)));
