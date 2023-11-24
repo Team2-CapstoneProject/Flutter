@@ -24,10 +24,6 @@ class _HistoryTransactionTicketState extends State<HistoryTransactionTicket> {
     super.initState();
   }
 
-  void refreshPage() {
-    context.read<HistoryBloc>().add(GetSpecificEvent(id: widget.id));
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +36,9 @@ class _HistoryTransactionTicketState extends State<HistoryTransactionTicket> {
           listener: (context, state) {
             if (state is HistoryPaymentSuccess) {
               setState(() {
-                refreshPage();
+                context
+                    .read<HistoryBloc>()
+                    .add(GetSpecificEvent(id: widget.id));
               });
             }
           },
