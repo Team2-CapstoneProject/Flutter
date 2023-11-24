@@ -23,13 +23,14 @@ class HistoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     return Container(
       height: 205,
       margin: EdgeInsets.only(bottom: 30),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: grey95,
+        color: currentTheme ? white70Color.withOpacity(0.3) : grey95,
       ),
       child: Padding(
         padding: const EdgeInsets.only(
@@ -67,10 +68,11 @@ class HistoryCard extends StatelessWidget {
                               margin: EdgeInsets.only(bottom: 5),
                               child: Text(
                                 name,
-                                style: blackTextStyle.copyWith(
-                                  fontSize: 14,
-                                  fontWeight: medium,
-                                ),
+                                style: currentTheme
+                                    ? whiteTextStyle.copyWith(
+                                        fontSize: 14, fontWeight: medium)
+                                    : blackTextStyle.copyWith(
+                                        fontSize: 14, fontWeight: medium),
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
@@ -79,7 +81,9 @@ class HistoryCard extends StatelessWidget {
                                 Icon(
                                   Iconsax.location,
                                   size: 12,
-                                  color: darkGrey,
+                                  color: currentTheme
+                                      ? white70Color.withOpacity(0.5)
+                                      : darkGrey,
                                 ),
                                 const SizedBox(
                                   width: 5.0,
@@ -87,10 +91,11 @@ class HistoryCard extends StatelessWidget {
                                 Flexible(
                                   child: Text(
                                     location,
-                                    style: blackTextStyle.copyWith(
-                                      fontSize: 10,
-                                      fontWeight: light,
-                                    ),
+                                    style: currentTheme
+                                        ? whiteTextStyle.copyWith(
+                                            fontSize: 10, fontWeight: medium)
+                                        : blackTextStyle.copyWith(
+                                            fontSize: 10, fontWeight: medium),
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 )
@@ -105,17 +110,19 @@ class HistoryCard extends StatelessWidget {
                                       text: Utils.currencyFormat(
                                         price,
                                       ),
-                                      style: darkGreyTextStyle.copyWith(
-                                        fontSize: 14,
-                                        fontWeight: medium,
-                                      ),
+                                      style: currentTheme
+                                          ? whiteTextStyle.copyWith(
+                                              fontSize: 14, fontWeight: medium)
+                                          : darkGreyTextStyle.copyWith(
+                                              fontSize: 14, fontWeight: medium),
                                     ),
                                     TextSpan(
                                       text: ' /night'.tr(),
-                                      style: darkGreyTextStyle.copyWith(
-                                        fontSize: 12,
-                                        fontWeight: light,
-                                      ),
+                                      style: currentTheme
+                                          ? whiteTextStyle.copyWith(
+                                              fontSize: 14, fontWeight: medium)
+                                          : darkGreyTextStyle.copyWith(
+                                              fontSize: 14, fontWeight: medium),
                                     ),
                                   ],
                                 ),
@@ -136,7 +143,7 @@ class HistoryCard extends StatelessWidget {
               ),
               child: MySeparator(
                 height: 1,
-                color: whiteColor,
+                color: currentTheme ? grey95 : whiteColor,
               ),
             ),
             if (status == 1)

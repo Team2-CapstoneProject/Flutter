@@ -14,12 +14,13 @@ class CustomTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     return Column(
       children: [
         TabBar(
           controller: tabController,
-          labelColor: blackColor,
-          labelStyle: blackTextStyle,
+          labelColor: currentTheme ? whiteColor : blackColor,
+          labelStyle: currentTheme ? whiteTextStyle : blackTextStyle,
           indicatorSize: TabBarIndicatorSize.label,
           indicatorColor: primaryColor,
           isScrollable: true,

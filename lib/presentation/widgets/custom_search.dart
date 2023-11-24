@@ -16,6 +16,7 @@ class CustomSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     return Container(
       margin: EdgeInsets.only(bottom: 30),
       height: 55,
@@ -35,7 +36,7 @@ class CustomSearch extends StatelessWidget {
           children: [
             Icon(
               Iconsax.search_normal,
-              color: greyColor,
+              color: currentTheme ? white70Color : greyColor,
             ),
             const SizedBox(
               width: 20.0,
@@ -45,10 +46,9 @@ class CustomSearch extends StatelessWidget {
                 onSubmitted: onFieldSubmitted,
                 onChanged: onChanged,
                 controller: controller,
-                style: greyTextStyle.copyWith(
-                  fontWeight: regular,
-                  fontSize: 14,
-                ),
+                style: currentTheme
+                    ? whiteTextStyle.copyWith(fontSize: 14, fontWeight: regular)
+                    : greyTextStyle.copyWith(fontSize: 14, fontWeight: regular),
                 decoration: InputDecoration(
                   hintText: 'Search',
                   border: InputBorder.none,

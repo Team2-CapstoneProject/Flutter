@@ -27,15 +27,18 @@ class _BookmarkPageState extends State<BookmarkPage> {
 
   @override
   Widget build(BuildContext context) {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: whiteColor,
+          statusBarColor: currentTheme == ThemeData.light()
+              ? whiteColor
+              : Color(0xff1E1E1E),
           statusBarIconBrightness: Brightness.dark,
         ),
-        backgroundColor: whiteColor,
+        backgroundColor:
+            currentTheme == ThemeData.light() ? whiteColor : Color(0xff1E1E1E),
         elevation: 0,
-        iconTheme: IconThemeData(color: darkGrey),
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 30),
@@ -49,7 +52,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
               },
               child: Icon(
                 Iconsax.notification,
-                color: darkGrey,
+                color: currentTheme ? white70Color : darkGrey,
               ),
             ),
           )

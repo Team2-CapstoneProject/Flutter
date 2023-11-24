@@ -17,13 +17,15 @@ class CustomCardVila extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       margin: EdgeInsets.only(bottom: 20),
       height: 145,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: grey95,
+        color: currentTheme ? white70Color.withOpacity(0.3) : grey95,
       ),
       child: Row(
         children: [
@@ -53,10 +55,11 @@ class CustomCardVila extends StatelessWidget {
                         margin: EdgeInsets.only(bottom: 5),
                         child: Text(
                           name,
-                          style: blackTextStyle.copyWith(
-                            fontSize: 14,
-                            fontWeight: medium,
-                          ),
+                          style: currentTheme
+                              ? whiteTextStyle.copyWith(
+                                  fontSize: 14, fontWeight: medium)
+                              : darkGreyTextStyle.copyWith(
+                                  fontSize: 14, fontWeight: medium),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -65,7 +68,9 @@ class CustomCardVila extends StatelessWidget {
                           Icon(
                             Iconsax.location,
                             size: 12,
-                            color: darkGrey,
+                            color: currentTheme
+                                ? white70Color.withOpacity(0.5)
+                                : darkGrey,
                           ),
                           const SizedBox(
                             width: 5.0,
@@ -73,10 +78,11 @@ class CustomCardVila extends StatelessWidget {
                           Flexible(
                             child: Text(
                               location,
-                              style: blackTextStyle.copyWith(
-                                fontSize: 10,
-                                fontWeight: light,
-                              ),
+                              style: currentTheme
+                                  ? whiteTextStyle.copyWith(
+                                      fontSize: 10, fontWeight: light)
+                                  : blackTextStyle.copyWith(
+                                      fontSize: 10, fontWeight: light),
                               overflow: TextOverflow.ellipsis,
                             ),
                           )
@@ -91,17 +97,19 @@ class CustomCardVila extends StatelessWidget {
                                 text: Utils.currencyFormat(
                                   price,
                                 ),
-                                style: darkGreyTextStyle.copyWith(
-                                  fontSize: 14,
-                                  fontWeight: medium,
-                                ),
+                                style: currentTheme
+                                    ? whiteTextStyle.copyWith(
+                                        fontSize: 14, fontWeight: medium)
+                                    : darkGreyTextStyle.copyWith(
+                                        fontSize: 14, fontWeight: medium),
                               ),
                               TextSpan(
                                 text: ' /night',
-                                style: darkGreyTextStyle.copyWith(
-                                  fontSize: 12,
-                                  fontWeight: light,
-                                ),
+                                style: currentTheme
+                                    ? whiteTextStyle.copyWith(
+                                        fontSize: 12, fontWeight: light)
+                                    : darkGreyTextStyle.copyWith(
+                                        fontSize: 12, fontWeight: light),
                               ),
                             ],
                           ),

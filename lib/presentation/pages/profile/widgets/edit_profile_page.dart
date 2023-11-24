@@ -69,6 +69,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -90,7 +91,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     child: Icon(
                       Icons.arrow_back,
                       size: 24,
-                      color: darkGrey,
+                      color: currentTheme ? whiteColor : greyColor,
                     ),
                   ),
                 ),
@@ -99,8 +100,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   margin: const EdgeInsets.only(top: 28),
                   child: Text(
                     'edit_your_profile'.tr(),
-                    style: blackTextStyle.copyWith(
-                        fontSize: 32, fontWeight: semiBold),
+                    style: currentTheme
+                        ? whiteTextStyle.copyWith(
+                            fontSize: 24, fontWeight: semiBold)
+                        : blackTextStyle.copyWith(
+                            fontSize: 24, fontWeight: semiBold),
                   ),
                 ),
                 GestureDetector(
@@ -135,7 +139,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                       borderSide: BorderSide(
-                        color: grey95,
+                        color: currentTheme ? darkerGrey : grey95,
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
@@ -145,11 +149,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                     ),
                     filled: true,
-                    fillColor: _isChangeFullName.value ? cyanBlue : whiteColor,
+                    fillColor: currentTheme
+                        ? darkGrey
+                        : (_isChangeFullName.value
+                            ? cyanBlue
+                            : whiteColor), //blueBlack : darkGrey
                     hintText: 'full_name'.tr(),
                     prefixIcon: Icon(
                       Iconsax.user,
-                      color: greyColor,
+                      color: currentTheme ? grey100 : greyColor,
                     ),
                   ),
                   onChanged: (value) {
@@ -175,7 +183,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                       borderSide: BorderSide(
-                        color: grey95,
+                        color: currentTheme ? darkerGrey : grey95,
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
@@ -185,11 +193,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                     ),
                     filled: true,
-                    fillColor: _isChangeNickname.value ? cyanBlue : whiteColor,
+                    fillColor: currentTheme
+                        ? darkGrey
+                        : (_isChangeFullName.value ? cyanBlue : whiteColor),
                     hintText: 'nickname'.tr(),
                     prefixIcon: Icon(
                       Iconsax.user,
-                      color: greyColor,
+                      color: currentTheme ? grey100 : greyColor,
                     ),
                   ),
                   onChanged: (value) {
@@ -213,7 +223,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     hintText: widget.data.email,
                     prefixIcon: Icon(
                       Iconsax.sms,
-                      color: greyColor,
+                      color: currentTheme ? grey100 : greyColor,
                     ),
                   ),
                 ),
@@ -234,7 +244,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                       borderSide: BorderSide(
-                        color: grey95,
+                        color: currentTheme ? darkerGrey : grey95,
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
@@ -244,12 +254,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                     ),
                     filled: true,
-                    fillColor:
-                        _isChangePhoneNumber.value ? cyanBlue : whiteColor,
+                    fillColor: currentTheme
+                        ? darkGrey
+                        : (_isChangeFullName.value ? cyanBlue : whiteColor),
                     hintText: 'phone_number'.tr(),
                     prefixIcon: Icon(
                       Iconsax.call,
-                      color: darkGrey,
+                      color: currentTheme ? grey100 : greyColor,
                     ),
                   ),
                   onChanged: (value) {

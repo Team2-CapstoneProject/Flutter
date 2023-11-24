@@ -30,7 +30,8 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
       case ThemeType.light:
         return ThemeData.light();
       case ThemeType.dark:
-        return ThemeData.dark();
+        return ThemeData.dark()
+            .copyWith(scaffoldBackgroundColor: Color(0xff1E1E1E));
       default:
         return ThemeData.light();
     }

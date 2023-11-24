@@ -17,6 +17,7 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     return GestureDetector(
       onTap: onTap,
       child: Column(
@@ -25,7 +26,7 @@ class CategoryCard extends StatelessWidget {
             height: 48,
             width: 48,
             decoration: BoxDecoration(
-              color: grey95,
+              color: currentTheme ? white70Color.withOpacity(0.5) : grey95,
               borderRadius: BorderRadius.circular(20),
             ),
             child: Icon(
