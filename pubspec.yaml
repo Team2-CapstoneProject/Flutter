@@ -83,7 +83,6 @@ flutter:
     - assets/
     - assets/auth/
     - assets/onboarding/
-    - assets/profile/
     - assets/i18n/
     - assets/lottie/
   #   - images/a_dot_ham.jpeg
