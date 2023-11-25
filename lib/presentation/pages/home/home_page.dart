@@ -45,11 +45,13 @@ class _HomePageState extends State<HomePage>
     bool currentTheme = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
+      backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
       // Headers
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: whiteColor,
-          statusBarIconBrightness: Brightness.dark,
+          statusBarColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
+          statusBarIconBrightness:
+              currentTheme ? Brightness.light : Brightness.dark,
         ),
         backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
         elevation: 0,
@@ -108,10 +110,10 @@ class _HomePageState extends State<HomePage>
                         Text(
                           'greeting'
                               .tr(namedArgs: {'name': user.userData.nickname}),
-                          style: currentTheme == ThemeData.light()
-                              ? blackTextStyle.copyWith(
+                          style: currentTheme
+                              ? whiteTextStyle.copyWith(
                                   fontSize: 24, fontWeight: semiBold)
-                              : whiteTextStyle.copyWith(
+                              : blackTextStyle.copyWith(
                                   fontSize: 24, fontWeight: semiBold),
                         ),
 
@@ -221,9 +223,13 @@ class _HomePageState extends State<HomePage>
                                             children: [
                                               Text(
                                                 'our_accommodation'.tr(),
-                                                style: blackTextStyle.copyWith(
-                                                    fontSize: 14,
-                                                    fontWeight: medium),
+                                                style: currentTheme
+                                                    ? whiteTextStyle.copyWith(
+                                                        fontSize: 14,
+                                                        fontWeight: medium)
+                                                    : blackTextStyle.copyWith(
+                                                        fontSize: 14,
+                                                        fontWeight: medium),
                                               ),
                                               GestureDetector(
                                                 onTap: () {

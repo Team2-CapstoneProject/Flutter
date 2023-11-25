@@ -26,14 +26,17 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
+      backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
       appBar: AppBar(
         elevation: 0,
         toolbarHeight: 0,
         backgroundColor: whiteColor,
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: whiteColor,
-          statusBarIconBrightness: Brightness.dark,
+          statusBarColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
+          statusBarIconBrightness:
+              currentTheme ? Brightness.light : Brightness.dark,
         ),
         iconTheme: IconThemeData(color: darkGrey),
       ),
@@ -74,7 +77,9 @@ class _SearchPageState extends State<SearchPage> {
                           Lottie.asset('assets/lottie/search.json'),
                           Text(
                             'Please do a search',
-                            style: primaryTextStyle.copyWith(fontSize: 14),
+                            style: currentTheme
+                                ? whiteTextStyle.copyWith(fontSize: 14)
+                                : primaryTextStyle.copyWith(fontSize: 14),
                           ).tr(),
                         ],
                       );

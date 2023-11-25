@@ -11,6 +11,7 @@ import 'package:capstone_project_villa/presentation/pages/profile/widgets/custom
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -36,6 +37,16 @@ class _ProfilePageState extends State<ProfilePage> {
     bool currentTheme = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
+      backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
+      appBar: AppBar(
+        elevation: 0,
+        toolbarHeight: 0,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
+          statusBarIconBrightness:
+              currentTheme ? Brightness.light : Brightness.dark,
+        ),
+      ),
       body: SafeArea(
           child: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 30),

@@ -6,7 +6,6 @@ import 'package:capstone_project_villa/presentation/pages/history/widgets/histor
 import 'package:capstone_project_villa/presentation/widgets/custom_card_vila.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_circular.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HistoryTransactionTicket extends StatefulWidget {
@@ -29,6 +28,7 @@ class _HistoryTransactionTicketState extends State<HistoryTransactionTicket> {
   Widget build(BuildContext context) {
     bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
+        backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
         appBar: AppBar(
           leading: IconButton(
             onPressed: () {
@@ -201,6 +201,9 @@ class _HistoryTransactionTicketState extends State<HistoryTransactionTicket> {
                             ),
                             onPressed: () {
                               showModalBottomSheet(
+                                backgroundColor: currentTheme
+                                    ? Color(0xff1E1E1E)
+                                    : whiteColor,
                                 context: context,
                                 isScrollControlled: true,
                                 builder: (BuildContext context) {

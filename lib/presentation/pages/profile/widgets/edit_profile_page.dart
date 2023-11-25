@@ -71,6 +71,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   Widget build(BuildContext context) {
     bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
+      backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 30),

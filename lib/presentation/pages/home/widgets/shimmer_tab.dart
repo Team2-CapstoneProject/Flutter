@@ -37,21 +37,12 @@ class ShimmerTabCard extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    height: 21,
-                    width: 52,
-                    color: white70Color,
-                  ),
-                  Container(
-                    height: 21,
-                    width: 52,
-                    color: white70Color,
-                  ),
-                ],
+              Container(
+                height: 21,
+                width: 52,
+                color: white70Color,
               ),
               Container(
                 margin: EdgeInsets.only(bottom: 30, top: 20),

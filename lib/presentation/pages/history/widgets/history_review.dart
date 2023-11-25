@@ -4,6 +4,7 @@ import 'package:capstone_project_villa/data/models/response/history_transaction_
 import 'package:capstone_project_villa/presentation/bloc/history/history_bloc.dart';
 import 'package:capstone_project_villa/presentation/pages/navbar/bottom_navbar.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -21,9 +22,10 @@ class _ReviewFormWidgetState extends State<ReviewFormWidget> {
   final _reviewController = TextEditingController();
   double selectedRating = 0;
   bool isLoading = false;
-  
+
   @override
   Widget build(BuildContext context) {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     return Container(
       height: 500,
       padding: EdgeInsets.all(30),
@@ -35,8 +37,10 @@ class _ReviewFormWidgetState extends State<ReviewFormWidget> {
             margin: EdgeInsets.only(bottom: 20),
             child: Text(
               'Give ratings',
-              style: blackTextStyle.copyWith(fontSize: 16, fontWeight: bold),
-            ),
+              style: currentTheme
+                  ? whiteTextStyle.copyWith(fontSize: 16, fontWeight: bold)
+                  : blackTextStyle.copyWith(fontSize: 16, fontWeight: bold),
+            ).tr(),
           ),
 
           // Rating
@@ -66,8 +70,10 @@ class _ReviewFormWidgetState extends State<ReviewFormWidget> {
             alignment: Alignment.centerLeft,
             child: Text(
               'Leave Review',
-              style: blackTextStyle.copyWith(fontSize: 14, fontWeight: medium),
-            ),
+              style: currentTheme
+                  ? whiteTextStyle.copyWith(fontSize: 14, fontWeight: medium)
+                  : blackTextStyle.copyWith(fontSize: 14, fontWeight: medium),
+            ).tr(),
           ),
           TextFormField(
             textCapitalization: TextCapitalization.words,

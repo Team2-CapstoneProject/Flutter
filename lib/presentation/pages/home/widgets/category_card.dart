@@ -36,18 +36,16 @@ class CategoryCard extends StatelessWidget {
             ),
           ),
           SizedBox(height: 5),
-          Text(
-            label,
-            style: currentTheme == ThemeData.light()
-                ? blackTextStyle.copyWith(
-                    fontSize: 12,
-                    fontWeight: regular,
-                  )
-                : whiteTextStyle.copyWith(
-                    fontSize: 12,
-                    fontWeight: regular,
-                  ),
-          ),
+          Text(label,
+              style: currentTheme
+                  ? whiteTextStyle.copyWith(
+                      fontSize: 12,
+                      fontWeight: regular,
+                    )
+                  : blackTextStyle.copyWith(
+                      fontSize: 12,
+                      fontWeight: regular,
+                    )),
         ],
       ),
     );

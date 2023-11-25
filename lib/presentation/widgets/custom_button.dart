@@ -15,7 +15,6 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     return SizedBox(
       height: 55,
       width: MediaQuery.of(context).size.width,
@@ -29,14 +28,9 @@ class CustomButton extends StatelessWidget {
         onPressed: isLoading ? null : onPressed,
         child: isLoading
             ? const CircularProgressIndicator()
-            : Text(
-                text,
-                style: currentTheme
-                    ? whiteTextStyle.copyWith(
-                        fontSize: 14, fontWeight: semiBold, letterSpacing: 0.5)
-                    : greyTextStyle.copyWith(
-                        fontSize: 14, fontWeight: semiBold, letterSpacing: 0.5),
-              ),
+            : Text(text,
+                style: whiteTextStyle.copyWith(
+                    fontSize: 14, fontWeight: semiBold, letterSpacing: 0.5)),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:capstone_project_villa/presentation/pages/detail/widgets/detail_payment_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -85,11 +86,20 @@ class _DetailDatePageState extends State<DetailDatePage> {
 
   @override
   Widget build(BuildContext context) {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
+      backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
       appBar: AppBar(
-        backgroundColor: whiteColor,
-        iconTheme: IconThemeData(color: darkGrey),
         elevation: 0,
+        backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
+          statusBarIconBrightness:
+              currentTheme ? Brightness.light : Brightness.dark,
+        ),
+        iconTheme: IconThemeData(
+          color: currentTheme ? whiteColor : darkGrey,
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -129,16 +139,16 @@ class _DetailDatePageState extends State<DetailDatePage> {
             firstDay: DateTime.now().subtract(Duration(days: 365)),
             lastDay: DateTime.now().add(Duration(days: 365)),
             calendarStyle: CalendarStyle(
-              outsideDaysVisible: false,
-              rangeStartDecoration: BoxDecoration(
-                color: primaryColor,
-                shape: BoxShape.circle,
-              ),
-              rangeEndDecoration: BoxDecoration(
-                color: primaryColor,
-                shape: BoxShape.circle,
-              ),
-            ),
+                outsideDaysVisible: false,
+                rangeStartDecoration: BoxDecoration(
+                  color: primaryColor,
+                  shape: BoxShape.circle,
+                ),
+                rangeEndDecoration: BoxDecoration(
+                  color: primaryColor,
+                  shape: BoxShape.circle,
+                ),
+                weekendTextStyle: TextStyle(color: Colors.red)),
             onFormatChanged: (format) {
               if (_calendarFormat != format) {
                 setState(() {
@@ -156,6 +166,8 @@ class _DetailDatePageState extends State<DetailDatePage> {
   }
 
   Widget review() {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
@@ -164,7 +176,9 @@ class _DetailDatePageState extends State<DetailDatePage> {
           children: [
             Text(
               'Check in',
-              style: blackTextStyle.copyWith(fontSize: 14, fontWeight: medium),
+              style: currentTheme
+                  ? whiteTextStyle.copyWith(fontSize: 14, fontWeight: medium)
+                  : blackTextStyle.copyWith(fontSize: 14, fontWeight: medium),
             ),
             Container(
               margin: EdgeInsets.only(top: 10),
@@ -181,15 +195,18 @@ class _DetailDatePageState extends State<DetailDatePage> {
                     padding: EdgeInsets.symmetric(horizontal: 13),
                     child: Icon(
                       Iconsax.calendar_1,
-                      color: darkGrey,
+                      color: currentTheme ? whiteColor : darkGrey,
                     ),
                   ),
                   Text(
                     _rangeStart == null
                         ? 'Select'
                         : Utils.dateTimeFormat2(_rangeStart!),
-                    style: blueBlackTextStyle.copyWith(
-                        fontSize: 14, fontWeight: medium),
+                    style: currentTheme
+                        ? whiteTextStyle.copyWith(
+                            fontSize: 14, fontWeight: medium)
+                        : blueBlackTextStyle.copyWith(
+                            fontSize: 14, fontWeight: medium),
                   ),
                 ],
               ),
@@ -200,7 +217,7 @@ class _DetailDatePageState extends State<DetailDatePage> {
           margin: EdgeInsets.symmetric(horizontal: 22, vertical: 5),
           child: Icon(
             Iconsax.arrow_right_1,
-            color: darkGrey,
+            color: currentTheme ? whiteColor : darkGrey,
           ),
         ),
         Column(
@@ -208,7 +225,9 @@ class _DetailDatePageState extends State<DetailDatePage> {
           children: [
             Text(
               'Check Out',
-              style: blackTextStyle.copyWith(fontSize: 14, fontWeight: medium),
+              style: currentTheme
+                  ? whiteTextStyle.copyWith(fontSize: 14, fontWeight: medium)
+                  : blackTextStyle.copyWith(fontSize: 14, fontWeight: medium),
             ),
             Container(
               margin: EdgeInsets.only(top: 10),
@@ -225,15 +244,18 @@ class _DetailDatePageState extends State<DetailDatePage> {
                     padding: EdgeInsets.symmetric(horizontal: 13),
                     child: Icon(
                       Iconsax.calendar_1,
-                      color: darkGrey,
+                      color: currentTheme ? whiteColor : darkGrey,
                     ),
                   ),
                   Text(
                     _rangeEnd == null
                         ? 'Select'
                         : Utils.dateTimeFormat2(_rangeEnd!),
-                    style: blueBlackTextStyle.copyWith(
-                        fontSize: 14, fontWeight: medium),
+                    style: currentTheme
+                        ? whiteTextStyle.copyWith(
+                            fontSize: 14, fontWeight: medium)
+                        : blueBlackTextStyle.copyWith(
+                            fontSize: 14, fontWeight: medium),
                   ),
                 ],
               ),
@@ -244,77 +266,8 @@ class _DetailDatePageState extends State<DetailDatePage> {
     );
   }
 
-  // Widget calculateTotalPrice() {
-  //   return BlocBuilder<TransactionBloc, TransactionState>(
-  //     builder: (context, state) {
-  //       if (state is TransactionLoaded) {
-  //         final totalNight = state.transactionResponse;
-  //         final totalPrice = _rangeStart != null && _rangeEnd != null
-  //             ? totalNight.night
-  //             : widget.vilas.price.toDouble();
-  //         return Container(
-  //           padding: EdgeInsets.symmetric(horizontal: 16),
-  //           height: MediaQuery.of(context).size.height * 0.16,
-  //           color: whiteColor,
-  //           child: Column(
-  //             crossAxisAlignment: CrossAxisAlignment.start,
-  //             children: [
-  //               Container(
-  //                 margin: EdgeInsets.symmetric(vertical: 12),
-  //                 child: RichText(
-  //                   text: TextSpan(
-  //                     style: blueBlackTextStyle.copyWith(
-  //                       fontSize: 24,
-  //                       fontWeight: semiBold,
-  //                     ),
-  //                     children: <TextSpan>[
-  //                       TextSpan(
-  //                         text: '${Utils.currencyFormat(totalPrice.toInt())} ',
-  //                       ),
-  //                       TextSpan(
-  //                         text: 'night'.tr(),
-  //                         style: grey100kTextStyle.copyWith(
-  //                           fontSize: 16,
-  //                           fontWeight: regular,
-  //                         ),
-  //                       ),
-  //                     ],
-  //                   ),
-  //                 ),
-  //               ),
-  //               CustomButton(
-  //                   onPressed: () {
-  //                     Navigator.push(
-  //                       context,
-  //                       MaterialPageRoute(
-  //                         builder: (context) => DetailPaymentPage(
-  //                           data: state.transactionResponse,
-  //                         ),
-  //                       ),
-  //                     );
-  //                   },
-  //                   text: 'book_now'.tr())
-  //             ],
-  //           ),
-  //         );
-  //       } else if (state is TransactionLoading) {
-  //         return Container(
-  //           alignment: Alignment.topCenter,
-  //           height: 50,
-  //           width: 50,
-  //           child: Text(
-  //             'loading...'.tr(),
-  //             style: blackTextStyle.copyWith(fontSize: 24),
-  //           ),
-  //         );
-  //       } else {
-  //         return SizedBox();
-  //       }
-  //     },
-  //   );
-  // }
-
   Widget calculateTotalPrice() {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     double totalPrice;
 
     if (_rangeStart != null && _rangeEnd != null) {
@@ -325,7 +278,7 @@ class _DetailDatePageState extends State<DetailDatePage> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16),
       height: MediaQuery.of(context).size.height * 0.16,
-      color: whiteColor,
+      color: currentTheme ? Color(0xff1E1E1E) : whiteColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -339,7 +292,11 @@ class _DetailDatePageState extends State<DetailDatePage> {
                 ),
                 children: <TextSpan>[
                   TextSpan(
-                      text: '${Utils.currencyFormat(totalPrice.toInt())} '),
+                    text: '${Utils.currencyFormat(totalPrice.toInt())} ',
+                    style: TextStyle(
+                      color: currentTheme ? whiteColor : blackColor,
+                    ),
+                  ),
                   TextSpan(
                     text: 'night'.tr(),
                     style: grey100kTextStyle.copyWith(

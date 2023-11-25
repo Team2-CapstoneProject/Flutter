@@ -5,10 +5,7 @@ import '../search/widget/shimmer_search.dart';
 import 'widget/horizontal_card.dart';
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:capstone_project_villa/presentation/widgets/custom_dialog.dart';
 
 class BookmarkPage extends StatefulWidget {
   static const String routeName = '/bookmark';
@@ -29,6 +26,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
   Widget build(BuildContext context) {
     bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
+      backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -42,24 +40,24 @@ class _BookmarkPageState extends State<BookmarkPage> {
         ),
         backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
         elevation: 0,
-        actions: [
-          Container(
-            margin: const EdgeInsets.only(right: 30),
-            child: GestureDetector(
-              onTap: () {
-                showDialog(
-                  barrierDismissible: false,
-                  context: context,
-                  builder: (context) => const CustomDialog(),
-                );
-              },
-              child: Icon(
-                Iconsax.notification,
-                color: currentTheme ? white70Color : darkGrey,
-              ),
-            ),
-          )
-        ],
+        // actions: [
+        //   Container(
+        //     margin: const EdgeInsets.only(right: 30),
+        //     child: GestureDetector(
+        //       onTap: () {
+        //         showDialog(
+        //           barrierDismissible: false,
+        //           context: context,
+        //           builder: (context) => const CustomDialog(),
+        //         );
+        //       },
+        //       child: Icon(
+        //         Iconsax.notification,
+        //         color: currentTheme ? white70Color : darkGrey,
+        //       ),
+        //     ),
+        //   )
+        // ],
       ),
       body: SafeArea(
         child: Padding(

@@ -1,3 +1,4 @@
+import 'package:capstone_project_villa/common/constants.dart';
 import 'package:capstone_project_villa/presentation/bloc/history/history_bloc.dart';
 import 'package:capstone_project_villa/presentation/pages/history/widgets/history_card.dart';
 import 'package:capstone_project_villa/presentation/pages/history/widgets/history_shimmer.dart';
@@ -5,6 +6,7 @@ import 'package:capstone_project_villa/presentation/pages/history/widgets/histor
 import 'package:capstone_project_villa/presentation/widgets/custom_lottie.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HistoryPage extends StatefulWidget {
@@ -38,7 +40,19 @@ class _HistoryPageState extends State<HistoryPage> {
 
   @override
   Widget build(BuildContext context) {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
+      backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
+      appBar: AppBar(
+        elevation: 0,
+        toolbarHeight: 0,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
+          statusBarIconBrightness:
+              currentTheme ? Brightness.light : Brightness.dark,
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(

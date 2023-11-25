@@ -10,6 +10,7 @@ class HelpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
+      backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
       appBar: AppBar(
         title: Text(
           'Request Help',

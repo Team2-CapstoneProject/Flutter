@@ -1,8 +1,10 @@
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:capstone_project_villa/common/utils.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import 'package:capstone_project_villa/data/models/response/detail_response_model.dart';
+import 'package:flutter/services.dart';
 import 'package:iconsax/iconsax.dart';
 
 class DetaikSeeAllReviewPage extends StatelessWidget {
@@ -14,16 +16,20 @@ class DetaikSeeAllReviewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
+      backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: whiteColor,
-        iconTheme: IconThemeData(color: darkGrey),
-        title: Text(
-          'Review Vila',
-          style: darkGreyTextStyle,
+        backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
+          statusBarIconBrightness:
+              currentTheme ? Brightness.light : Brightness.dark,
         ),
-        centerTitle: true,
+        iconTheme: IconThemeData(
+          color: currentTheme ? whiteColor : darkGrey,
+        ),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 20),
@@ -33,7 +39,7 @@ class DetaikSeeAllReviewPage extends StatelessWidget {
                 ? Container(
                     height: MediaQuery.of(context).size.height * 0.8,
                     child: Center(
-                      child: Text('No reviews available'),
+                      child: Text('No reviews available').tr(),
                     ),
                   )
                 : ListView.builder(

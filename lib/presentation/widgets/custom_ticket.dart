@@ -20,8 +20,9 @@ class CustomTicket extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     return TicketWidget(
-      color: grey95,
+      color: currentTheme ? white70Color.withOpacity(0.3) : grey95,
       padding: EdgeInsets.all(25),
       isCornerRounded: true,
       width: MediaQuery.of(context).size.width,
@@ -34,10 +35,12 @@ class CustomTicket extends StatelessWidget {
             children: [
               Text(
                 'Check In',
-                style: darkGreyTextStyle.copyWith(
-                  fontSize: 12,
-                  fontWeight: light,
-                ),
+                style: currentTheme
+                    ? whiteTextStyle.copyWith(fontSize: 12, fontWeight: light)
+                    : darkGreyTextStyle.copyWith(
+                        fontSize: 12,
+                        fontWeight: light,
+                      ),
               ),
               Text(Utils.dateTimeFormat4(checkin))
             ],
@@ -50,10 +53,12 @@ class CustomTicket extends StatelessWidget {
             children: [
               Text(
                 'Check Out',
-                style: darkGreyTextStyle.copyWith(
-                  fontSize: 12,
-                  fontWeight: light,
-                ),
+                style: currentTheme
+                    ? whiteTextStyle.copyWith(fontSize: 12, fontWeight: light)
+                    : darkGreyTextStyle.copyWith(
+                        fontSize: 12,
+                        fontWeight: light,
+                      ),
               ),
               Text(Utils.dateTimeFormat4(checkout)),
             ],
@@ -70,10 +75,12 @@ class CustomTicket extends StatelessWidget {
             children: [
               Text(
                 'Taxes 5%',
-                style: darkGreyTextStyle.copyWith(
-                  fontSize: 12,
-                  fontWeight: light,
-                ),
+                style: currentTheme
+                    ? whiteTextStyle.copyWith(fontSize: 12, fontWeight: light)
+                    : darkGreyTextStyle.copyWith(
+                        fontSize: 12,
+                        fontWeight: light,
+                      ),
               ),
               Text(Utils.currencyFormat2(taxes))
             ],
@@ -86,10 +93,12 @@ class CustomTicket extends StatelessWidget {
             children: [
               Text(
                 'Night',
-                style: darkGreyTextStyle.copyWith(
-                  fontSize: 12,
-                  fontWeight: light,
-                ),
+                style: currentTheme
+                    ? whiteTextStyle.copyWith(fontSize: 12, fontWeight: light)
+                    : darkGreyTextStyle.copyWith(
+                        fontSize: 12,
+                        fontWeight: light,
+                      ),
               ),
               Text(Utils.currencyFormat2(night))
             ],
@@ -102,10 +111,12 @@ class CustomTicket extends StatelessWidget {
             children: [
               Text(
                 'Total',
-                style: darkGreyTextStyle.copyWith(
-                  fontSize: 12,
-                  fontWeight: regular,
-                ),
+                style: currentTheme
+                    ? whiteTextStyle.copyWith(fontSize: 12, fontWeight: light)
+                    : darkGreyTextStyle.copyWith(
+                        fontSize: 12,
+                        fontWeight: light,
+                      ),
               ),
               Text(Utils.currencyFormat2(total))
             ],

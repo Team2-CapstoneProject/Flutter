@@ -36,16 +36,19 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     bool currentTheme = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
+      backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: whiteColor,
-          statusBarIconBrightness: Brightness.dark,
+          statusBarColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
+          statusBarIconBrightness:
+              currentTheme ? Brightness.light : Brightness.dark,
         ),
         iconTheme: IconThemeData(
-          color: currentTheme ? whiteColor : blackColor,
+          color: currentTheme ? whiteColor : darkGrey,
         ),
       ),
       body: ListView(

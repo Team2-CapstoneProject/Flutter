@@ -3,6 +3,7 @@ import 'package:capstone_project_villa/data/models/response/transaction_response
 import 'package:capstone_project_villa/presentation/widgets/custom_card_vila.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_ticket.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class DetailPaymentPage extends StatefulWidget {
   final TransactionResponseModel data;
@@ -15,13 +16,22 @@ class DetailPaymentPage extends StatefulWidget {
 class _DetailPaymentPageState extends State<DetailPaymentPage> {
   @override
   Widget build(BuildContext context) {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     final vila = widget.data.vila;
     final payment = widget.data;
     return Scaffold(
+      backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
       appBar: AppBar(
         elevation: 0,
-        iconTheme: IconThemeData(color: darkGrey),
-        backgroundColor: whiteColor,
+        backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
+          statusBarIconBrightness:
+              currentTheme ? Brightness.light : Brightness.dark,
+        ),
+        iconTheme: IconThemeData(
+          color: currentTheme ? whiteColor : darkGrey,
+        ),
       ),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 20),
@@ -33,10 +43,13 @@ class _DetailPaymentPageState extends State<DetailPaymentPage> {
                 margin: EdgeInsets.only(top: 10, bottom: 20),
                 child: Text(
                   'Payment',
-                  style: blackTextStyle.copyWith(
-                    fontSize: 24,
-                    fontWeight: semiBold,
-                  ),
+                  style: currentTheme
+                      ? whiteTextStyle.copyWith(
+                          fontSize: 24, fontWeight: semiBold)
+                      : blackTextStyle.copyWith(
+                          fontSize: 24,
+                          fontWeight: semiBold,
+                        ),
                 ),
               ),
 
