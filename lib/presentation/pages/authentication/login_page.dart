@@ -48,6 +48,7 @@ class _LoginPageState extends State<LoginPage> {
       statusBarIconBrightness: Brightness.dark,
     ));
     return Scaffold(
+      backgroundColor: whiteColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Form(

@@ -42,6 +42,7 @@ class _ForgotPageState extends State<ForgotPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: whiteColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Form(

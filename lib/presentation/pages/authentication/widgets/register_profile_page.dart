@@ -49,6 +49,7 @@ class _RegisterProfilePageState extends State<RegisterProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: whiteColor,
       body: SafeArea(
         child: ListView(
           children: [

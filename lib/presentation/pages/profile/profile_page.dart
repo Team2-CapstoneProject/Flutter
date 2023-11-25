@@ -94,9 +94,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             fontSize: 12, fontWeight: light),
                   ),
 
-                  const SizedBox(
-                    height: 10.0,
-                  ),
+                  // const SizedBox(
+                  //   height: 10.0,
+                  // ),
 
                   // Divider
                   Divider(
