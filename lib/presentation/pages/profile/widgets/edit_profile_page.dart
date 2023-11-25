@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:capstone_project_villa/data/models/request/profile_request_model.dart';
 import 'package:capstone_project_villa/presentation/bloc/profile/profile_bloc.dart';
-import 'package:capstone_project_villa/presentation/pages/navbar/bottom_navbar.dart';
+import 'package:capstone_project_villa/presentation/pages/profile/profile_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +11,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:capstone_project_villa/data/models/response/profile_response_model.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
+import 'package:image_picker/image_picker.dart';
 
 class EditProfilePage extends StatefulWidget {
   final ProfileResponseModel data;
@@ -32,14 +35,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
   late ValueNotifier<bool> _isChangePhoneNumber;
 
   @override
-  void dispose() {
-    _fullNameController.dispose();
-    _nickNameController.dispose();
-    _phoneController.dispose();
-    super.dispose();
-  }
-
-  @override
   void initState() {
     _isChangeFullName = ValueNotifier(false);
     _isChangeNickname = ValueNotifier(false);
@@ -47,23 +42,34 @@ class _EditProfilePageState extends State<EditProfilePage> {
     super.initState();
   }
 
-  // String imageName = "";
-  // File? file;
+  @override
+  void dispose() {
+    _fullNameController.dispose();
+    _nickNameController.dispose();
+    _phoneController.dispose();
+    super.dispose();
+  }
 
-  // void _getImage() async {
-  //   final img = await ImagePicker().pickImage(source: ImageSource.gallery);
-  //   if (img == null) return;
+  String? imagePath;
+  File? file;
 
-  //   final imageTemporary = File(img.path);
+  void _getImage() async {
+    final img = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (img == null) return;
 
-  //   setState(() {
-  //     file = imageTemporary;
-  //     imageName = img.name;
-  //   });
-  // }
+    final imageTemporary = File(img.path);
+
+    setState(() {
+      file = imageTemporary;
+      imagePath = img.path;
+
+      print('New image path: $imagePath');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -85,7 +91,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     child: Icon(
                       Icons.arrow_back,
                       size: 24,
-                      color: darkGrey,
+                      color: currentTheme ? whiteColor : greyColor,
                     ),
                   ),
                 ),
@@ -94,19 +100,29 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   margin: const EdgeInsets.only(top: 28),
                   child: Text(
                     'edit_your_profile'.tr(),
-                    style: blackTextStyle.copyWith(
-                        fontSize: 32, fontWeight: semiBold),
+                    style: currentTheme
+                        ? whiteTextStyle.copyWith(
+                            fontSize: 24, fontWeight: semiBold)
+                        : blackTextStyle.copyWith(
+                            fontSize: 24, fontWeight: semiBold),
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(top: 30, bottom: 50),
-                  width: 152,
-                  height: 152,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: NetworkImage(widget.data.image),
-                      fit: BoxFit.cover,
+                GestureDetector(
+                  onTap: () {
+                    _getImage();
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 30, bottom: 50),
+                    width: 152,
+                    height: 152,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: file != null
+                          ? DecorationImage(
+                              image: FileImage(file!), fit: BoxFit.cover)
+                          : DecorationImage(
+                              image: NetworkImage(widget.data.image),
+                              fit: BoxFit.cover),
                     ),
                   ),
                 ),
@@ -123,7 +139,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                       borderSide: BorderSide(
-                        color: grey95,
+                        color: currentTheme ? darkerGrey : grey95,
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
@@ -133,11 +149,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                     ),
                     filled: true,
-                    fillColor: _isChangeFullName.value ? cyanBlue : whiteColor,
+                    fillColor: currentTheme
+                        ? darkGrey
+                        : (_isChangeFullName.value
+                            ? cyanBlue
+                            : whiteColor), //blueBlack : darkGrey
                     hintText: 'full_name'.tr(),
                     prefixIcon: Icon(
                       Iconsax.user,
-                      color: greyColor,
+                      color: currentTheme ? grey100 : greyColor,
                     ),
                   ),
                   onChanged: (value) {
@@ -163,7 +183,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                       borderSide: BorderSide(
-                        color: grey95,
+                        color: currentTheme ? darkerGrey : grey95,
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
@@ -173,11 +193,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                     ),
                     filled: true,
-                    fillColor: _isChangeNickname.value ? cyanBlue : whiteColor,
+                    fillColor: currentTheme
+                        ? darkGrey
+                        : (_isChangeFullName.value ? cyanBlue : whiteColor),
                     hintText: 'nickname'.tr(),
                     prefixIcon: Icon(
                       Iconsax.user,
-                      color: greyColor,
+                      color: currentTheme ? grey100 : greyColor,
                     ),
                   ),
                   onChanged: (value) {
@@ -201,7 +223,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     hintText: widget.data.email,
                     prefixIcon: Icon(
                       Iconsax.sms,
-                      color: greyColor,
+                      color: currentTheme ? grey100 : greyColor,
                     ),
                   ),
                 ),
@@ -222,7 +244,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                       borderSide: BorderSide(
-                        color: grey95,
+                        color: currentTheme ? darkerGrey : grey95,
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
@@ -232,12 +254,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                     ),
                     filled: true,
-                    fillColor:
-                        _isChangePhoneNumber.value ? cyanBlue : whiteColor,
+                    fillColor: currentTheme
+                        ? darkGrey
+                        : (_isChangeFullName.value ? cyanBlue : whiteColor),
                     hintText: 'phone_number'.tr(),
                     prefixIcon: Icon(
                       Iconsax.call,
-                      color: darkGrey,
+                      color: currentTheme ? grey100 : greyColor,
                     ),
                   ),
                   onChanged: (value) {
@@ -260,7 +283,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             Navigator.of(context).pop();
                             Navigator.pushReplacementNamed(
                               context,
-                              BottomNavbarPage.routeName,
+                              ProfilePage.routeName,
                             );
                           });
                           return AlertDialog(
@@ -305,15 +328,20 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   builder: (context, state) {
                     return CustomButton(
                       onPressed: () {
+                        print('Full Name: ${_fullNameController.text}');
+                        print('Nickname: ${_nickNameController.text}');
+                        print('Phone Number: ${_phoneController.text}');
+                        print('Image Path: ${file?.path}');
+
                         if (formKey.currentState!.validate()) {
                           context.read<ProfileBloc>().add(
                                 ProfileUpdateEvent(
-                                  profileRequestModel: ProfileRequestModel(
-                                    fullname: _fullNameController.text,
-                                    nickname: _nickNameController.text,
-                                    phone_number: _phoneController.text,
-                                  ),
-                                ),
+                                    profileRequestModel: ProfileRequestModel(
+                                      fullname: _fullNameController.text,
+                                      nickname: _nickNameController.text,
+                                      phone_number: _phoneController.text,
+                                    ),
+                                    imageFile: file),
                               );
                         }
                       },

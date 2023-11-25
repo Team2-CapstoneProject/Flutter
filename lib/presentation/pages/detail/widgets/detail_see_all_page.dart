@@ -11,15 +11,18 @@ class DetailSeeAllPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: whiteColor,
+        backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: whiteColor,
           statusBarIconBrightness: Brightness.dark,
         ),
-        iconTheme: IconThemeData(color: darkGrey),
+        iconTheme: IconThemeData(
+          color: currentTheme ? whiteColor : blackColor,
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),

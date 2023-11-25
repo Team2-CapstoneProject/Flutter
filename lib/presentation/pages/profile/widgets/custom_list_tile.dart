@@ -13,18 +13,22 @@ class CustomListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
+
     return ListTile(
       leading: Icon(
         icon,
-        color: icon == Iconsax.logout ? redCandy : greyColor,
+        color: (icon == Iconsax.logout && !currentTheme) ? redCandy : greyColor,
         size: 24,
       ),
       title: Text(
         text,
         style: GoogleFonts.poppins(
-          color: text == 'Logout' ? redCandy : blackColor,
+          color: (text == 'Logout')
+              ? redCandy
+              : (currentTheme ? Colors.white : blackColor),
           fontSize: 14,
-          fontWeight: regular,
+          fontWeight: FontWeight.w500,
         ),
       ),
       onTap: onTap,

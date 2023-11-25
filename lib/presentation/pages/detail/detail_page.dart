@@ -35,15 +35,18 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: whiteColor,
+        backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: whiteColor,
           statusBarIconBrightness: Brightness.dark,
         ),
-        iconTheme: IconThemeData(color: darkGrey),
+        iconTheme: IconThemeData(
+          color: currentTheme ? whiteColor : blackColor,
+        ),
       ),
       body: ListView(
         scrollDirection: Axis.vertical,
@@ -91,10 +94,11 @@ class _DetailPageState extends State<DetailPage> {
                             margin: EdgeInsets.only(bottom: 5),
                             child: Text(
                               details[0].name,
-                              style: blackTextStyle.copyWith(
-                                fontSize: 24,
-                                fontWeight: semiBold,
-                              ),
+                              style: currentTheme
+                                  ? whiteTextStyle.copyWith(
+                                      fontSize: 24, fontWeight: semiBold)
+                                  : blackTextStyle.copyWith(
+                                      fontSize: 24, fontWeight: semiBold),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
@@ -102,16 +106,17 @@ class _DetailPageState extends State<DetailPage> {
                           // Location Vila
                           Text(
                             details[0].location,
-                            style: greyTextStyle.copyWith(
-                              fontSize: 14,
-                              fontWeight: light,
-                            ),
+                            style: currentTheme
+                                ? whiteTextStyle.copyWith(
+                                    fontSize: 14, fontWeight: light)
+                                : greyTextStyle.copyWith(
+                                    fontSize: 14, fontWeight: light),
                             overflow: TextOverflow.ellipsis,
                           ),
 
                           // Divider
                           Divider(
-                            color: white70Color,
+                            color: currentTheme ? cyanBlue : white70Color,
                           ),
 
                           // Slider Image
@@ -125,10 +130,13 @@ class _DetailPageState extends State<DetailPage> {
                                   children: [
                                     Text(
                                       'gallery_photos'.tr(),
-                                      style: blackTextStyle.copyWith(
-                                        fontSize: 14,
-                                        fontWeight: semiBold,
-                                      ),
+                                      style: currentTheme
+                                          ? whiteTextStyle.copyWith(
+                                              fontSize: 14,
+                                              fontWeight: semiBold)
+                                          : blackTextStyle.copyWith(
+                                              fontSize: 14,
+                                              fontWeight: semiBold),
                                     ),
                                     InkWell(
                                       onTap: () {
@@ -148,10 +156,12 @@ class _DetailPageState extends State<DetailPage> {
                                       },
                                       child: Text(
                                         'see_all'.tr(),
-                                        style: primaryTextStyle.copyWith(
-                                          fontSize: 12,
-                                          fontWeight: light,
-                                        ),
+                                        style: currentTheme
+                                            ? whiteTextStyle.copyWith(
+                                                fontSize: 12, fontWeight: light)
+                                            : blackTextStyle.copyWith(
+                                                fontSize: 12,
+                                                fontWeight: light),
                                       ),
                                     )
                                   ],
@@ -193,10 +203,11 @@ class _DetailPageState extends State<DetailPage> {
                               children: [
                                 Text(
                                   'description'.tr(),
-                                  style: blackTextStyle.copyWith(
-                                    fontSize: 14,
-                                    fontWeight: medium,
-                                  ),
+                                  style: currentTheme
+                                      ? whiteTextStyle.copyWith(
+                                          fontSize: 14, fontWeight: medium)
+                                      : blackTextStyle.copyWith(
+                                          fontSize: 14, fontWeight: medium),
                                 ),
                                 const SizedBox(
                                   height: 10.0,
@@ -210,10 +221,13 @@ class _DetailPageState extends State<DetailPage> {
                                             ? details[0].description
                                             : 'no_description_available'.tr(),
                                         textAlign: TextAlign.justify,
-                                        style: greyTextStyle.copyWith(
-                                          fontSize: 12,
-                                          fontWeight: regular,
-                                        ),
+                                        style: currentTheme
+                                            ? whiteTextStyle.copyWith(
+                                                fontSize: 12,
+                                                fontWeight: regular)
+                                            : greyTextStyle.copyWith(
+                                                fontSize: 12,
+                                                fontWeight: regular),
                                       )
                                     : Text(
                                         details.isNotEmpty &&
@@ -229,10 +243,13 @@ class _DetailPageState extends State<DetailPage> {
                                                 : details[0].description)
                                             : 'no_description_available'.tr(),
                                         textAlign: TextAlign.justify,
-                                        style: greyTextStyle.copyWith(
-                                          fontSize: 12,
-                                          fontWeight: regular,
-                                        ),
+                                        style: currentTheme
+                                            ? whiteTextStyle.copyWith(
+                                                fontSize: 12,
+                                                fontWeight: regular)
+                                            : greyTextStyle.copyWith(
+                                                fontSize: 12,
+                                                fontWeight: regular),
                                       ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
@@ -247,11 +264,17 @@ class _DetailPageState extends State<DetailPage> {
                                         isExpanded
                                             ? 'see_less'.tr()
                                             : 'see_more'.tr(),
-                                        style: primaryTextStyle.copyWith(
-                                          decoration: TextDecoration.underline,
-                                          fontSize: 12,
-                                          fontWeight: bold,
-                                        ),
+                                        style: currentTheme
+                                            ? whiteTextStyle.copyWith(
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                fontSize: 12,
+                                                fontWeight: bold)
+                                            : primaryTextStyle.copyWith(
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                fontSize: 12,
+                                                fontWeight: bold),
                                       ),
                                     ),
                                   ],
@@ -267,10 +290,11 @@ class _DetailPageState extends State<DetailPage> {
                               children: [
                                 Text(
                                   'facilities'.tr(),
-                                  style: blackTextStyle.copyWith(
-                                    fontSize: 14,
-                                    fontWeight: medium,
-                                  ),
+                                  style: currentTheme
+                                      ? whiteTextStyle.copyWith(
+                                          fontSize: 14, fontWeight: medium)
+                                      : blackTextStyle.copyWith(
+                                          fontSize: 14, fontWeight: medium),
                                 ),
                                 const SizedBox(
                                   height: 30.0,
@@ -293,15 +317,20 @@ class _DetailPageState extends State<DetailPage> {
                                             facilities[index].facilities.icon,
                                             width: 28,
                                             height: 28,
-                                            color: primaryColor,
+                                            color: currentTheme
+                                                ? grey100
+                                                : primaryColor,
                                           ),
                                           SizedBox(height: 10),
                                           Text(
                                             facilities[index].facilities.label,
-                                            style: primaryTextStyle.copyWith(
-                                              fontSize: 12,
-                                              fontWeight: light,
-                                            ),
+                                            style: currentTheme
+                                                ? whiteTextStyle.copyWith(
+                                                    fontSize: 12,
+                                                    fontWeight: light)
+                                                : primaryTextStyle.copyWith(
+                                                    fontSize: 12,
+                                                    fontWeight: light),
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ],
@@ -322,10 +351,11 @@ class _DetailPageState extends State<DetailPage> {
                                 children: [
                                   Text(
                                     'reviews'.tr(),
-                                    style: blackTextStyle.copyWith(
-                                      fontSize: 14,
-                                      fontWeight: medium,
-                                    ),
+                                    style: currentTheme
+                                        ? whiteTextStyle.copyWith(
+                                            fontSize: 14, fontWeight: medium)
+                                        : greyTextStyle.copyWith(
+                                            fontSize: 14, fontWeight: medium),
                                   ),
                                   GestureDetector(
                                     onTap: () {
@@ -341,10 +371,11 @@ class _DetailPageState extends State<DetailPage> {
                                     },
                                     child: Text(
                                       'see_all'.tr(),
-                                      style: primaryTextStyle.copyWith(
-                                        fontSize: 12,
-                                        fontWeight: light,
-                                      ),
+                                      style: currentTheme
+                                          ? whiteTextStyle.copyWith(
+                                              fontSize: 12, fontWeight: light)
+                                          : primaryTextStyle.copyWith(
+                                              fontSize: 12, fontWeight: light),
                                     ),
                                   ),
                                 ],
@@ -532,7 +563,8 @@ class _DetailPageState extends State<DetailPage> {
             return Container(
               padding: EdgeInsets.symmetric(horizontal: 16),
               height: MediaQuery.of(context).size.height * 0.16,
-              color: whiteColor,
+              color:
+                  currentTheme ? Color.fromARGB(255, 20, 20, 20) : whiteColor,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -540,20 +572,26 @@ class _DetailPageState extends State<DetailPage> {
                     margin: EdgeInsets.symmetric(vertical: 12),
                     child: RichText(
                       text: TextSpan(
-                        style: blueBlackTextStyle.copyWith(
-                          fontSize: 24,
-                          fontWeight: semiBold,
-                        ),
+                        style: currentTheme
+                            ? whiteTextStyle.copyWith(
+                                fontSize: 24, fontWeight: semiBold)
+                            : blueBlackTextStyle.copyWith(
+                                fontSize: 24,
+                                fontWeight: semiBold,
+                              ),
                         children: <TextSpan>[
                           TextSpan(
                             text: '${Utils.currencyFormat(vila.price)} ',
                           ),
                           TextSpan(
                             text: 'night'.tr(),
-                            style: grey100kTextStyle.copyWith(
-                              fontSize: 16,
-                              fontWeight: regular,
-                            ),
+                            style: currentTheme
+                                ? whiteTextStyle.copyWith(
+                                    fontSize: 16, fontWeight: regular)
+                                : grey100kTextStyle.copyWith(
+                                    fontSize: 16,
+                                    fontWeight: regular,
+                                  ),
                           ),
                         ],
                       ),

@@ -1,11 +1,14 @@
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:capstone_project_villa/common/utils.dart';
-import 'package:capstone_project_villa/data/models/response/search_response_model.dart';
+import 'package:capstone_project_villa/data/models/request/bookmark_request_model.dart';
+import 'package:capstone_project_villa/data/models/response/bookmark_response_model.dart';
+import 'package:capstone_project_villa/presentation/bloc/bookmark/bookmark_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HorizontalCard extends StatelessWidget {
-  final Vila vila;
+  final BookmarkedVila vila;
 
   const HorizontalCard({
     Key? key,
@@ -14,14 +17,13 @@ class HorizontalCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     return Container(
       margin: EdgeInsets.only(bottom: 30),
       height: 145,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: currentTheme ? white70Color.withOpacity(0.3) : grey95,
+        color: grey95,
       ),
       child: Row(
         children: [
@@ -33,7 +35,7 @@ class HorizontalCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               image: DecorationImage(
                 image: NetworkImage(
-                  vila.vilaImages.sliderImage,
+                  vila.vila_image,
                 ),
                 fit: BoxFit.cover,
               ),
@@ -52,12 +54,11 @@ class HorizontalCard extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(bottom: 5),
                         child: Text(
-                          vila.name,
-                          style: currentTheme
-                              ? whiteTextStyle.copyWith(
-                                  fontSize: 14, fontWeight: medium)
-                              : blackTextStyle.copyWith(
-                                  fontSize: 14, fontWeight: medium),
+                          vila.vila_name,
+                          style: blackTextStyle.copyWith(
+                            fontSize: 14,
+                            fontWeight: medium,
+                          ),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -66,21 +67,18 @@ class HorizontalCard extends StatelessWidget {
                           Icon(
                             Iconsax.location,
                             size: 12,
-                            color: currentTheme
-                                ? white70Color.withOpacity(0.5)
-                                : darkGrey,
+                            color: darkGrey,
                           ),
                           const SizedBox(
                             width: 5.0,
                           ),
                           Flexible(
                             child: Text(
-                              vila.location,
-                              style: currentTheme
-                                  ? whiteTextStyle.copyWith(
-                                      fontSize: 10, fontWeight: medium)
-                                  : blackTextStyle.copyWith(
-                                      fontSize: 10, fontWeight: medium),
+                              vila.vila_location,
+                              style: blackTextStyle.copyWith(
+                                fontSize: 10,
+                                fontWeight: light,
+                              ),
                               overflow: TextOverflow.ellipsis,
                             ),
                           )
@@ -93,32 +91,49 @@ class HorizontalCard extends StatelessWidget {
                             children: <TextSpan>[
                               TextSpan(
                                 text: Utils.currencyFormat(
-                                  vila.price,
+                                  vila.vila_price,
                                 ),
-                                style: currentTheme
-                                    ? whiteTextStyle.copyWith(
-                                        fontSize: 14, fontWeight: medium)
-                                    : darkGreyTextStyle.copyWith(
-                                        fontSize: 14, fontWeight: medium),
+                                style: darkGreyTextStyle.copyWith(
+                                  fontSize: 14,
+                                  fontWeight: medium,
+                                ),
                               ),
                               TextSpan(
                                 text: ' /night',
-                                style: currentTheme
-                                    ? whiteTextStyle.copyWith(
-                                        fontSize: 14, fontWeight: medium)
-                                    : darkGreyTextStyle.copyWith(
-                                        fontSize: 14, fontWeight: medium),
+                                style: darkGreyTextStyle.copyWith(
+                                  fontSize: 12,
+                                  fontWeight: light,
+                                ),
                               ),
                             ],
                           ),
                         ),
                       ),
-                      // Align(
-                      //   alignment: Alignment.centerRight,
-                      //   child: Icon(
-                      //     Iconsax.archive_1,
-                      //   ),
-                      // )
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: BlocConsumer<BookmarkBloc, BookmarkState>(
+                          listener: (context, state) {
+                            // print('masuk 1: ' + state.toString());
+                          },
+                          builder: (context, state) {
+                            return GestureDetector(
+                              onTap: () {
+                                // print('masuk2');
+                                context.read<BookmarkBloc>().add(
+                                      ChangeBookmarkEvent(
+                                        BookmarkRequestModel(
+                                          id: vila.vila_id,
+                                        ),
+                                      ),
+                                    );
+                              },
+                              child: Icon(
+                                Iconsax.archive_tick1,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
                     ],
                   ),
                 ),

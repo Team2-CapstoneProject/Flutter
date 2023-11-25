@@ -25,8 +25,10 @@ class HistoryTicket extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
+
     return TicketWidget(
-      color: grey95,
+      color: currentTheme ? white70Color.withOpacity(0.3) : grey95,
       padding: EdgeInsets.symmetric(vertical: 15, horizontal: 25),
       isCornerRounded: true,
       width: MediaQuery.of(context).size.width,
@@ -40,15 +42,16 @@ class HistoryTicket extends StatelessWidget {
             children: [
               Text(
                 'Name',
-                style: darkGreyTextStyle.copyWith(
-                  fontSize: 12,
-                  fontWeight: light,
-                ),
+                style: currentTheme
+                    ? whiteTextStyle.copyWith(fontSize: 12, fontWeight: light)
+                    : darkGreyTextStyle.copyWith(
+                        fontSize: 12, fontWeight: light),
               ),
               Text(
                 name,
-                style:
-                    blackTextStyle.copyWith(fontSize: 14, fontWeight: medium),
+                style: currentTheme
+                    ? whiteTextStyle.copyWith(fontSize: 14, fontWeight: medium)
+                    : blackTextStyle.copyWith(fontSize: 14, fontWeight: medium),
               ),
             ],
           ),
@@ -61,15 +64,16 @@ class HistoryTicket extends StatelessWidget {
             children: [
               Text(
                 'Check In',
-                style: darkGreyTextStyle.copyWith(
-                  fontSize: 12,
-                  fontWeight: light,
-                ),
+                style: currentTheme
+                    ? whiteTextStyle.copyWith(fontSize: 12, fontWeight: light)
+                    : darkGreyTextStyle.copyWith(
+                        fontSize: 12, fontWeight: light),
               ),
               Text(
                 Utils.dateTimeFormat4(checkIn),
-                style:
-                    blackTextStyle.copyWith(fontSize: 14, fontWeight: medium),
+                style: currentTheme
+                    ? whiteTextStyle.copyWith(fontSize: 14, fontWeight: medium)
+                    : blackTextStyle.copyWith(fontSize: 14, fontWeight: medium),
               )
             ],
           ),
@@ -82,15 +86,16 @@ class HistoryTicket extends StatelessWidget {
             children: [
               Text(
                 'Check Out',
-                style: darkGreyTextStyle.copyWith(
-                  fontSize: 12,
-                  fontWeight: light,
-                ),
+                style: currentTheme
+                    ? whiteTextStyle.copyWith(fontSize: 12, fontWeight: light)
+                    : darkGreyTextStyle.copyWith(
+                        fontSize: 12, fontWeight: light),
               ),
               Text(
                 Utils.dateTimeFormat4(checkOut),
-                style:
-                    blackTextStyle.copyWith(fontSize: 14, fontWeight: medium),
+                style: currentTheme
+                    ? whiteTextStyle.copyWith(fontSize: 14, fontWeight: medium)
+                    : blackTextStyle.copyWith(fontSize: 14, fontWeight: medium),
               )
             ],
           ),
@@ -118,7 +123,10 @@ class HistoryTicket extends StatelessWidget {
           const SizedBox(
             height: 22.0,
           ),
-          MySeparator(height: 3, color: whiteColor),
+          MySeparator(
+            height: 3,
+            color: currentTheme ? white70Color.withOpacity(0.3) : whiteColor,
+          ),
           const SizedBox(
             height: 30.0,
           ),
@@ -128,15 +136,16 @@ class HistoryTicket extends StatelessWidget {
             children: [
               Text(
                 'Taxes 5%',
-                style: darkGreyTextStyle.copyWith(
-                  fontSize: 12,
-                  fontWeight: light,
-                ),
+                style: currentTheme
+                    ? whiteTextStyle.copyWith(fontSize: 12, fontWeight: light)
+                    : darkGreyTextStyle.copyWith(
+                        fontSize: 12, fontWeight: light),
               ),
               Text(
                 Utils.currencyFormat2(taxes),
-                style:
-                    blackTextStyle.copyWith(fontSize: 14, fontWeight: medium),
+                style: currentTheme
+                    ? whiteTextStyle.copyWith(fontSize: 14, fontWeight: medium)
+                    : blackTextStyle.copyWith(fontSize: 14, fontWeight: medium),
               )
             ],
           ),
@@ -149,15 +158,16 @@ class HistoryTicket extends StatelessWidget {
             children: [
               Text(
                 'Night',
-                style: darkGreyTextStyle.copyWith(
-                  fontSize: 12,
-                  fontWeight: light,
-                ),
+                style: currentTheme
+                    ? whiteTextStyle.copyWith(fontSize: 12, fontWeight: light)
+                    : darkGreyTextStyle.copyWith(
+                        fontSize: 12, fontWeight: light),
               ),
               Text(
                 Utils.currencyFormat2(night),
-                style:
-                    blackTextStyle.copyWith(fontSize: 14, fontWeight: medium),
+                style: currentTheme
+                    ? whiteTextStyle.copyWith(fontSize: 14, fontWeight: medium)
+                    : blackTextStyle.copyWith(fontSize: 14, fontWeight: medium),
               )
             ],
           ),
@@ -170,15 +180,16 @@ class HistoryTicket extends StatelessWidget {
             children: [
               Text(
                 'Total',
-                style: darkGreyTextStyle.copyWith(
-                  fontSize: 12,
-                  fontWeight: regular,
-                ),
+                style: currentTheme
+                    ? whiteTextStyle.copyWith(fontSize: 12, fontWeight: light)
+                    : darkGreyTextStyle.copyWith(
+                        fontSize: 12, fontWeight: light),
               ),
               Text(
                 Utils.currencyFormat2(total),
-                style:
-                    blackTextStyle.copyWith(fontSize: 14, fontWeight: semiBold),
+                style: currentTheme
+                    ? whiteTextStyle.copyWith(fontSize: 14, fontWeight: medium)
+                    : blackTextStyle.copyWith(fontSize: 14, fontWeight: medium),
               )
             ],
           ),

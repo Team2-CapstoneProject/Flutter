@@ -1,16 +1,20 @@
 import 'package:capstone_project_villa/presentation/bloc/auth/auth_bloc.dart';
 import 'package:capstone_project_villa/presentation/bloc/profile/profile_bloc.dart';
 import 'package:capstone_project_villa/presentation/pages/authentication/login_page.dart';
+import 'package:capstone_project_villa/presentation/pages/profile/help_page.dart';
+import 'package:capstone_project_villa/presentation/pages/profile/security_page.dart';
 import 'package:capstone_project_villa/presentation/pages/profile/widgets/custom_shimmer.dart';
 import 'package:capstone_project_villa/presentation/pages/profile/widgets/edit_profile_page.dart';
 import 'package:capstone_project_villa/presentation/pages/profile/widgets/locale_dialog.dart';
-import 'package:capstone_project_villa/presentation/widgets/custom_dialog.dart';
+// import 'package:capstone_project_villa/presentation/widgets/custom_dialog.dart';
 import 'package:capstone_project_villa/presentation/pages/profile/widgets/custom_list_tile.dart';
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
+
+import '../../bloc/theme/theme_bloc.dart';
 
 class ProfilePage extends StatefulWidget {
   static const String routeName = '/profile';
@@ -29,6 +33,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
@@ -59,16 +65,22 @@ class _ProfilePageState extends State<ProfilePage> {
                   // Username
                   Text(
                     user.nickname.toString(),
-                    style: blackTextStyle.copyWith(
-                        fontSize: 24, fontWeight: semiBold),
+                    style: currentTheme
+                        ? whiteTextStyle.copyWith(
+                            fontSize: 24, fontWeight: semiBold)
+                        : blackTextStyle.copyWith(
+                            fontSize: 24, fontWeight: semiBold),
                   ),
                   const SizedBox(height: 5.0),
 
                   // Email
                   Text(
                     user.email.toString(),
-                    style:
-                        greyTextStyle.copyWith(fontSize: 14, fontWeight: light),
+                    style: currentTheme
+                        ? whiteTextStyle.copyWith(
+                            fontSize: 12, fontWeight: light)
+                        : greyTextStyle.copyWith(
+                            fontSize: 12, fontWeight: light),
                   ),
 
                   const SizedBox(
@@ -104,10 +116,16 @@ class _ProfilePageState extends State<ProfilePage> {
                           icon: Iconsax.frame_4,
                           text: 'security'.tr(),
                           onTap: () {
-                            showDialog(
-                              barrierDismissible: false,
-                              context: context,
-                              builder: (context) => const CustomDialog(),
+                            // showDialog(
+                            //   barrierDismissible: false,
+                            //   context: context,
+                            //   builder: (context) => const CustomDialog(),
+                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const SecurityPage(),
+                              ),
                             );
                           },
                         ),
@@ -117,10 +135,16 @@ class _ProfilePageState extends State<ProfilePage> {
                           icon: Iconsax.info_circle,
                           text: 'help'.tr(),
                           onTap: () {
-                            showDialog(
-                              barrierDismissible: false,
-                              context: context,
-                              builder: (context) => const CustomDialog(),
+                            // showDialog(
+                            //   barrierDismissible: false,
+                            //   context: context,
+                            //   builder: (context) => const CustomDialog(),
+                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const HelpPage(),
+                              ),
                             );
                           },
                         ),
@@ -199,9 +223,27 @@ class _ProfilePageState extends State<ProfilePage> {
                           text: 'dark_theme'.tr(),
                           onTap: () {
                             showDialog(
-                              barrierDismissible: false,
                               context: context,
-                              builder: (context) => const CustomDialog(),
+                              builder: (context) => AlertDialog(
+                                title: Text('Select Theme'.tr()),
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    ListTile(
+                                      title: Text('Light Theme'.tr()),
+                                      onTap: () {
+                                        _changeTheme(context, ThemeType.light);
+                                      },
+                                    ),
+                                    ListTile(
+                                      title: Text('Dark Theme'.tr()),
+                                      onTap: () {
+                                        _changeTheme(context, ThemeType.dark);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
                             );
                           },
                         ),
@@ -241,5 +283,10 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       )),
     );
+  }
+
+  void _changeTheme(BuildContext context, ThemeType themeType) {
+    BlocProvider.of<ThemeBloc>(context).add(ChangeTheme(themeType));
+    Navigator.pop(context);
   }
 }

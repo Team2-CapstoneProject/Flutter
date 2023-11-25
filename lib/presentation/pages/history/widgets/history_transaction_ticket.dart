@@ -6,6 +6,7 @@ import 'package:capstone_project_villa/presentation/pages/history/widgets/histor
 import 'package:capstone_project_villa/presentation/widgets/custom_card_vila.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_circular.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HistoryTransactionTicket extends StatefulWidget {
@@ -26,10 +27,20 @@ class _HistoryTransactionTicketState extends State<HistoryTransactionTicket> {
 
   @override
   Widget build(BuildContext context) {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: whiteColor,
-          iconTheme: IconThemeData(color: darkGrey),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              size: 24,
+              color: currentTheme ? whiteColor : greyColor,
+            ),
+          ),
+          backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
           elevation: 0,
         ),
         body: BlocListener<HistoryBloc, HistoryState>(
@@ -56,10 +67,11 @@ class _HistoryTransactionTicketState extends State<HistoryTransactionTicket> {
                           margin: EdgeInsets.only(top: 15, bottom: 5),
                           child: Text(
                             'Ticket',
-                            style: blackTextStyle.copyWith(
-                              fontSize: 32,
-                              fontWeight: semiBold,
-                            ),
+                            style: currentTheme
+                                ? whiteTextStyle.copyWith(
+                                    fontSize: 32, fontWeight: semiBold)
+                                : blackTextStyle.copyWith(
+                                    fontSize: 32, fontWeight: semiBold),
                           ),
                         ),
 

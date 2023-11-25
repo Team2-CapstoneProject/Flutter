@@ -1,3 +1,4 @@
+import 'package:capstone_project_villa/presentation/pages/bookmark/bookmark_page.dart';
 import 'package:capstone_project_villa/presentation/pages/category/category_vila_page.dart';
 import 'package:capstone_project_villa/presentation/pages/detail/detail_page.dart';
 import 'package:capstone_project_villa/presentation/pages/home/widgets/category_card.dart';
@@ -41,6 +42,8 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       // Headers
       appBar: AppBar(
@@ -48,7 +51,7 @@ class _HomePageState extends State<HomePage>
           statusBarColor: whiteColor,
           statusBarIconBrightness: Brightness.dark,
         ),
-        backgroundColor: whiteColor,
+        backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
         elevation: 0,
         actions: [
           Container(
@@ -57,15 +60,14 @@ class _HomePageState extends State<HomePage>
               children: [
                 GestureDetector(
                   onTap: () {
-                    showDialog(
-                      barrierDismissible: false,
-                      context: context,
-                      builder: (context) => const CustomDialog(),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => BookmarkPage()),
                     );
                   },
                   child: Icon(
                     Iconsax.archive_1,
-                    color: darkGrey,
+                    color: currentTheme ? white70Color : darkGrey,
                   ),
                 ),
                 const SizedBox(
@@ -80,7 +82,7 @@ class _HomePageState extends State<HomePage>
                   },
                   child: Icon(
                     Iconsax.notification,
-                    color: darkGrey,
+                    color: currentTheme ? white70Color : darkGrey,
                   ),
                 ),
               ],
@@ -106,10 +108,11 @@ class _HomePageState extends State<HomePage>
                         Text(
                           'greeting'
                               .tr(namedArgs: {'name': user.userData.nickname}),
-                          style: blackTextStyle.copyWith(
-                            fontSize: 24,
-                            fontWeight: semiBold,
-                          ),
+                          style: currentTheme == ThemeData.light()
+                              ? blackTextStyle.copyWith(
+                                  fontSize: 24, fontWeight: semiBold)
+                              : whiteTextStyle.copyWith(
+                                  fontSize: 24, fontWeight: semiBold),
                         ),
 
                         // Search Button
@@ -139,17 +142,19 @@ class _HomePageState extends State<HomePage>
                               children: [
                                 Icon(
                                   Iconsax.search_normal,
-                                  color: greyColor,
+                                  color:
+                                      currentTheme ? white70Color : greyColor,
                                 ),
                                 const SizedBox(
                                   width: 20.0,
                                 ),
                                 Text(
                                   'Search',
-                                  style: greyTextStyle.copyWith(
-                                    fontWeight: regular,
-                                    fontSize: 14,
-                                  ),
+                                  style: currentTheme
+                                      ? whiteTextStyle.copyWith(
+                                          fontSize: 14, fontWeight: regular)
+                                      : greyTextStyle.copyWith(
+                                          fontSize: 14, fontWeight: regular),
                                 )
                               ],
                             ),
@@ -449,10 +454,11 @@ class _HomePageState extends State<HomePage>
                               children: [
                                 Text(
                                   'for_you'.tr(),
-                                  style: blackTextStyle.copyWith(
-                                    fontSize: 14,
-                                    fontWeight: medium,
-                                  ),
+                                  style: currentTheme
+                                      ? whiteTextStyle.copyWith(
+                                          fontSize: 14, fontWeight: medium)
+                                      : darkGreyTextStyle.copyWith(
+                                          fontSize: 14, fontWeight: medium),
                                 ),
                               ],
                             ),
