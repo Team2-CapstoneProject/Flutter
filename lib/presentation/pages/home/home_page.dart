@@ -142,17 +142,19 @@ class _HomePageState extends State<HomePage>
                               children: [
                                 Icon(
                                   Iconsax.search_normal,
-                                  color: greyColor,
+                                  color:
+                                      currentTheme ? white70Color : greyColor,
                                 ),
                                 const SizedBox(
                                   width: 20.0,
                                 ),
                                 Text(
                                   'Search',
-                                  style: greyTextStyle.copyWith(
-                                    fontWeight: regular,
-                                    fontSize: 14,
-                                  ),
+                                  style: currentTheme
+                                      ? whiteTextStyle.copyWith(
+                                          fontSize: 14, fontWeight: regular)
+                                      : greyTextStyle.copyWith(
+                                          fontSize: 14, fontWeight: regular),
                                 )
                               ],
                             ),

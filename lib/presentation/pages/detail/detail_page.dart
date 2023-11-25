@@ -41,7 +41,7 @@ class _DetailPageState extends State<DetailPage> {
         elevation: 0,
         backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
+          statusBarColor: whiteColor,
           statusBarIconBrightness: Brightness.dark,
         ),
         iconTheme: IconThemeData(
@@ -563,7 +563,8 @@ class _DetailPageState extends State<DetailPage> {
             return Container(
               padding: EdgeInsets.symmetric(horizontal: 16),
               height: MediaQuery.of(context).size.height * 0.16,
-              color: whiteColor,
+              color:
+                  currentTheme ? Color.fromARGB(255, 20, 20, 20) : whiteColor,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -571,20 +572,26 @@ class _DetailPageState extends State<DetailPage> {
                     margin: EdgeInsets.symmetric(vertical: 12),
                     child: RichText(
                       text: TextSpan(
-                        style: blueBlackTextStyle.copyWith(
-                          fontSize: 24,
-                          fontWeight: semiBold,
-                        ),
+                        style: currentTheme
+                            ? whiteTextStyle.copyWith(
+                                fontSize: 24, fontWeight: semiBold)
+                            : blueBlackTextStyle.copyWith(
+                                fontSize: 24,
+                                fontWeight: semiBold,
+                              ),
                         children: <TextSpan>[
                           TextSpan(
                             text: '${Utils.currencyFormat(vila.price)} ',
                           ),
                           TextSpan(
                             text: 'night'.tr(),
-                            style: grey100kTextStyle.copyWith(
-                              fontSize: 16,
-                              fontWeight: regular,
-                            ),
+                            style: currentTheme
+                                ? whiteTextStyle.copyWith(
+                                    fontSize: 16, fontWeight: regular)
+                                : grey100kTextStyle.copyWith(
+                                    fontSize: 16,
+                                    fontWeight: regular,
+                                  ),
                           ),
                         ],
                       ),

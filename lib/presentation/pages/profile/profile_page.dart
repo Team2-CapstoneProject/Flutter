@@ -65,10 +65,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   // Username
                   Text(
                     user.nickname.toString(),
-                    style: currentTheme == ThemeData.light()
-                        ? blackTextStyle.copyWith(
+                    style: currentTheme
+                        ? whiteTextStyle.copyWith(
                             fontSize: 24, fontWeight: semiBold)
-                        : whiteTextStyle.copyWith(
+                        : blackTextStyle.copyWith(
                             fontSize: 24, fontWeight: semiBold),
                   ),
                   const SizedBox(height: 5.0),

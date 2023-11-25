@@ -30,14 +30,17 @@ class _BookmarkPageState extends State<BookmarkPage> {
     bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: currentTheme == ThemeData.light()
-              ? whiteColor
-              : Color(0xff1E1E1E),
-          statusBarIconBrightness: Brightness.dark,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            size: 24,
+            color: currentTheme ? whiteColor : greyColor,
+          ),
         ),
-        backgroundColor:
-            currentTheme == ThemeData.light() ? whiteColor : Color(0xff1E1E1E),
+        backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
         elevation: 0,
         actions: [
           Container(
