@@ -37,6 +37,9 @@ class _BottomNavbarPageState extends State<BottomNavbarPage> {
         body: _widgetOptions.elementAt(_selectedIndex),
         bottomNavigationBar: Container(
           height: 94,
+          color: currentTheme == ThemeData.light()
+              ? whiteColor
+              : Color(0xff1E1E1E),
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: GNav(
             gap: 6,
@@ -70,6 +73,10 @@ class _BottomNavbarPageState extends State<BottomNavbarPage> {
                 text: 'Search',
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                textStyle: currentTheme == ThemeData.light()
+                    ? primaryTextStyle.copyWith(
+                        fontSize: 14, fontWeight: medium)
+                    : whiteTextStyle.copyWith(fontSize: 14, fontWeight: medium),
                 iconColor: currentTheme == ThemeData.light()
                     ? primaryColor
                     : whiteColor,
@@ -79,6 +86,10 @@ class _BottomNavbarPageState extends State<BottomNavbarPage> {
                 text: 'History',
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                textStyle: currentTheme == ThemeData.light()
+                    ? primaryTextStyle.copyWith(
+                        fontSize: 14, fontWeight: medium)
+                    : whiteTextStyle.copyWith(fontSize: 14, fontWeight: medium),
                 iconColor: currentTheme == ThemeData.light()
                     ? primaryColor
                     : whiteColor,
@@ -88,6 +99,10 @@ class _BottomNavbarPageState extends State<BottomNavbarPage> {
                 text: 'Profile',
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                textStyle: currentTheme == ThemeData.light()
+                    ? primaryTextStyle.copyWith(
+                        fontSize: 14, fontWeight: medium)
+                    : whiteTextStyle.copyWith(fontSize: 14, fontWeight: medium),
                 iconColor: currentTheme == ThemeData.light()
                     ? primaryColor
                     : whiteColor,
