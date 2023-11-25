@@ -32,7 +32,7 @@ class CategoryCard extends StatelessWidget {
             child: Icon(
               icon,
               size: 24,
-              color: darkGrey,
+              color: currentTheme ? whiteColor : darkGrey,
             ),
           ),
           SizedBox(height: 5),

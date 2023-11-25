@@ -47,13 +47,10 @@ class _HomePageState extends State<HomePage>
       // Headers
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: currentTheme == ThemeData.light()
-              ? whiteColor
-              : Color(0xff1E1E1E),
+          statusBarColor: whiteColor,
           statusBarIconBrightness: Brightness.dark,
         ),
-        backgroundColor:
-            currentTheme == ThemeData.light() ? whiteColor : Color(0xff1E1E1E),
+        backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
         elevation: 0,
         actions: [
           Container(

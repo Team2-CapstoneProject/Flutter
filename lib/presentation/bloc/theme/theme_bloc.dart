@@ -18,10 +18,18 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     add(ChangeTheme(isDarkTheme ? ThemeType.dark : ThemeType.light));
   }
 
+  // void _onChangeTheme(ChangeTheme event, Emitter<ThemeState> emit) {
+  //   final ThemeData newTheme = _getThemeDataFromType(event.themeType);
+  //   sharedPreferences.setBool('isDarkTheme', newTheme == ThemeData.dark());
+
+  //   emit(ThemeUpdated(newTheme));
+  // }
+
   void _onChangeTheme(ChangeTheme event, Emitter<ThemeState> emit) {
     final ThemeData newTheme = _getThemeDataFromType(event.themeType);
-    sharedPreferences.setBool('isDarkTheme', newTheme == ThemeData.dark());
+    final bool isDarkTheme = newTheme.brightness == Brightness.dark;
 
+    sharedPreferences.setBool('isDarkTheme', isDarkTheme);
     emit(ThemeUpdated(newTheme));
   }
 
@@ -30,8 +38,12 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
       case ThemeType.light:
         return ThemeData.light();
       case ThemeType.dark:
-        return ThemeData.dark()
-            .copyWith(scaffoldBackgroundColor: Color(0xff1E1E1E));
+        // return ThemeData.dark()
+        //     .copyWith(scaffoldBackgroundColor: Color(0xff1E1E1E));
+        final darkTheme = ThemeData.dark().copyWith(
+          scaffoldBackgroundColor: Color(0xff1E1E1E),
+        );
+        return darkTheme;
       default:
         return ThemeData.light();
     }
