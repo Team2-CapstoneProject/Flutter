@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 
 class CustomTicket extends StatelessWidget {
+  final DateTime checkin;
+  final DateTime checkout;
   final int taxes;
   final int night;
   final int total;
@@ -12,7 +14,9 @@ class CustomTicket extends StatelessWidget {
       {super.key,
       required this.taxes,
       required this.night,
-      required this.total});
+      required this.total,
+      required this.checkin,
+      required this.checkout});
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +30,7 @@ class CustomTicket extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 'Check In',
@@ -34,35 +39,27 @@ class CustomTicket extends StatelessWidget {
                   fontWeight: light,
                 ),
               ),
+              Text(Utils.dateTimeFormat4(checkin))
             ],
-          ),
-          const SizedBox(
-            height: 16.0,
-          ),
-          Text(
-            'Check Out',
-            style: darkGreyTextStyle.copyWith(
-              fontSize: 12,
-              fontWeight: light,
-            ),
           ),
           const SizedBox(
             height: 16.0,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Guest',
+                'Check Out',
                 style: darkGreyTextStyle.copyWith(
                   fontSize: 12,
                   fontWeight: light,
                 ),
               ),
-              // Text()
+              Text(Utils.dateTimeFormat4(checkout)),
             ],
           ),
           const SizedBox(
-            height: 30.0,
+            height: 65.0,
           ),
           MySeparator(height: 3, color: whiteColor),
           const SizedBox(

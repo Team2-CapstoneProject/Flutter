@@ -6,6 +6,7 @@ import 'package:capstone_project_villa/presentation/pages/home/widgets/foryou_ca
 import 'package:capstone_project_villa/presentation/pages/home/widgets/shimmer.dart';
 import 'package:capstone_project_villa/presentation/pages/home/widgets/shimmer_tab.dart';
 import 'package:capstone_project_villa/presentation/pages/home/widgets/tab_card.dart';
+import 'package:capstone_project_villa/presentation/pages/notification/notification_page.dart';
 import 'package:capstone_project_villa/presentation/pages/search/search_page.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -74,11 +75,10 @@ class _HomePageState extends State<HomePage>
                 ),
                 GestureDetector(
                   onTap: () {
-                    showDialog(
-                      barrierDismissible: false,
-                      context: context,
-                      builder: (context) => const CustomDialog(),
-                    );
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => NotificationPage()));
                   },
                   child: Icon(
                     Iconsax.notification,
@@ -357,7 +357,7 @@ class _HomePageState extends State<HomePage>
                                   name: vila.name.toString(),
                                   location: vila.location.toString(),
                                   price: vila.price,
-                                  score: vila.score ?? 0,
+                                  score: vila.score.toDouble(),
                                   image: vila.vilaImages.sliderImage,
                                 ),
                               );
@@ -383,7 +383,7 @@ class _HomePageState extends State<HomePage>
                                   name: vila.name.toString(),
                                   location: vila.location.toString(),
                                   price: vila.price,
-                                  score: vila.score ?? 0,
+                                  score: vila.score.toDouble(),
                                   image: vila.vilaImages.sliderImage,
                                 ),
                               );
@@ -409,7 +409,7 @@ class _HomePageState extends State<HomePage>
                                   name: vila.name.toString(),
                                   location: vila.location.toString(),
                                   price: vila.price,
-                                  score: vila.score ?? 0,
+                                  score: vila.score.toDouble(),
                                   image: vila.vilaImages.sliderImage,
                                 ),
                               );
@@ -435,7 +435,7 @@ class _HomePageState extends State<HomePage>
                                   name: vila.name.toString(),
                                   location: vila.location.toString(),
                                   price: vila.price,
-                                  score: vila.score ?? 0,
+                                  score: vila.score.toDouble(),
                                   image: vila.vilaImages.sliderImage,
                                 ),
                               );

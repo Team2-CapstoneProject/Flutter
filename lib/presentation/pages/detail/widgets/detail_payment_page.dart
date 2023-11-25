@@ -53,6 +53,8 @@ class _DetailPaymentPageState extends State<DetailPaymentPage> {
                 taxes: payment.taxes,
                 night: payment.night,
                 total: payment.total,
+                checkin: payment.tglCheckin,
+                checkout: payment.tglCheckout,
               )
             ],
           )

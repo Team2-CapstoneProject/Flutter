@@ -23,3 +23,9 @@ class HistoryPaymentEvent extends HistoryEvent {
 
   HistoryPaymentEvent({required this.historyRequestModel, required this.id});
 }
+
+class HistoryReviewEvent extends HistoryEvent {
+  final ReviewRequestModel review;
+
+  HistoryReviewEvent({required this.review});
+}

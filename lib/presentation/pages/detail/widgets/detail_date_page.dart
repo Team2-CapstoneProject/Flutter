@@ -59,21 +59,27 @@ class _DetailDatePageState extends State<DetailDatePage> {
       _rangeEnd = end;
 
       if (_rangeStart != null && _rangeEnd != null) {
-        int numberOfDays = calculateNumberOfDays(_rangeStart!, _rangeEnd!);
-        _nNight = numberOfDays;
-
-        context.read<TransactionBloc>().add(
-              GetTransaction(
-                transactionRequestModel: TransactionRequestModel(
-                  vila_id: widget.vilas.id,
-                  n_night: _nNight,
-                ),
-              ),
-            );
-        print("Number of days: $numberOfDays");
+        int numberOfNights = calculateNumberOfDays(_rangeStart!, _rangeEnd!);
+        _nNight = numberOfNights;
       }
-      print(_rangeStart);
-      print(_rangeEnd);
+
+      // if (_rangeStart != null && _rangeEnd != null) {
+      // int numberOfDays = calculateNumberOfDays(_rangeStart!, _rangeEnd!);
+      // nNight = numberOfDays;
+
+      // context.read<TransactionBloc>().add(
+      //       GetTransaction(
+      //         transactionRequestModel: TransactionRequestModel(
+      //           vila_id: widget.vilas.id,
+      //           n_night: _nNight,
+      //         ),
+      //       ),
+      //     );
+
+      // print("Number of days: $numberOfDays");
+      // }
+      // print(_rangeStart);
+      // print(_rangeEnd);
     });
   }
 
@@ -124,6 +130,14 @@ class _DetailDatePageState extends State<DetailDatePage> {
             lastDay: DateTime.now().add(Duration(days: 365)),
             calendarStyle: CalendarStyle(
               outsideDaysVisible: false,
+              rangeStartDecoration: BoxDecoration(
+                color: primaryColor,
+                shape: BoxShape.circle,
+              ),
+              rangeEndDecoration: BoxDecoration(
+                color: primaryColor,
+                shape: BoxShape.circle,
+              ),
             ),
             onFormatChanged: (format) {
               if (_calendarFormat != format) {
@@ -230,73 +244,157 @@ class _DetailDatePageState extends State<DetailDatePage> {
     );
   }
 
+  // Widget calculateTotalPrice() {
+  //   return BlocBuilder<TransactionBloc, TransactionState>(
+  //     builder: (context, state) {
+  //       if (state is TransactionLoaded) {
+  //         final totalNight = state.transactionResponse;
+  //         final totalPrice = _rangeStart != null && _rangeEnd != null
+  //             ? totalNight.night
+  //             : widget.vilas.price.toDouble();
+  //         return Container(
+  //           padding: EdgeInsets.symmetric(horizontal: 16),
+  //           height: MediaQuery.of(context).size.height * 0.16,
+  //           color: whiteColor,
+  //           child: Column(
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: [
+  //               Container(
+  //                 margin: EdgeInsets.symmetric(vertical: 12),
+  //                 child: RichText(
+  //                   text: TextSpan(
+  //                     style: blueBlackTextStyle.copyWith(
+  //                       fontSize: 24,
+  //                       fontWeight: semiBold,
+  //                     ),
+  //                     children: <TextSpan>[
+  //                       TextSpan(
+  //                         text: '${Utils.currencyFormat(totalPrice.toInt())} ',
+  //                       ),
+  //                       TextSpan(
+  //                         text: 'night'.tr(),
+  //                         style: grey100kTextStyle.copyWith(
+  //                           fontSize: 16,
+  //                           fontWeight: regular,
+  //                         ),
+  //                       ),
+  //                     ],
+  //                   ),
+  //                 ),
+  //               ),
+  //               CustomButton(
+  //                   onPressed: () {
+  //                     Navigator.push(
+  //                       context,
+  //                       MaterialPageRoute(
+  //                         builder: (context) => DetailPaymentPage(
+  //                           data: state.transactionResponse,
+  //                         ),
+  //                       ),
+  //                     );
+  //                   },
+  //                   text: 'book_now'.tr())
+  //             ],
+  //           ),
+  //         );
+  //       } else if (state is TransactionLoading) {
+  //         return Container(
+  //           alignment: Alignment.topCenter,
+  //           height: 50,
+  //           width: 50,
+  //           child: Text(
+  //             'loading...'.tr(),
+  //             style: blackTextStyle.copyWith(fontSize: 24),
+  //           ),
+  //         );
+  //       } else {
+  //         return SizedBox();
+  //       }
+  //     },
+  //   );
+  // }
+
   Widget calculateTotalPrice() {
-    return BlocBuilder<TransactionBloc, TransactionState>(
-      builder: (context, state) {
-        if (state is TransactionLoaded) {
-          final totalNight = state.transactionResponse;
-          final totalPrice = _rangeStart != null && _rangeEnd != null
-              ? totalNight.night
-              : widget.vilas.price.toDouble();
-          return Container(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            height: MediaQuery.of(context).size.height * 0.16,
-            color: whiteColor,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 12),
-                  child: RichText(
-                    text: TextSpan(
-                      style: blueBlackTextStyle.copyWith(
-                        fontSize: 24,
-                        fontWeight: semiBold,
-                      ),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: '${Utils.currencyFormat(totalPrice.toInt())} ',
-                        ),
-                        TextSpan(
-                          text: 'night'.tr(),
-                          style: grey100kTextStyle.copyWith(
-                            fontSize: 16,
-                            fontWeight: regular,
-                          ),
-                        ),
-                      ],
+    double totalPrice;
+
+    if (_rangeStart != null && _rangeEnd != null) {
+      totalPrice = _nNight * widget.vilas.price.toDouble();
+    } else {
+      totalPrice = widget.vilas.price.toDouble();
+    }
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      height: MediaQuery.of(context).size.height * 0.16,
+      color: whiteColor,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 12),
+            child: RichText(
+              text: TextSpan(
+                style: blueBlackTextStyle.copyWith(
+                  fontSize: 22,
+                  fontWeight: semiBold,
+                ),
+                children: <TextSpan>[
+                  TextSpan(
+                      text: '${Utils.currencyFormat(totalPrice.toInt())} '),
+                  TextSpan(
+                    text: 'night'.tr(),
+                    style: grey100kTextStyle.copyWith(
+                      fontSize: 16,
+                      fontWeight: regular,
                     ),
                   ),
+                ],
+              ),
+            ),
+          ),
+          BlocConsumer<TransactionBloc, TransactionState>(
+              listener: (context, state) {
+            if (state is TransactionLoaded) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailPaymentPage(
+                    data: state.transactionResponse,
+                  ),
                 ),
-                CustomButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DetailPaymentPage(
-                            data: state.transactionResponse,
+              );
+            }
+          }, builder: (context, state) {
+            if (state is TransactionLoading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return CustomButton(
+                onPressed: () {
+                  if (_rangeStart != null && _rangeEnd != null) {
+                    String tglCheckin = Utils.dateTimeFormat5(_rangeStart!);
+                    String tglCheckout = Utils.dateTimeFormat5(_rangeEnd!);
+
+                    final transactionModel = TransactionRequestModel(
+                      vilaId: widget.vilas.id,
+                      nNight: _nNight,
+                      tglCheckin: tglCheckin,
+                      tglCheckout: tglCheckout,
+                    );
+
+                    // print(transactionModel);
+
+                    context.read<TransactionBloc>().add(
+                          GetTransaction(
+                            transactionRequestModel: transactionModel,
                           ),
-                        ),
-                      );
-                    },
-                    text: 'book_now'.tr())
-              ],
-            ),
-          );
-        } else if (state is TransactionLoading) {
-          return Container(
-            alignment: Alignment.topCenter,
-            height: 50,
-            width: 50,
-            child: Text(
-              'loading...'.tr(),
-              style: blackTextStyle.copyWith(fontSize: 24),
-            ),
-          );
-        } else {
-          return SizedBox();
-        }
-      },
+                        );
+                  }
+                },
+                text: 'book_now'.tr());
+          })
+        ],
+      ),
     );
   }
 }

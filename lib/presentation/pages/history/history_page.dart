@@ -2,10 +2,10 @@ import 'package:capstone_project_villa/presentation/bloc/history/history_bloc.da
 import 'package:capstone_project_villa/presentation/pages/history/widgets/history_card.dart';
 import 'package:capstone_project_villa/presentation/pages/history/widgets/history_shimmer.dart';
 import 'package:capstone_project_villa/presentation/pages/history/widgets/history_transaction_ticket.dart';
+import 'package:capstone_project_villa/presentation/widgets/custom_lottie.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lottie/lottie.dart';
 
 class HistoryPage extends StatefulWidget {
   static const String routeName = '/history';
@@ -119,7 +119,6 @@ Widget buildResult(String searchTerm) {
                       MaterialPageRoute(
                           builder: (context) => HistoryTransactionTicket(
                                 id: historyByName[index].id,
-                                data: historyByName[index],
                               )));
                 },
               );
@@ -141,11 +140,7 @@ Widget buildRecentVila() {
         final allHistory = state.historyResponseModel.allTransactions;
 
         if (allHistory.isEmpty) {
-          return Container(
-              margin: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.1,
-              ),
-              child: Lottie.asset('assets/lottie/nodata.json'));
+          return CustomLottie(assetPath: 'assets/lottie/nodata.json');
         }
 
         return ListView.builder(
@@ -166,7 +161,6 @@ Widget buildRecentVila() {
                     MaterialPageRoute(
                         builder: (context) => HistoryTransactionTicket(
                               id: allHistory[index].id,
-                              data: allHistory[index],
                             )));
               },
             );

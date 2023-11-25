@@ -57,10 +57,10 @@ class Vila {
   final VilaImages vilaImages;
   final List<Transaction> transactions;
   final List<Bookmark> bookmarks;
-  final int nBookmark;
-  final int nTransaction;
+  final int jumlahBookmark;
+  final int jumlahTransaction;
   final int nReview;
-  final double? score;
+  final double score;
 
   Vila({
     required this.id,
@@ -71,27 +71,27 @@ class Vila {
     required this.vilaImages,
     required this.transactions,
     required this.bookmarks,
-    required this.nBookmark,
-    required this.nTransaction,
+    required this.jumlahBookmark,
+    required this.jumlahTransaction,
     required this.nReview,
-    this.score,
+    required this.score,
   });
 
   factory Vila.fromJson(Map<String, dynamic> json) => Vila(
-        id: json["id"] ?? 0,
+        id: json["id"],
         name: json["name"] ?? '',
         price: json["price"] ?? 0,
         location: json["location"] ?? '',
-        updatedAt: DateTime.parse(json["updatedAt"] ?? ''),
-        vilaImages: VilaImages.fromJson(json["VilaImages"] ?? {}),
+        updatedAt: DateTime.parse(json["updatedAt"]),
+        vilaImages: VilaImages.fromJson(json["VilaImages"]),
         transactions: List<Transaction>.from(
             json["Transactions"].map((x) => Transaction.fromJson(x))),
         bookmarks: List<Bookmark>.from(
             json["Bookmarks"].map((x) => Bookmark.fromJson(x))),
-        nBookmark: json["nBookmark"] ?? 0,
-        nTransaction: json["nTransaction"] ?? 0,
+        jumlahBookmark: json["jumlahBookmark"] ?? 0,
+        jumlahTransaction: json["jumlahTransaction"] ?? 0,
         nReview: json["nReview"] ?? 0,
-        score: json["score"] == null ? null : json["score"].toDouble(),
+        score: (json["score"] ?? 0).toDouble(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -103,8 +103,8 @@ class Vila {
         "VilaImages": vilaImages.toJson(),
         "Transactions": List<dynamic>.from(transactions.map((x) => x.toJson())),
         "Bookmarks": List<dynamic>.from(bookmarks.map((x) => x.toJson())),
-        "nBookmark": nBookmark,
-        "nTransaction": nTransaction,
+        "jumlahBookmark": jumlahBookmark,
+        "jumlahTransaction": jumlahTransaction,
         "nReview": nReview,
         "score": score,
       };
@@ -154,26 +154,24 @@ class Transaction {
 class Review {
   final int id;
   final int score;
-  final DateTime? createdAt;
+  final DateTime createdAt;
 
   Review({
     required this.id,
     required this.score,
-    this.createdAt,
+    required this.createdAt,
   });
 
   factory Review.fromJson(Map<String, dynamic> json) => Review(
-        id: json["id"] ?? 0,
-        score: json["score"] ?? '',
-        createdAt: json["createdAt"] == null
-            ? null
-            : DateTime.parse(json["createdAt"]),
+        id: json["id"],
+        score: json["score"] ?? 0,
+        createdAt: DateTime.parse(json["createdAt"]),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "score": score,
-        "createdAt": createdAt?.toIso8601String(),
+        "createdAt": createdAt.toIso8601String(),
       };
 }
 
@@ -187,9 +185,8 @@ class VilaImages {
   });
 
   factory VilaImages.fromJson(Map<String, dynamic> json) => VilaImages(
-        id: json["id"] ?? 0,
-        sliderImage: json["slider_image"] ??
-            'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        id: json["id"],
+        sliderImage: json["slider_image"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
