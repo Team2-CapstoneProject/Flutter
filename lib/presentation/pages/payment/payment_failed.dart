@@ -15,7 +15,7 @@ class _PaymentFailedPageState extends State<PaymentFailedPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       AwesomeDialog(
         context: context,
-        dialogType: DialogType.success,
+        dialogType: DialogType.error,
         animType: AnimType.rightSlide,
         title: 'Payment Failed',
         desc: 'Sorry, your payment failed',
