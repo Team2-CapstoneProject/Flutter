@@ -315,7 +315,7 @@ class _DetailDatePageState extends State<DetailDatePage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => DetailPaymentPage(
-                    data: state.transactionResponse,
+                    data: state.transactionResponse, nNight: _nNight,
                   ),
                 ),
               );
