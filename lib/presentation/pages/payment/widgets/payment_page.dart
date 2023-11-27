@@ -6,23 +6,23 @@ import 'package:capstone_project_villa/presentation/bloc/transaction/transaction
 import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_card_vila.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_ticket.dart';
-import 'package:capstone_project_villa/presentation/widgets/custom_widget.dart';
+import 'package:capstone_project_villa/presentation/widgets/custom_payment.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DetailPaymentPage extends StatefulWidget {
+class PaymentPage extends StatefulWidget {
   final TransactionResponseModel data;
   final int nNight;
-  const DetailPaymentPage(
+  const PaymentPage(
       {super.key, required this.data, required this.nNight});
 
   @override
-  State<DetailPaymentPage> createState() => _DetailPaymentPageState();
+  State<PaymentPage> createState() => _PaymentPageState();
 }
 
-class _DetailPaymentPageState extends State<DetailPaymentPage> {
+class _PaymentPageState extends State<PaymentPage> {
   @override
   Widget build(BuildContext context) {
     bool currentTheme = Theme.of(context).brightness == Brightness.dark;

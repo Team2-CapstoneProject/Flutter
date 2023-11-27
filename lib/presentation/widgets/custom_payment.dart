@@ -1,3 +1,4 @@
+import 'package:capstone_project_villa/presentation/pages/payment/widgets/payment_failed.dart';
 import 'package:capstone_project_villa/presentation/pages/payment/payment_success.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -35,7 +36,11 @@ class _CustomWidgetState extends State<CustomWidget> {
               }));
             }
             // Gagal Payment
-            if (url.contains('status_code=202&transaction_status=deny')) {}
+            if (url.contains('status_code=202&transaction_status=deny')) {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return PaymentFailedPage();
+              }));
+            }
           },
           onPageFinished: (String url) {},
           onWebResourceError: (WebResourceError error) {},
