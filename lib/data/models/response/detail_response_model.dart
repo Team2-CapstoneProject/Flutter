@@ -159,11 +159,24 @@ class Users {
     required this.fullname,
   });
 
-  factory Users.fromJson(Map<String, dynamic> json) => Users(
+  factory Users.fromJson(Map<String, dynamic> json) {
+    final String imgsUrl = json["image"] ?? '';
+
+    if (imgsUrl.startsWith('https://')) {
+      return Users(
         id: json["id"],
-        image: json["image"] ?? '',
+        image: imgsUrl,
         fullname: json["fullname"] ?? '',
       );
+    } else {
+      final driveImgs = 'https://drive.google.com/uc?export=view&id=$imgsUrl';
+      return Users(
+        id: json["id"],
+        image: driveImgs,
+        fullname: json["fullname"] ?? '',
+      );
+    }
+  }
 
   Map<String, dynamic> toJson() => {
         "id": id,
