@@ -9,8 +9,8 @@
 - Edit Profile, Localization, DarkTheme
 
 ## 🛠️ Built With
-* [Flutter](https://flutter.dev/).
-* [Bloc](https://pub.dev/packages/flutter_bloc).
+* [Flutter](https://flutter.dev/)
+* [Bloc](https://pub.dev/packages/flutter_bloc)
 * [Awesome_Dialog](https://pub.dev/packages/awesome_dialog)
 * [Carousel_Slider](https://pub.dev/packages/carousel_slider)
 * [Dartz](https://pub.dev/packages/dartz).
