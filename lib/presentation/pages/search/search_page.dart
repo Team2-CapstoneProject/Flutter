@@ -54,19 +54,6 @@ class _SearchPageState extends State<SearchPage> {
                       ),
                     );
                   },
-                  onFieldSubmitted: (value) {
-                    setState(() {
-                      if (value.isNotEmpty) {
-                        context.read<SearchBloc>().add(
-                              PerformSearch(
-                                SearchRequestModel(
-                                  searchText: value,
-                                ),
-                              ),
-                            );
-                      }
-                    });
-                  },
                   controller: _searchController,
                 ),
                 BlocBuilder<SearchBloc, SearchState>(

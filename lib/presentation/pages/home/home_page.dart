@@ -8,7 +8,6 @@ import 'package:capstone_project_villa/presentation/pages/home/widgets/shimmer_t
 import 'package:capstone_project_villa/presentation/pages/home/widgets/tab_card.dart';
 import 'package:capstone_project_villa/presentation/pages/notification/notification_page.dart';
 import 'package:capstone_project_villa/presentation/pages/search/search_page.dart';
-import 'package:capstone_project_villa/presentation/widgets/custom_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -185,24 +184,12 @@ class _HomePageState extends State<HomePage>
                               CategoryCard(
                                 icon: Iconsax.building_44,
                                 label: 'Hotel',
-                                onTap: () {
-                                  showDialog(
-                                    barrierDismissible: false,
-                                    context: context,
-                                    builder: (context) => const CustomDialog(),
-                                  );
-                                },
+                                onTap: () {},
                               ),
                               CategoryCard(
                                 icon: Iconsax.smart_car,
                                 label: 'Travel',
-                                onTap: () {
-                                  showDialog(
-                                    barrierDismissible: false,
-                                    context: context,
-                                    builder: (context) => const CustomDialog(),
-                                  );
-                                },
+                                onTap: () {},
                               ),
                               CategoryCard(
                                 icon: Iconsax.category,
@@ -267,50 +254,22 @@ class _HomePageState extends State<HomePage>
                                                 CategoryCard(
                                                   icon: Iconsax.building,
                                                   label: 'Hotel',
-                                                  onTap: () {
-                                                    showDialog(
-                                                      barrierDismissible: false,
-                                                      context: context,
-                                                      builder: (context) =>
-                                                          const CustomDialog(),
-                                                    );
-                                                  },
+                                                  onTap: () {},
                                                 ),
                                                 CategoryCard(
                                                   icon: Iconsax.smart_car,
                                                   label: 'Travel',
-                                                  onTap: () {
-                                                    showDialog(
-                                                      barrierDismissible: false,
-                                                      context: context,
-                                                      builder: (context) =>
-                                                          const CustomDialog(),
-                                                    );
-                                                  },
+                                                  onTap: () {},
                                                 ),
                                                 CategoryCard(
                                                   icon: Iconsax.car,
                                                   label: 'Rental',
-                                                  onTap: () {
-                                                    showDialog(
-                                                      barrierDismissible: false,
-                                                      context: context,
-                                                      builder: (context) =>
-                                                          const CustomDialog(),
-                                                    );
-                                                  },
+                                                  onTap: () {},
                                                 ),
                                                 CategoryCard(
                                                   icon: Iconsax.people,
                                                   label: 'Guide',
-                                                  onTap: () {
-                                                    showDialog(
-                                                      barrierDismissible: false,
-                                                      context: context,
-                                                      builder: (context) =>
-                                                          const CustomDialog(),
-                                                    );
-                                                  },
+                                                  onTap: () {},
                                                 ),
                                               ],
                                             ),
