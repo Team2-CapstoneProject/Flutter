@@ -18,7 +18,9 @@ class CustomListTile extends StatelessWidget {
     return ListTile(
       leading: Icon(
         icon,
-        color: (icon == Iconsax.logout && !currentTheme) ? redCandy : greyColor,
+        color: (icon == Iconsax.logout)
+            ? redCandy
+            : (currentTheme ? whiteColor : greyColor),
         size: 24,
       ),
       title: Text(

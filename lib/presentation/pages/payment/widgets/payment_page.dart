@@ -1,19 +1,28 @@
 import 'package:capstone_project_villa/common/constants.dart';
+import 'package:capstone_project_villa/common/utils.dart';
+import 'package:capstone_project_villa/data/models/request/transaction_request_model.dart';
 import 'package:capstone_project_villa/data/models/response/transaction_response_model.dart';
+import 'package:capstone_project_villa/presentation/bloc/transaction/transaction_bloc.dart';
+import 'package:capstone_project_villa/presentation/widgets/custom_button.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_card_vila.dart';
 import 'package:capstone_project_villa/presentation/widgets/custom_ticket.dart';
+import 'package:capstone_project_villa/presentation/widgets/custom_payment.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DetailPaymentPage extends StatefulWidget {
+class PaymentPage extends StatefulWidget {
   final TransactionResponseModel data;
-  const DetailPaymentPage({super.key, required this.data});
+  final int nNight;
+  const PaymentPage(
+      {super.key, required this.data, required this.nNight});
 
   @override
-  State<DetailPaymentPage> createState() => _DetailPaymentPageState();
+  State<PaymentPage> createState() => _PaymentPageState();
 }
 
-class _DetailPaymentPageState extends State<DetailPaymentPage> {
+class _PaymentPageState extends State<PaymentPage> {
   @override
   Widget build(BuildContext context) {
     bool currentTheme = Theme.of(context).brightness == Brightness.dark;
@@ -72,6 +81,41 @@ class _DetailPaymentPageState extends State<DetailPaymentPage> {
             ],
           )
         ],
+      ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.only(left: 20, right: 20, bottom: 30),
+        child: BlocListener<TransactionBloc, TransactionState>(
+          listener: (context, state) {
+            if (state is MidtransLoaded) {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return CustomWidget(
+                    url: state.midtransResponseModel.transactionUrl);
+              }));
+            }
+          },
+          child: BlocBuilder<TransactionBloc, TransactionState>(
+              builder: (context, state) {
+            if (state is TransactionLoaded) {
+              return CustomButton(
+                  onPressed: () {
+                    final data = widget.data;
+                    final requestModel = TransactionRequestModel(
+                      vilaId: data.vila.id,
+                      nNight: widget.nNight,
+                      tglCheckin: Utils.dateTimeFormat5(data.tglCheckin),
+                      tglCheckout: Utils.dateTimeFormat5(data.tglCheckout),
+                    );
+                    context.read<TransactionBloc>().add(
+                          GetMidtransTransaction(
+                            transactionMidtrans: requestModel,
+                          ),
+                        );
+                  },
+                  text: 'Confirm Payment'.tr());
+            }
+            return SizedBox();
+          }),
+        ),
       ),
     );
   }

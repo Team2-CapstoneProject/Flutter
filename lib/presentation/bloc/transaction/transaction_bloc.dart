@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:capstone_project_villa/data/datasources/remote/transaction_remote_datasource.dart';
 import 'package:capstone_project_villa/data/models/request/transaction_request_model.dart';
+import 'package:capstone_project_villa/data/models/response/midtrans_response_model.dart';
 import 'package:capstone_project_villa/data/models/response/transaction_response_model.dart';
 import 'package:meta/meta.dart';
 
@@ -15,6 +16,14 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
           .getTransaction(event.transactionRequestModel);
       result.fold((error) => emit(TransactionError(message: error)),
           (success) => emit(TransactionLoaded(transactionResponse: success)));
+    });
+
+    on<GetMidtransTransaction>((event, emit) async {
+      emit(TransactionLoading());
+      final result = await TransactionDataSource()
+          .paymentMidtrans(event.transactionMidtrans);
+      result.fold((error) => emit(TransactionError(message: error)),
+          (success) => emit(MidtransLoaded(midtransResponseModel: success)));
     });
   }
 }

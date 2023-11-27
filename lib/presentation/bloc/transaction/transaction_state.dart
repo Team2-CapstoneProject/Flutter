@@ -13,6 +13,12 @@ final class TransactionLoaded extends TransactionState {
   TransactionLoaded({required this.transactionResponse});
 }
 
+final class MidtransLoaded extends TransactionState {
+  final MidtransResponseModel midtransResponseModel;
+
+  MidtransLoaded({required this.midtransResponseModel});
+}
+
 final class TransactionError extends TransactionState {
   final String message;
 

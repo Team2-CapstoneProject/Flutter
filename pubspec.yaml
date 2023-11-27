@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  awesome_dialog: ^3.1.0
   carousel_slider: ^4.2.1
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
@@ -51,6 +52,7 @@ dependencies:
   shimmer: ^3.0.0
   table_calendar: ^3.0.9
   ticket_widget: ^1.0.2
+  webview_flutter: ^4.4.2
 
 dev_dependencies:
   flutter_test:

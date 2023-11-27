@@ -59,6 +59,7 @@ class DetaikSeeAllReviewPage extends StatelessWidget {
                               width: MediaQuery.of(context).size.width,
                               margin: EdgeInsets.only(bottom: 30),
                               decoration: BoxDecoration(
+                                color: grey95,
                                 borderRadius: BorderRadius.circular(8),
                                 border: Border.all(color: grey95),
                               ),

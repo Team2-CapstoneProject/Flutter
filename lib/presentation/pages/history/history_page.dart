@@ -72,17 +72,6 @@ class _HistoryPageState extends State<HistoryPage> {
                       }
                     });
                   },
-                  onFieldSubmitted: (value) {
-                    setState(() {
-                      if (value.isNotEmpty) {
-                        context.read<HistoryBloc>().add(
-                            GetHistoryByNameEvent(name: vilaController.text));
-                      } else {
-                        vilaController.clear();
-                        context.read<HistoryBloc>().add(GetHistoryEvent());
-                      }
-                    });
-                  },
                 ),
                 vilaController.text.isEmpty
                     ? buildRecentVila()
@@ -158,7 +147,7 @@ Widget buildRecentVila() {
         }
 
         return ListView.builder(
-          itemCount: state.historyResponseModel.allTransactions.length,
+          itemCount: allHistory.length,
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
@@ -171,11 +160,13 @@ Widget buildRecentVila() {
               status: allHistory[index].transactionStatuses[0].statusId,
               onViewPressed: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => HistoryTransactionTicket(
-                              id: allHistory[index].id,
-                            )));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HistoryTransactionTicket(
+                      id: allHistory[index].id,
+                    ),
+                  ),
+                );
               },
             );
           },

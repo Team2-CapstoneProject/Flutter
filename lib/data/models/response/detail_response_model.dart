@@ -135,7 +135,7 @@ class Review {
 
   factory Review.fromJson(Map<String, dynamic> json) => Review(
         id: json["id"],
-        score: json["score"] == null ? null : json["score"].toDouble(),
+        score: json["score"]?.toDouble() ?? 0.0,
         description: json["description"] ?? '',
         updatedAt: DateTime.parse(json["updatedAt"]),
       );
