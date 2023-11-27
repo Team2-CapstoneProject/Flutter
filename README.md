@@ -13,14 +13,14 @@
 * [Bloc](https://pub.dev/packages/flutter_bloc)
 * [Awesome_Dialog](https://pub.dev/packages/awesome_dialog)
 * [Carousel_Slider](https://pub.dev/packages/carousel_slider)
-* [Dartz](https://pub.dev/packages/dartz).
+* [Dartz](https://pub.dev/packages/dartz)
 * [Easy_Localization](https://pub.dev/packages/easy_localization)
 * [Flutter_Launcher_icons](https://pub.dev/packages/flutter_launcher_icons)
 * [Flutter_Rating_Bar](https://pub.dev/packages/flutter_rating_bar)
 * [Flutter_StatusBarColor_Ns](https://pub.dev/packages/flutter_statusbarcolor_ns)
 * [Google_Fonts](https://pub.dev/packages/google_fonts)
 * [Google_Nav_Bar](https://pub.dev/packages/google_nav_bar)
-* [Http](https://pub.dev/packages/http).
+* [Http](https://pub.dev/packages/http)
 * [Iconsax](https://pub.dev/packages/iconsax)
 * [Image_Picker](https://pub.dev/packages/image_picker)
 * [Intl](https://pub.dev/packages/intl)
