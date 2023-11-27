@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:capstone_project_villa/data/models/request/profile_request_model.dart';
 import 'package:capstone_project_villa/presentation/bloc/profile/profile_bloc.dart';
-import 'package:capstone_project_villa/presentation/pages/profile/profile_page.dart';
+import 'package:capstone_project_villa/presentation/pages/navbar/bottom_navbar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -282,9 +282,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         builder: (BuildContext context) {
                           Future.delayed(Duration(seconds: 1), () {
                             Navigator.of(context).pop();
-                            Navigator.pushReplacementNamed(
+                            Navigator.pushReplacement(
                               context,
-                              ProfilePage.routeName,
+                              PageRouteBuilder(
+                                pageBuilder:
+                                    (context, animation1, animation2) =>
+                                        BottomNavbarPage(),
+                                settings: RouteSettings(arguments: 3),
+                              ),
                             );
                           });
                           return AlertDialog(
@@ -329,10 +334,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   builder: (context, state) {
                     return CustomButton(
                       onPressed: () {
-                        print('Full Name: ${_fullNameController.text}');
-                        print('Nickname: ${_nickNameController.text}');
-                        print('Phone Number: ${_phoneController.text}');
-                        print('Image Path: ${file?.path}');
+                        // print('Full Name: ${_fullNameController.text}');
+                        // print('Nickname: ${_nickNameController.text}');
+                        // print('Phone Number: ${_phoneController.text}');
+                        // print('Image Path: ${file?.path}');
 
                         if (formKey.currentState!.validate()) {
                           context.read<ProfileBloc>().add(

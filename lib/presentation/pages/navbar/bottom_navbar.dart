@@ -28,6 +28,19 @@ class _BottomNavbarPageState extends State<BottomNavbarPage> {
     ProfilePage()
   ];
 
+  void changeTab(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    int tabIndex = ModalRoute.of(context)?.settings.arguments as int? ?? 0;
+    changeTab(tabIndex);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
