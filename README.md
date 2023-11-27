@@ -32,7 +32,10 @@
 * [Webview_Flutter](https://pub.dev/packages/webview_flutter)
 
 ## 🖥️ Web Apps
-- [Web](https://fullstak-vila-reservation.vercel.app/)
+- [Web Apps](https://fullstak-vila-reservation.vercel.app/)
+
+## 📝 Design Figma
+- [Figma](https://www.figma.com/file/QcmoBPOw9zgJD6NRa5Urmu/Azura-Voyage?type=design&mode=design&t=Zk45QXV2XWC1RjKZ-1)
 
 ## 🌐 Resources
-- [API](https://fietarigan.github.io/villa-reservation-api-doc/)
+- [API Documentations](https://fietarigan.github.io/villa-reservation-api-doc/)
