@@ -3,16 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
 class CustomSearch extends StatelessWidget {
-  final ValueChanged<String> onFieldSubmitted;
   final TextEditingController controller;
   final ValueChanged<String>? onChanged;
 
-  const CustomSearch(
-      {Key? key,
-      required this.controller,
-      this.onChanged,
-      required this.onFieldSubmitted})
-      : super(key: key);
+  const CustomSearch({
+    Key? key,
+    required this.controller,
+    this.onChanged,
+    // required this.onFieldSubmitted,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +42,6 @@ class CustomSearch extends StatelessWidget {
             ),
             Expanded(
               child: TextField(
-                onSubmitted: onFieldSubmitted,
                 onChanged: onChanged,
                 controller: controller,
                 style: currentTheme

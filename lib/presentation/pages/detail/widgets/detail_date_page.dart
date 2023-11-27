@@ -1,4 +1,4 @@
-import 'package:capstone_project_villa/presentation/pages/detail/widgets/detail_payment_page.dart';
+import 'package:capstone_project_villa/presentation/pages/payment/widgets/payment_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -314,8 +314,8 @@ class _DetailDatePageState extends State<DetailDatePage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => DetailPaymentPage(
-                    data: state.transactionResponse,
+                  builder: (context) => PaymentPage(
+                    data: state.transactionResponse, nNight: _nNight,
                   ),
                 ),
               );
