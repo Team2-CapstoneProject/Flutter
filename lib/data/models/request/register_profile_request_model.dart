@@ -17,7 +17,7 @@ class RegisterProfileRequestModel {
     return {
       'fullname': fullname,
       'nickname': nickname,
-      'image': image!.path,
+      'image': image?.path == null ? '' : image!.path,
       'phone_number': phone_number,
     };
   }

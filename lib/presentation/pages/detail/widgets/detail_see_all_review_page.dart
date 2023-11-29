@@ -59,7 +59,9 @@ class DetaikSeeAllReviewPage extends StatelessWidget {
                               width: MediaQuery.of(context).size.width,
                               margin: EdgeInsets.only(bottom: 30),
                               decoration: BoxDecoration(
-                                color: grey95,
+                                color: currentTheme
+                                    ? white70Color.withOpacity(0.3)
+                                    : grey95,
                                 borderRadius: BorderRadius.circular(8),
                                 border: Border.all(color: grey95),
                               ),
@@ -94,10 +96,13 @@ class DetaikSeeAllReviewPage extends StatelessWidget {
                                           Container(
                                             child: Text(
                                               users.fullname,
-                                              style: blackTextStyle.copyWith(
-                                                fontSize: 12,
-                                                fontWeight: bold,
-                                              ),
+                                              style: currentTheme
+                                                  ? whiteTextStyle.copyWith(
+                                                      fontSize: 12,
+                                                      fontWeight: bold)
+                                                  : blackTextStyle.copyWith(
+                                                      fontSize: 12,
+                                                      fontWeight: bold),
                                             ),
                                           ),
                                           Row(
@@ -113,8 +118,11 @@ class DetaikSeeAllReviewPage extends StatelessWidget {
                                               Container(
                                                 child: Text(
                                                   review[0].score.toString(),
-                                                  style: greyTextStyle.copyWith(
-                                                      fontSize: 12),
+                                                  style: currentTheme
+                                                      ? whiteTextStyle.copyWith(
+                                                          fontSize: 12)
+                                                      : greyTextStyle.copyWith(
+                                                          fontSize: 12),
                                                 ),
                                               ),
                                             ],
@@ -123,9 +131,13 @@ class DetaikSeeAllReviewPage extends StatelessWidget {
                                             child: Container(
                                               child: Text(
                                                 review[0].description,
-                                                style: blackTextStyle.copyWith(
-                                                    fontSize: 12,
-                                                    fontWeight: regular),
+                                                style: currentTheme
+                                                    ? whiteTextStyle.copyWith(
+                                                        fontSize: 12,
+                                                        fontWeight: regular)
+                                                    : blackTextStyle.copyWith(
+                                                        fontSize: 12,
+                                                        fontWeight: regular),
                                                 overflow: TextOverflow.ellipsis,
                                                 textAlign: TextAlign.justify,
                                                 maxLines: 3,
@@ -136,8 +148,11 @@ class DetaikSeeAllReviewPage extends StatelessWidget {
                                             child: Text(
                                               Utils.dateTimeFormatCustom(
                                                   review[0].updatedAt),
-                                              style: grey100kTextStyle.copyWith(
-                                                  fontSize: 10),
+                                              style: currentTheme
+                                                  ? whiteTextStyle.copyWith(
+                                                      fontSize: 10)
+                                                  : grey100kTextStyle.copyWith(
+                                                      fontSize: 10),
                                             ),
                                           )
                                         ],

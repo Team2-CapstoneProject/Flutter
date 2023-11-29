@@ -26,7 +26,7 @@ class CustomTicket extends StatelessWidget {
       padding: EdgeInsets.all(25),
       isCornerRounded: true,
       width: MediaQuery.of(context).size.width,
-      height: 290,
+      height: 300,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

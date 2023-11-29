@@ -297,13 +297,13 @@ class _DetailDatePageState extends State<DetailDatePage> {
                       color: currentTheme ? whiteColor : blackColor,
                     ),
                   ),
-                  TextSpan(
-                    text: 'night'.tr(),
-                    style: grey100kTextStyle.copyWith(
-                      fontSize: 16,
-                      fontWeight: regular,
-                    ),
-                  ),
+                  // TextSpan(
+                  //   text: 'night'.tr(),
+                  //   style: grey100kTextStyle.copyWith(
+                  //     fontSize: 16,
+                  //     fontWeight: regular,
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -315,7 +315,8 @@ class _DetailDatePageState extends State<DetailDatePage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => PaymentPage(
-                    data: state.transactionResponse, nNight: _nNight,
+                    data: state.transactionResponse,
+                    nNight: _nNight,
                   ),
                 ),
               );
