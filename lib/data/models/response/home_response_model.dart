@@ -57,6 +57,7 @@ class Vila {
   final VilaImages vilaImages;
   final List<Transaction> transactions;
   final List<Bookmark> bookmarks;
+  final bool isBookmarked;
   final int jumlahBookmark;
   final int jumlahTransaction;
   final int nReview;
@@ -71,6 +72,7 @@ class Vila {
     required this.vilaImages,
     required this.transactions,
     required this.bookmarks,
+    required this.isBookmarked,
     required this.jumlahBookmark,
     required this.jumlahTransaction,
     required this.nReview,
@@ -88,6 +90,7 @@ class Vila {
             json["Transactions"].map((x) => Transaction.fromJson(x))),
         bookmarks: List<Bookmark>.from(
             json["Bookmarks"].map((x) => Bookmark.fromJson(x))),
+        isBookmarked: json["isBookmarked"],
         jumlahBookmark: json["jumlahBookmark"] ?? 0,
         jumlahTransaction: json["jumlahTransaction"] ?? 0,
         nReview: json["nReview"] ?? 0,
@@ -103,6 +106,7 @@ class Vila {
         "VilaImages": vilaImages.toJson(),
         "Transactions": List<dynamic>.from(transactions.map((x) => x.toJson())),
         "Bookmarks": List<dynamic>.from(bookmarks.map((x) => x.toJson())),
+        "isBookmarked": isBookmarked,
         "jumlahBookmark": jumlahBookmark,
         "jumlahTransaction": jumlahTransaction,
         "nReview": nReview,
@@ -112,17 +116,21 @@ class Vila {
 
 class Bookmark {
   final int id;
+  final int user_id;
 
   Bookmark({
     required this.id,
+    required this.user_id,
   });
 
   factory Bookmark.fromJson(Map<String, dynamic> json) => Bookmark(
         id: json["id"],
+        user_id: json["user_id"] ?? 0,
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "user_id": user_id,
       };
 }
 

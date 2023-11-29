@@ -17,13 +17,15 @@ class HorizontalCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool currentTheme = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       margin: EdgeInsets.only(bottom: 30),
       height: 145,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: grey95,
+        color: currentTheme ? white70Color.withOpacity(0.3) : grey95,
       ),
       child: Row(
         children: [
@@ -55,10 +57,15 @@ class HorizontalCard extends StatelessWidget {
                         margin: EdgeInsets.only(bottom: 5),
                         child: Text(
                           vila.vila_name,
-                          style: blackTextStyle.copyWith(
-                            fontSize: 14,
-                            fontWeight: medium,
-                          ),
+                          style: currentTheme
+                              ? whiteTextStyle.copyWith(
+                                  fontSize: 14,
+                                  fontWeight: medium,
+                                )
+                              : blackTextStyle.copyWith(
+                                  fontSize: 14,
+                                  fontWeight: medium,
+                                ),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -67,7 +74,9 @@ class HorizontalCard extends StatelessWidget {
                           Icon(
                             Iconsax.location,
                             size: 12,
-                            color: darkGrey,
+                            color: currentTheme
+                                ? white70Color.withOpacity(0.5)
+                                : darkGrey,
                           ),
                           const SizedBox(
                             width: 5.0,
@@ -75,10 +84,15 @@ class HorizontalCard extends StatelessWidget {
                           Flexible(
                             child: Text(
                               vila.vila_location,
-                              style: blackTextStyle.copyWith(
-                                fontSize: 10,
-                                fontWeight: light,
-                              ),
+                              style: currentTheme
+                                  ? whiteTextStyle.copyWith(
+                                      fontSize: 10,
+                                      fontWeight: light,
+                                    )
+                                  : blackTextStyle.copyWith(
+                                      fontSize: 10,
+                                      fontWeight: light,
+                                    ),
                               overflow: TextOverflow.ellipsis,
                             ),
                           )
@@ -93,17 +107,27 @@ class HorizontalCard extends StatelessWidget {
                                 text: Utils.currencyFormat(
                                   vila.vila_price,
                                 ),
-                                style: darkGreyTextStyle.copyWith(
-                                  fontSize: 14,
-                                  fontWeight: medium,
-                                ),
+                                style: currentTheme
+                                    ? whiteTextStyle.copyWith(
+                                        fontSize: 14,
+                                        fontWeight: medium,
+                                      )
+                                    : darkGreyTextStyle.copyWith(
+                                        fontSize: 14,
+                                        fontWeight: medium,
+                                      ),
                               ),
                               TextSpan(
                                 text: ' /night',
-                                style: darkGreyTextStyle.copyWith(
-                                  fontSize: 12,
-                                  fontWeight: light,
-                                ),
+                                style: currentTheme
+                                    ? whiteTextStyle.copyWith(
+                                        fontSize: 12,
+                                        fontWeight: light,
+                                      )
+                                    : darkGreyTextStyle.copyWith(
+                                        fontSize: 12,
+                                        fontWeight: light,
+                                      ),
                               ),
                             ],
                           ),
@@ -129,6 +153,7 @@ class HorizontalCard extends StatelessWidget {
                               },
                               child: Icon(
                                 Iconsax.archive_tick1,
+                                color: darkGrey,
                               ),
                             );
                           },

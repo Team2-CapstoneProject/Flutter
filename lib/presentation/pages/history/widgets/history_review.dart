@@ -27,7 +27,7 @@ class _ReviewFormWidgetState extends State<ReviewFormWidget> {
   Widget build(BuildContext context) {
     bool currentTheme = Theme.of(context).brightness == Brightness.dark;
     return Container(
-      height: 500,
+      height: MediaQuery.of(context).size.height * 0.6,
       padding: EdgeInsets.all(30),
       child: Column(
         mainAxisSize: MainAxisSize.min,

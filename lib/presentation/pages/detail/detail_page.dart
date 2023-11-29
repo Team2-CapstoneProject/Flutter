@@ -454,7 +454,7 @@ class _DetailPageState extends State<DetailPage> {
                 height: 135,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                  color: grey95,
+                  color: currentTheme ? white70Color.withOpacity(0.3) : grey95,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Padding(
@@ -482,18 +482,22 @@ class _DetailPageState extends State<DetailPage> {
                             children: [
                               Text(
                                 users.fullname,
-                                style: blackTextStyle.copyWith(
-                                  fontSize: 16,
-                                  fontWeight: semiBold,
-                                ),
+                                style: currentTheme
+                                    ? whiteTextStyle.copyWith(
+                                        fontSize: 16, fontWeight: semiBold)
+                                    : greyTextStyle.copyWith(
+                                        fontSize: 16, fontWeight: semiBold),
                                 overflow: TextOverflow.ellipsis,
                               ),
                               Text(
                                 Utils.dateTimeFormat3(review.updatedAt),
-                                style: greyTextStyle.copyWith(
-                                  fontSize: 14,
-                                  fontWeight: regular,
-                                ),
+                                style: currentTheme
+                                    ? whiteTextStyle.copyWith(
+                                        fontSize: 14, fontWeight: regular)
+                                    : greyTextStyle.copyWith(
+                                        fontSize: 14,
+                                        fontWeight: regular,
+                                      ),
                               ),
                             ],
                           ),
@@ -532,10 +536,11 @@ class _DetailPageState extends State<DetailPage> {
                           maxLines: 3,
                           textAlign: TextAlign.justify,
                           overflow: TextOverflow.ellipsis,
-                          style: blackTextStyle.copyWith(
-                            fontSize: 12,
-                            fontWeight: regular,
-                          ),
+                          style: currentTheme
+                              ? whiteTextStyle.copyWith(
+                                  fontSize: 12, fontWeight: regular)
+                              : blackTextStyle.copyWith(
+                                  fontSize: 12, fontWeight: regular),
                         ),
                       ),
                     ],
