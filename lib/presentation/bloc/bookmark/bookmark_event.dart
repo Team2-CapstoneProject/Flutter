@@ -10,3 +10,9 @@ class ChangeBookmarkEvent extends BookmarkEvent {
 
   ChangeBookmarkEvent(this.bookmarkRequestModel);
 }
+
+class ToggleBookmarkEvent extends BookmarkEvent {
+  final BookmarkRequestModel bookmarkRequestModel;
+
+  ToggleBookmarkEvent(this.bookmarkRequestModel);
+}

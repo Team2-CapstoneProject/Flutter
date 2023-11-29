@@ -40,5 +40,17 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
         },
       );
     });
+
+    on<ToggleBookmarkEvent>((event, emit) async {
+      emit(BookmarkLoading());
+
+      final result =
+          await BookmarkDataSource().doBookmark(event.bookmarkRequestModel);
+
+      result.fold(
+        (error) => emit(BookmarkError(error)),
+        (success) => emit(ToggleBookmarkSuccess(success)),
+      );
+    });
   }
 }

@@ -321,11 +321,13 @@ class _HomePageState extends State<HomePage>
                                               DetailPage(id: vila.id)));
                                 },
                                 child: CardCustom(
+                                  id: vila.id,
                                   name: vila.name.toString(),
                                   location: vila.location.toString(),
                                   price: vila.price,
                                   score: vila.score.toDouble(),
                                   image: vila.vilaImages.sliderImage,
+                                  isBookmarked: vila.isBookmarked,
                                 ),
                               );
                             },
@@ -347,11 +349,13 @@ class _HomePageState extends State<HomePage>
                                               DetailPage(id: vila.id)));
                                 },
                                 child: CardCustom(
+                                  id: vila.id,
                                   name: vila.name.toString(),
                                   location: vila.location.toString(),
                                   price: vila.price,
                                   score: vila.score.toDouble(),
                                   image: vila.vilaImages.sliderImage,
+                                  isBookmarked: vila.isBookmarked,
                                 ),
                               );
                             },
@@ -373,11 +377,13 @@ class _HomePageState extends State<HomePage>
                                               DetailPage(id: vila.id)));
                                 },
                                 child: CardCustom(
+                                  id: vila.id,
                                   name: vila.name.toString(),
                                   location: vila.location.toString(),
                                   price: vila.price,
                                   score: vila.score.toDouble(),
                                   image: vila.vilaImages.sliderImage,
+                                  isBookmarked: vila.isBookmarked,
                                 ),
                               );
                             },
@@ -399,11 +405,13 @@ class _HomePageState extends State<HomePage>
                                               DetailPage(id: vila.id)));
                                 },
                                 child: CardCustom(
+                                  id: vila.id,
                                   name: vila.name.toString(),
                                   location: vila.location.toString(),
                                   price: vila.price,
                                   score: vila.score.toDouble(),
                                   image: vila.vilaImages.sliderImage,
+                                  isBookmarked: vila.isBookmarked,
                                 ),
                               );
                             },

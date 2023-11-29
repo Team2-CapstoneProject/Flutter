@@ -1,7 +1,11 @@
 import 'package:capstone_project_villa/common/constants.dart';
 import 'package:capstone_project_villa/common/utils.dart';
+import 'package:capstone_project_villa/data/models/request/bookmark_request_model.dart';
 import 'package:capstone_project_villa/data/models/response/home_response_model.dart';
+import 'package:capstone_project_villa/presentation/bloc/bookmark/bookmark_bloc.dart';
+import 'package:capstone_project_villa/presentation/pages/navbar/bottom_navbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ForYouCard extends StatelessWidget {
@@ -114,9 +118,40 @@ class ForYouCard extends StatelessWidget {
                       ),
                       Align(
                         alignment: Alignment.centerRight,
-                        child: Icon(
-                          Iconsax.archive_1,
+                        child: BlocConsumer<BookmarkBloc, BookmarkState>(
+                          listener: (context, state) {
+                            if (state is ToggleBookmarkSuccess) {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => BottomNavbarPage(),
+                                ),
+                              );
+                            }
+                          },
+                          builder: (context, state) {
+                            return GestureDetector(
+                              onTap: () {
+                                context.read<BookmarkBloc>().add(
+                                      ToggleBookmarkEvent(
+                                        BookmarkRequestModel(id: vila.id),
+                                      ),
+                                    );
+                              },
+                              child: Icon(
+                                vila.isBookmarked
+                                    ? Iconsax.archive_tick1
+                                    : Iconsax.archive_1,
+                                color: darkGrey,
+                                size: 28.0,
+                              ),
+                            );
+                          },
                         ),
+
+                        // Icon(
+                        //   Iconsax.archive_1,
+                        // ),
                       )
                     ],
                   ),

@@ -14,6 +14,12 @@ final class BookmarkSuccess extends BookmarkState {
   BookmarkSuccess(this.bookmarkResponModel, this.bookmarkedVilas);
 }
 
+final class ToggleBookmarkSuccess extends BookmarkState {
+  final BookmarkResponModel bookmarkResponModel;
+
+  ToggleBookmarkSuccess(this.bookmarkResponModel);
+}
+
 final class BookmarkError extends BookmarkState {
   final String errorMessage;
 
