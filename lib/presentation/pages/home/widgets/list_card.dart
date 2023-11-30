@@ -2,7 +2,6 @@ import 'package:capstone_project_villa/common/constants.dart';
 import 'package:capstone_project_villa/common/utils.dart';
 import 'package:capstone_project_villa/data/models/request/bookmark_request_model.dart';
 import 'package:capstone_project_villa/presentation/bloc/bookmark/bookmark_bloc.dart';
-import 'package:capstone_project_villa/presentation/pages/navbar/bottom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';

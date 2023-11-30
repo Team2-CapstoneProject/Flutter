@@ -1,4 +1,6 @@
 # 🏨 Villa Reservation - Azure Voyage
+![image](/assets/mockup_1.png)
+![image](/assets/mockup_2.png)
 
 ## 🎉 Features App
 - Recommended, All, Popular, Rating
