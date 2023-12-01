@@ -47,6 +47,7 @@ class _HomePageState extends State<HomePage>
       backgroundColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
       // Headers
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: currentTheme ? Color(0xff1E1E1E) : whiteColor,
           statusBarIconBrightness:

@@ -83,8 +83,12 @@ class _ReviewFormWidgetState extends State<ReviewFormWidget> {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
-              contentPadding:
-                  EdgeInsets.only(left: 20, top: 20, bottom: 100, right: 20),
+              contentPadding: EdgeInsets.only(
+                left: 20,
+                top: 20,
+                bottom: 60,
+                right: 20,
+              ),
               hintText: "Write a review here",
               isCollapsed: true,
             ),
