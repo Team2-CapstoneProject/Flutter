@@ -100,6 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                           color: greyColor,
                         ),
                       ),
+                      style: greyTextStyle,
                       validator: (value) {
                         final emailRegex = RegExp(
                             r'^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$');
@@ -168,6 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                               _isPasswordFocused.value = value.isNotEmpty;
                             });
                           },
+                          style: greyTextStyle,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'The password cannot be empty';

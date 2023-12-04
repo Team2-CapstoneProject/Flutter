@@ -102,6 +102,7 @@ class _ForgotPageState extends State<ForgotPage> {
                         color: greyColor,
                       ),
                     ),
+                    style: greyTextStyle,
                     validator: (value) {
                       final emailRegex = RegExp(
                           r'^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$');
@@ -159,6 +160,7 @@ class _ForgotPageState extends State<ForgotPage> {
                               ),
                             ),
                           ),
+                          style: greyTextStyle,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'The password cannot be empty';
@@ -218,6 +220,7 @@ class _ForgotPageState extends State<ForgotPage> {
                             ),
                           ),
                         ),
+                        style: greyTextStyle,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return ("Re-Enter Password");
