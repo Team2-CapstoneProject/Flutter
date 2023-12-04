@@ -26,7 +26,7 @@ class ProfileDataSource {
 
   Future<Either<String, ProfileResponseModel>> updateProfile(
     ProfileRequestModel profileRequestModel,
-    File imageFile,
+    File? imageFile,
   ) async {
     final token = await AuthLocalDataSource().getToken();
 
@@ -41,16 +41,18 @@ class ProfileDataSource {
     request.fields['nickname'] = profileRequestModel.nickname!;
     request.fields['phone_number'] = profileRequestModel.phone_number!;
 
-    var imageStream = http.ByteStream(imageFile.openRead());
-    var length = await imageFile.length();
+    if (imageFile != null && imageFile.path.startsWith('/data/')) {
+      var imageStream = http.ByteStream(imageFile.openRead());
+      var length = await imageFile.length();
 
-    var multipartFile = http.MultipartFile(
-      'image',
-      imageStream,
-      length,
-      filename: path.basename(imageFile.path),
-    );
-    request.files.add(multipartFile);
+      var multipartFile = http.MultipartFile(
+        'image',
+        imageStream,
+        length,
+        filename: path.basename(imageFile.path),
+      );
+      request.files.add(multipartFile);
+    }
 
     try {
       var response = await request.send();

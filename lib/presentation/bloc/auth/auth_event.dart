@@ -17,11 +17,11 @@ class AuthRegisterEvent extends AuthEvent {
 
 class AuthUpdateProfileEvent extends AuthEvent {
   final RegisterProfileRequestModel registerProfileRequestModel;
-  final File imageFile;
+  final File? imageFile;
 
   AuthUpdateProfileEvent({
     required this.registerProfileRequestModel,
-    required this.imageFile,
+    this.imageFile,
   });
 }
 

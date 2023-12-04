@@ -7,10 +7,10 @@ class ProfileGetUserEvent extends ProfileEvent {}
 
 class ProfileUpdateEvent extends ProfileEvent {
   final ProfileRequestModel profileRequestModel;
-  final File? imageFile;
+  final File imageFile;
 
   ProfileUpdateEvent({
     required this.profileRequestModel,
-    this.imageFile,
+    required this.imageFile,
   });
 }

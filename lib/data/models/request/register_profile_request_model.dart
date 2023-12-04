@@ -17,16 +17,20 @@ class RegisterProfileRequestModel {
     return {
       'fullname': fullname,
       'nickname': nickname,
-      'image': image?.path == null ? '' : image!.path,
+      'image': image?.path ?? '',
       'phone_number': phone_number,
     };
   }
 
   factory RegisterProfileRequestModel.fromMap(Map<String, dynamic> map) {
+    String imagePath = (map['image'] != null && map['image'] != '')
+        ? map['image']
+        : 'assets/default.png';
+
     return RegisterProfileRequestModel(
       fullname: map['fullname'],
       nickname: map['nickname'],
-      image: File(map['image']),
+      image: File(imagePath),
       phone_number: map['phone_number'],
     );
   }
