@@ -6,8 +6,8 @@ import 'package:capstone_project_villa/presentation/pages/home/widgets/foryou_ca
 import 'package:capstone_project_villa/presentation/pages/home/widgets/shimmer.dart';
 import 'package:capstone_project_villa/presentation/pages/home/widgets/shimmer_tab.dart';
 import 'package:capstone_project_villa/presentation/pages/home/widgets/tab_card.dart';
+import 'package:capstone_project_villa/presentation/pages/navbar/bottom_navbar.dart';
 import 'package:capstone_project_villa/presentation/pages/notification/notification_page.dart';
-import 'package:capstone_project_villa/presentation/pages/search/search_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -132,10 +132,13 @@ class _HomePageState extends State<HomePage>
                               ),
                             ),
                             onPressed: () {
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                 context,
-                                MaterialPageRoute(
-                                  builder: (context) => SearchPage(),
+                                PageRouteBuilder(
+                                  pageBuilder:
+                                      (context, animation1, animation2) =>
+                                          BottomNavbarPage(),
+                                  settings: RouteSettings(arguments: 1),
                                 ),
                               );
                             },
