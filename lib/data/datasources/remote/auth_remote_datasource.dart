@@ -57,7 +57,7 @@ class ApiDataSource {
 
   Future<Either<String, AuthResponseModel>> registerProfile(
     RegisterProfileRequestModel registerProfileRequestModel,
-    File imageFile,
+    File? imageFile,
   ) async {
     final token = await AuthLocalDataSource().getToken();
 
@@ -68,21 +68,40 @@ class ApiDataSource {
 
     request.headers['Authorization'] = 'Bearer $token';
 
-    request.fields['fullname'] = registerProfileRequestModel.fullname!;
-    request.fields['nickname'] = registerProfileRequestModel.nickname!;
-    request.fields['phone_number'] = registerProfileRequestModel.phone_number!;
+    // Set data profil
+    request.fields['fullname'] = registerProfileRequestModel.fullname ?? '';
+    request.fields['nickname'] = registerProfileRequestModel.nickname ?? '';
+    request.fields['phone_number'] =
+        registerProfileRequestModel.phone_number ?? '';
 
-    var imageStream =
-        http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
-    var length = await imageFile.length();
+    // Set gambar
+    if (imageFile != null) {
+      var imageStream =
+          http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+      var length = await imageFile.length();
 
-    var multipartFile = http.MultipartFile(
-      'image',
-      imageStream,
-      length,
-      filename: path.basename(imageFile.path),
-    );
-    request.files.add(multipartFile);
+      var multipartFile = http.MultipartFile(
+        'image',
+        imageStream,
+        length,
+        filename: path.basename(imageFile.path),
+      );
+      request.files.add(multipartFile);
+    } else {
+      // Sertakan gambar default dari assets jika imageFile null
+      var defaultImageFile = File('assets/default.png');
+      var defaultImageStream =
+          http.ByteStream(DelegatingStream.typed(defaultImageFile.openRead()));
+      var defaultImageLength = await defaultImageFile.length();
+
+      var defaultMultipartFile = http.MultipartFile(
+        'image',
+        defaultImageStream,
+        defaultImageLength,
+        filename: path.basename(defaultImageFile.path),
+      );
+      request.files.add(defaultMultipartFile);
+    }
 
     try {
       var response = await request.send();
@@ -94,7 +113,8 @@ class ApiDataSource {
         return Left('Failed Update Profile');
       }
     } catch (e) {
-      return Left('Error: $e');
+      print('Error sending request: $e');
+      return Left('Error sending request: $e');
     }
   }
 

@@ -23,7 +23,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<ProfileUpdateEvent>((event, emit) async {
       emit(ProfileLoading());
       final result = await ProfileDataSource()
-          .updateProfile(event.profileRequestModel, event.imageFile!);
+          .updateProfile(event.profileRequestModel, event.imageFile);
       result.fold((error) => emit(ProfileError(message: error)),
           (success) => emit(ProfileLoaded(profileResponseModel: success)));
     });

@@ -332,12 +332,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     }
                   },
                   builder: (context, state) {
+                    if (state is ProfileLoading) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
                     return CustomButton(
                       onPressed: () {
-                        // print('Full Name: ${_fullNameController.text}');
-                        // print('Nickname: ${_nickNameController.text}');
-                        // print('Phone Number: ${_phoneController.text}');
-                        // print('Image Path: ${file?.path}');
+                        final selectedImage = file ?? File(widget.data.image);
+
+                        print('Full Name: ${_fullNameController.text}');
+                        print('Nickname: ${_nickNameController.text}');
+                        print('Phone Number: ${_phoneController.text}');
+                        print('Image Path: ${selectedImage}');
 
                         if (formKey.currentState!.validate()) {
                           context.read<ProfileBloc>().add(
@@ -347,7 +354,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       nickname: _nickNameController.text,
                                       phone_number: _phoneController.text,
                                     ),
-                                    imageFile: file),
+                                    imageFile: selectedImage),
                               );
                         }
                       },

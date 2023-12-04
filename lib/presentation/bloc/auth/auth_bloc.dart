@@ -30,9 +30,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthUpdateProfileEvent>((event, emit) async {
       emit(AuthLoading());
 
+      File? imageFile = event.imageFile;
+
       final result = await ApiDataSource().registerProfile(
         event.registerProfileRequestModel,
-        event.imageFile,
+        imageFile!,
       );
 
       result.fold(

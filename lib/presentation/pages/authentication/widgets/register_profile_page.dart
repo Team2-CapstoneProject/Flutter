@@ -276,7 +276,9 @@ class _RegisterProfilePageState extends State<RegisterProfilePage> {
                                     nickname: _nickNameController.text,
                                     phone_number: _phoneController.text,
                                   ),
-                                  imageFile: file!,
+                                  imageFile: file ??
+                                      File(
+                                          "/data/user/0/com.example.capstone_project_villa/cache/595f52b8-af68-417e-928d-0d0119393dd2/1000021402.png"),
                                 ),
                               );
                         },
