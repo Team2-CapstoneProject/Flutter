@@ -68,13 +68,11 @@ class ApiDataSource {
 
     request.headers['Authorization'] = 'Bearer $token';
 
-    // Set data profil
     request.fields['fullname'] = registerProfileRequestModel.fullname ?? '';
     request.fields['nickname'] = registerProfileRequestModel.nickname ?? '';
     request.fields['phone_number'] =
         registerProfileRequestModel.phone_number ?? '';
 
-    // Set gambar
     if (imageFile != null) {
       var imageStream =
           http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
@@ -88,19 +86,9 @@ class ApiDataSource {
       );
       request.files.add(multipartFile);
     } else {
-      // Sertakan gambar default dari assets jika imageFile null
-      var defaultImageFile = File('assets/default.png');
-      var defaultImageStream =
-          http.ByteStream(DelegatingStream.typed(defaultImageFile.openRead()));
-      var defaultImageLength = await defaultImageFile.length();
-
-      var defaultMultipartFile = http.MultipartFile(
-        'image',
-        defaultImageStream,
-        defaultImageLength,
-        filename: path.basename(defaultImageFile.path),
-      );
-      request.files.add(defaultMultipartFile);
+      // Jika imageFile null, kirim URL gambar sebagai string
+      request.fields['image_url'] =
+          'https://upload.wikimedia.org/wikipedia/commons/0/0b/NewJeans_Minji_OLENS_2.jpg';
     }
 
     try {

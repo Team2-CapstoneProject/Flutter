@@ -270,16 +270,13 @@ class _RegisterProfilePageState extends State<RegisterProfilePage> {
                           print('Image Path: ${file?.path}');
                           context.read<AuthBloc>().add(
                                 AuthUpdateProfileEvent(
-                                  registerProfileRequestModel:
-                                      RegisterProfileRequestModel(
-                                    fullname: _fullNameController.text,
-                                    nickname: _nickNameController.text,
-                                    phone_number: _phoneController.text,
-                                  ),
-                                  imageFile: file ??
-                                      File(
-                                          "/data/user/0/com.example.capstone_project_villa/cache/595f52b8-af68-417e-928d-0d0119393dd2/1000021402.png"),
-                                ),
+                                    registerProfileRequestModel:
+                                        RegisterProfileRequestModel(
+                                      fullname: _fullNameController.text,
+                                      nickname: _nickNameController.text,
+                                      phone_number: _phoneController.text,
+                                    ),
+                                    imageFile: file),
                               );
                         },
                         text: 'Register',
