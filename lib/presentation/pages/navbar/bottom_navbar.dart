@@ -47,7 +47,10 @@ class _BottomNavbarPageState extends State<BottomNavbarPage> {
       ThemeData currentTheme =
           (state is ThemeUpdated) ? state.themeData : ThemeData.light();
       return Scaffold(
-        body: _widgetOptions.elementAt(_selectedIndex),
+        body: IndexedStack(
+          index: _selectedIndex,
+          children: _widgetOptions,
+        ),
         bottomNavigationBar: Container(
           height: 94,
           color: currentTheme == ThemeData.light()
